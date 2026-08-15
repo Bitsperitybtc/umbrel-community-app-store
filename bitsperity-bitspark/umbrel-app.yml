@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-bitspark
 category: bitcoin
 name: BitSpark
-version: "0.0.1"
+version: "sha-32593df"
 tagline: Idea Engine on Nostr
 description: >-
   BitSpark is a client-side Idea Engine on Nostr. Shape ideas, post paid jobs,

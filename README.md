@@ -17,14 +17,19 @@ BitSpark is a static Nostr client. The container serves the production SPA. Sign
 
 ### Image pin
 
-The compose file currently points at `ghcr.io/bitsperitybtc/bitspark:0.0.1` without a digest. When the multi-arch image (`linux/amd64` and `linux/arm64`) is published:
+Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`), not an architecture-specific blob:
 
-1. Confirm both architectures: `docker buildx imagetools inspect ghcr.io/bitsperitybtc/bitspark:<tag>`
-2. Pin `image: ghcr.io/bitsperitybtc/bitspark:<tag>@sha256:<digest>`
+```text
+ghcr.io/bitsperitybtc/bitspark:sha-32593df@sha256:a8cc4e3fe797d9ccc80301caa44aeb953ee19c736d4887b445002ecfc9cc54e1
+```
+
+To bump:
+
+1. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/bitspark:<tag>`
+2. Pin `image: ghcr.io/bitsperitybtc/bitspark:<tag>@sha256:<index-digest>`
 3. Set `version` in `umbrel-app.yml` to that tag
-4. Leave `APP_PORT: 80` unless the image listens elsewhere
 
-Do not use `latest`. Do not use compose `build:`.
+Do not use `latest`. Do not use compose `build:`. `APP_PORT` stays `80`.
 
 ### Official App Store PR
 
@@ -44,7 +49,7 @@ umbrel-app-store.yml          Store id + display name
 bitsperity-bitspark/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + web image
-  icon.png                    512×512, community listing
+  icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
   gallery/1.png               Landing
   gallery/2.png               Ideas
   gallery/3.png               Job detail
