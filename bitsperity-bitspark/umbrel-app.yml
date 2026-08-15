@@ -1,0 +1,35 @@
+manifestVersion: 1
+id: bitsperity-bitspark
+category: bitcoin
+name: BitSpark
+version: "0.0.1"
+tagline: Idea Engine on Nostr
+description: >-
+  BitSpark is a client-side Idea Engine on Nostr. Shape ideas, post paid jobs,
+  and settle with Lightning — no central platform in the middle.
+
+
+  Sign in with a Nostr signer (NIP-46). Lightning payments use Wallet Connect
+  (NWC) from Settings. Identity and wallet stay in your browser; events live on
+  relays.
+
+
+  Browse ideas and jobs without an account. Publishing, applying, tipping, and
+  settlement need a signer and, when money moves, a connected wallet.
+releaseNotes: ""
+developer: Bitsperity
+website: https://github.com/Bitsperitybtc/bitspark_btc
+dependencies: []
+repo: https://github.com/Bitsperitybtc/bitspark_btc
+support: https://github.com/Bitsperitybtc/bitspark_btc/issues
+port: 3847
+gallery:
+  - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-bitspark/gallery/1.png
+  - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-bitspark/gallery/2.png
+  - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-bitspark/gallery/3.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-bitspark/icon.png
+submitter: Bitsperity
+submission: https://github.com/Bitsperitybtc/umbrel-community-app-store

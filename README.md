@@ -1,17 +1,51 @@
-## Umbrel Community App Store Template
+# Bitsperity App Store
 
-This repository is a template to create an Umbrel Community App Store. These additional app stores allow developers to distribute applications without submitting to the [Official Umbrel App Store](https://github.com/getumbrel/umbrel-apps).
+Community app store for umbrelOS. Add this repository URL in umbrelOS: **App Store → Community App Stores**.
 
-## How to use:
+Apps in this store use the `bitsperity-` ID prefix. That prefix is required by umbrelOS for community listings. The official Umbrel App Store package will use `bitspark` with the same compose shape.
 
-1. Start by clicking the "Use this template" button located above.
-2. Assign an ID and name to your app store within the `umbrel-app-store.yml` file. This file specifies two important attributes:
-    - `id` - Acts as a unique prefix for every app within your Community App Store. You must start your application's ID with your app store's ID. For instance, in this template, the app store ID is `sparkles`, and there's an app named `hello world`. Consequently, the app's ID should be: `sparkles-hello-world`.
-    - `name` - This is the name of the Community App Store displayed in the umbrelOS UI.
-3. Change the name of the `sparkles-hello-world` folder to match your app's ID. The app ID is for you to decide. For example, if your app store ID is `whistles`, and your app is named My Video Downloader, you could set its app ID to `whistles-my-video-downloader`, and rename the folder accordingly.
-4. Next, enter your app's listing details in the `whistles-my-video-downloader/umbrel-app.yml`. These are displayed in the umbrelOS UI.
-5. Include the necessary Docker services in `whistles-my-video-downloader/docker-compose.yml`.
-6. That's it! Your Community App Store, featuring your unique app, is now set up and ready to go. To use your Community App Store, you can add its GitHub url the umbrelOS user interface as shown in the following demo:
+## BitSpark
 
+| | |
+|---|---|
+| Community app ID | `bitsperity-bitspark` |
+| Official app ID (later) | `bitspark` |
+| Host URL | `http://umbrel.local:3847` |
+| Source | [Bitsperitybtc/bitspark_btc](https://github.com/Bitsperitybtc/bitspark_btc) |
 
-https://user-images.githubusercontent.com/10330103/197889452-e5cd7e96-3233-4a09-b475-94b754adc7a3.mp4
+BitSpark is a static Nostr client. The container serves the production SPA. Sign-in is NIP-46. Lightning is NWC in Settings. Umbrel login is not wrapped in front of the app.
+
+### Image pin
+
+The compose file currently points at `ghcr.io/bitsperitybtc/bitspark:0.0.1` without a digest. When the multi-arch image (`linux/amd64` and `linux/arm64`) is published:
+
+1. Confirm both architectures: `docker buildx imagetools inspect ghcr.io/bitsperitybtc/bitspark:<tag>`
+2. Pin `image: ghcr.io/bitsperitybtc/bitspark:<tag>@sha256:<digest>`
+3. Set `version` in `umbrel-app.yml` to that tag
+4. Leave `APP_PORT: 80` unless the image listens elsewhere
+
+Do not use `latest`. Do not use compose `build:`.
+
+### Official App Store PR
+
+Copy `bitsperity-bitspark/` to a `bitspark/` folder in a fork of [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps):
+
+- `id` and directory name become `bitspark`
+- `APP_HOST` becomes `bitspark_web_1`
+- Drop `icon:` — Umbrel hosts official icons
+- Keep `gallery: []` in the package; attach screenshots and the logo in the PR body
+- Fill `submission` with the umbrel-apps PR URL
+- Run `npm run lint:apps -- bitspark --check-images`
+
+## Layout
+
+```text
+umbrel-app-store.yml          Store id + display name
+bitsperity-bitspark/
+  umbrel-app.yml              Listing
+  docker-compose.yml          app_proxy + web image
+  icon.png                    512×512, community listing
+  gallery/1.png               Landing
+  gallery/2.png               Ideas
+  gallery/3.png               Job detail
+```
