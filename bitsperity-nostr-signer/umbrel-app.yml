@@ -1,0 +1,33 @@
+manifestVersion: 1
+id: bitsperity-nostr-signer
+category: social
+name: Nostr Signer
+version: "0.1.0"
+tagline: Hold Nostr keys on your node and sign for any NIP-46 client
+description: >-
+  Nostr Signer holds your Nostr identities on this node and signs events for any
+  compliant NIP-46 client (Amber, nsec.app, Alby, Bitspark, and others). Keys
+  are encrypted at rest (NIP-49). You approve, deny, and revoke apps per
+  identity in this UI. Signing happens over a bundled mailbox relay — never
+  over HTTP.
+
+
+  Two ports: the UI on 8740 (behind Umbrel login) and the NIP-46 mailbox
+  WebSocket on 8741 (no Umbrel cookie; NIP-46 is the access control). Add a
+  public wss:// relay in Settings to pair clients that are not on this node.
+releaseNotes: >-
+  First community listing. NIP-46 remote signer: identities, per-identity
+  unlock, one-click pairing, bundled kind-24133 mailbox.
+developer: Bitsperity
+website: https://github.com/Bitsperitybtc/nostr_signer
+dependencies: []
+repo: https://github.com/Bitsperitybtc/nostr_signer
+support: https://github.com/Bitsperitybtc/nostr_signer/issues
+port: 8740
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-nostr-signer/icon.png
+submitter: Bitsperity
+submission: https://github.com/Bitsperitybtc/umbrel-community-app-store

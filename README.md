@@ -42,6 +42,38 @@ Copy `bitsperity-bitspark/` to a `bitspark/` folder in a fork of [getumbrel/umbr
 - Fill `submission` with the umbrel-apps PR URL
 - Run `npm run lint:apps -- bitspark --check-images`
 
+
+## Nostr Signer
+
+| | |
+|---|---|
+| Community app ID | `bitsperity-nostr-signer` |
+| Official app ID (later) | `nostr-signer` |
+| UI | `http://umbrel.local:8740` (Umbrel login) |
+| Mailbox | `ws://umbrel.local:8741` (no Umbrel cookie) |
+| Source | [Bitsperitybtc/nostr_signer](https://github.com/Bitsperitybtc/nostr_signer) |
+
+Standalone NIP-46 remote signer. Holds identities on the node, approves clients
+per identity, signs over a bundled kind-24133 mailbox. Any compliant NIP-46
+client can pair.
+
+### Image pin
+
+Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`), not an architecture-specific blob:
+
+```text
+ghcr.io/bitsperitybtc/nostr-signer:0.1.0@sha256:9640d2a79d268810628d7f02e4ee3f63538fca5bc519422e95f5c0418bbf50d9
+```
+
+To bump:
+
+1. Tag `vX.Y.Z` on `nostr_signer` `main` (GHCR workflow publishes the image)
+2. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/nostr-signer:<tag>`
+3. Pin `image: ghcr.io/bitsperitybtc/nostr-signer:<tag>@sha256:<index-digest>`
+4. Set `version` in `umbrel-app.yml` to that tag
+
+Do not use `latest` for the signer. Do not use compose `build:`. Keep the mailbox sidecar digest-pinned. After the first GHCR push, the package must be **public** or Umbrel cannot pull it.
+
 ## Layout
 
 ```text
@@ -53,4 +85,9 @@ bitsperity-bitspark/
   gallery/1.png               Landing
   gallery/2.png               Ideas
   gallery/3.png               Job detail
+bitsperity-nostr-signer/
+  umbrel-app.yml              Listing
+  docker-compose.yml          app_proxy + signer + mailbox relay
+  relay-config.toml           Kind 24133 only
+  icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 ```

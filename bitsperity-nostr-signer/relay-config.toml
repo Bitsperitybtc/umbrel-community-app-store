@@ -1,0 +1,20 @@
+# Bundled NIP-46 mailbox. Not a general personal relay.
+# Kind 24133 only; ephemeral (not archived across restart).
+
+[info]
+relay_url = "ws://127.0.0.1:8741/"
+name = "nostr-signer-mailbox"
+description = "NIP-46 mailbox for Nostr Signer (kind 24133 only)."
+
+[database]
+in_memory = true
+
+[network]
+address = "0.0.0.0"
+port = 8080
+
+[options]
+reject_future_seconds = 1800
+
+[limits]
+event_kind_allowlist = [24133]

@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: bitsperity-nostr-signer_signer_1
+      APP_PORT: "8740"
+
+  signer:
+    image: ghcr.io/bitsperitybtc/nostr-signer:0.1.0@sha256:9640d2a79d268810628d7f02e4ee3f63538fca5bc519422e95f5c0418bbf50d9
+    restart: on-failure
+    stop_grace_period: 1m
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    environment:
+      DATA_DIR: /data
+      LISTEN: 0.0.0.0:8740
+      DEFAULT_SIGNER_DIAL: ws://relay:8080
+      LOG_LEVEL: info
+    depends_on:
+      - relay
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:8740/healthz').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  relay:
+    # Pin the mailbox sidecar by digest. Kind 24133 only (see relay-config.toml).
+    image: scsibug/nostr-rs-relay:latest@sha256:03f54bfbffff80a50db62c9287913bd25a2dec08033b56d2122bc2550363d5c5
+    restart: on-failure
+    ports:
+      - "8741:8080"
+    volumes:
+      - ./relay-config.toml:/usr/src/app/config.toml:ro
