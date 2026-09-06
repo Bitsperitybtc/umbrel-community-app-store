@@ -15,6 +15,16 @@ Apps in this store use the `bitsperity-` ID prefix. That prefix is required by u
 
 BitSpark is a static Nostr client. The container serves the production SPA. Sign-in is NIP-46. Lightning is NWC in Settings. Umbrel login is not wrapped in front of the app.
 
+### How umbrelOS updates this app
+
+Two layers. Refreshing the community store only git-clones this repo (catalog). The installed app stays on the old compose and `umbrel-app.yml` until its **Update** button is used.
+
+Umbrel shows **Update** when `version` in the catalog `umbrel-app.yml` differs from the copy in `app-data`. String inequality, not semver. Changing `icon.png` without bumping `version` does nothing on an already-installed app.
+
+The desktop/store icon is the `icon:` HTTP URL, not the file in the clone. `raw.githubusercontent.com/.../master/...` is cached: after replacing `icon.png`, point `icon:` at the commit that contains the new PNG (not `master`).
+
+Update copies only `docker-compose.yml` (then `umbrel-app.yml` after start). Same image pin → pull is a no-op; the running SPA does not change.
+
 ### Image pin
 
 Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`), not an architecture-specific blob:
@@ -23,13 +33,18 @@ Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`), not an
 ghcr.io/bitsperitybtc/bitspark:sha-32593df@sha256:a8cc4e3fe797d9ccc80301caa44aeb953ee19c736d4887b445002ecfc9cc54e1
 ```
 
-To bump:
+To ship a new SPA (Umbrel: community store refresh, then **Update** on BitSpark):
 
-1. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/bitspark:<tag>`
-2. Pin `image: ghcr.io/bitsperitybtc/bitspark:<tag>@sha256:<index-digest>`
-3. Set `version` in `umbrel-app.yml` to that tag
+1. Publish `ghcr.io/bitsperitybtc/bitspark` (push `chore/open-source-readiness` / `main` / `v*`, or `workflow_dispatch`). Do not use `latest` in compose.
+2. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/bitspark:<tag>` — copy the **index** digest (`linux/amd64` + `linux/arm64`), not a blob digest.
+3. Pin `image: ghcr.io/bitsperitybtc/bitspark:<tag>@sha256:<index-digest>`
+4. Set `version` in `umbrel-app.yml` to that tag (must differ from the installed version)
+5. Fill `releaseNotes`. If `icon.png` changed, set `icon:` to `.../<commit>/bitsperity-bitspark/icon.png`
+6. Push this store repo
 
-Do not use `latest`. Do not use compose `build:`. `APP_PORT` stays `80`.
+Listing-only (icon/copy, same container): bump `version` (e.g. `sha-32593df.1`), keep the image pin, cache-bust `icon:` if the PNG changed.
+
+Do not use compose `build:`. `APP_PORT` stays `80`.
 
 ### Official App Store PR
 
