@@ -30,7 +30,7 @@ Update copies only `docker-compose.yml` (then `umbrel-app.yml` after start). Sam
 Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`), not an architecture-specific blob:
 
 ```text
-ghcr.io/bitsperitybtc/bitspark:sha-32593df@sha256:a8cc4e3fe797d9ccc80301caa44aeb953ee19c736d4887b445002ecfc9cc54e1
+ghcr.io/bitsperitybtc/bitspark:sha-b2437ef@sha256:7d78486e32f26e671b77eb8b6e8ac79b280f08f6ffcf4112b321453686b46ae9
 ```
 
 To ship a new SPA (Umbrel: community store refresh, then **Update** on BitSpark):
