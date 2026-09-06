@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-bitspark
 category: bitcoin
 name: BitSpark
-version: "sha-b2437ef"
+version: "sha-b2437ef.1"
 tagline: Idea Engine on Nostr
 description: >-
   BitSpark is a client-side Idea Engine on Nostr. Shape ideas, post paid jobs,
@@ -17,10 +17,8 @@ description: >-
   Browse ideas and jobs without an account. Publishing, applying, tipping, and
   settlement need a signer and, when money moves, a connected wallet.
 releaseNotes: >-
-  Current main (b2437ef). Florilegium UI with the sun mark, Idea Engine
-  (NIP-23 ideas, NIP-37 drafts, naddr routes), jobs 1.0 (NIP-99 listings),
-  zap splits, and optional same-node signer-config.json. App icon is the sun
-  mark.
+  App icon redrawn for the Umbrel grid: eight-ray gold sun, no engraved
+  clutter. Container is still main sha-b2437ef.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitspark_btc
 dependencies: []
@@ -34,6 +32,6 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
-icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/71aeca7/bitsperity-bitspark/icon.png
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/9453d09/bitsperity-bitspark/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
