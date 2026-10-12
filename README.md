@@ -60,36 +60,39 @@ Copy `bitsperity-horizon/` to a `horizon/` folder in a fork of [getumbrel/umbrel
 - Run `npm run lint:apps -- horizon --check-images`
 
 
-## Nostr Signer
+## bitsperity Moonstone
 
 | | |
 |---|---|
-| Community app ID | `bitsperity-nostr-signer` |
-| Official app ID (later) | `nostr-signer` |
+| Community app ID | `bitsperity-moonstone` |
+| Official app ID (later) | `moonstone` |
 | UI | `http://umbrel.local:8740` (Umbrel login) |
 | Mailbox | `ws://umbrel.local:8741` (no Umbrel cookie) |
-| Source | [Bitsperitybtc/nostr_signer](https://github.com/Bitsperitybtc/nostr_signer) |
+| Source | [Bitsperitybtc/moonstone](https://github.com/Bitsperitybtc/moonstone) |
 
 Standalone NIP-46 remote signer. Holds identities on the node, approves clients
 per identity, signs over a bundled kind-24133 mailbox. Any compliant NIP-46
 client can pair.
 
+Existing installs do not migrate. Umbrel keeps the data directory under the previous app id `bitsperity-nostr-signer`.
+
 ### Image pin
 
-Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`), not an architecture-specific blob:
+Compose uses `ghcr.io/bitsperitybtc/moonstone:0.1.0`. The package is not publicly readable yet, so this listing does not pin a digest copied from `nostr-signer`. After the first GHCR push, make the package **public** or Umbrel cannot pull it, then pin the multi-arch index digest:
 
 ```text
-ghcr.io/bitsperitybtc/nostr-signer:0.1.0@sha256:9640d2a79d268810628d7f02e4ee3f63538fca5bc519422e95f5c0418bbf50d9
+ghcr.io/bitsperitybtc/moonstone:0.1.0
 ```
 
 To bump:
 
-1. Tag `vX.Y.Z` on `nostr_signer` `main` (GHCR workflow publishes the image)
-2. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/nostr-signer:<tag>`
-3. Pin `image: ghcr.io/bitsperitybtc/nostr-signer:<tag>@sha256:<index-digest>`
-4. Set `version` in `umbrel-app.yml` to that tag
+1. Tag `vX.Y.Z` on `moonstone` `main` (GHCR workflow publishes the image)
+2. Make `ghcr.io/bitsperitybtc/moonstone` public
+3. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/moonstone:<tag>`
+4. Pin `image: ghcr.io/bitsperitybtc/moonstone:<tag>@sha256:<index-digest>`
+5. Set `version` in `umbrel-app.yml` to that tag
 
-Do not use `latest` for the signer. Do not use compose `build:`. Keep the mailbox sidecar digest-pinned. After the first GHCR push, the package must be **public** or Umbrel cannot pull it.
+Do not use `latest`. Do not use compose `build:`. Keep the mailbox sidecar digest-pinned.
 
 ## Layout
 
@@ -102,7 +105,7 @@ bitsperity-horizon/
   gallery/1.png               Landing
   gallery/2.png               Ideas
   gallery/3.png               Job detail
-bitsperity-nostr-signer/
+bitsperity-moonstone/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + signer + mailbox relay
   relay-config.toml           Kind 24133 only

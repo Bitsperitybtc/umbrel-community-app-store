@@ -3,11 +3,11 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: bitsperity-nostr-signer_signer_1
+      APP_HOST: bitsperity-moonstone_signer_1
       APP_PORT: "8740"
 
   signer:
-    image: ghcr.io/bitsperitybtc/nostr-signer:0.1.0@sha256:9640d2a79d268810628d7f02e4ee3f63538fca5bc519422e95f5c0418bbf50d9
+    image: ghcr.io/bitsperitybtc/moonstone:0.1.0
     restart: on-failure
     stop_grace_period: 1m
     volumes:
