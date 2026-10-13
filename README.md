@@ -11,11 +11,11 @@ Apps in this store use the `bitsperity-` ID prefix. That prefix is required by u
 | Community app ID | `bitsperity-horizon` |
 | Official app ID (later) | `horizon` |
 | Host URL | `http://umbrel.local:3847` |
-| Source | [Bitsperitybtc/bitspark_btc](https://github.com/Bitsperitybtc/bitspark_btc) |
+| Source | [Bitsperitybtc/horizon](https://github.com/Bitsperitybtc/horizon) |
 
 bitsperity Horizon is a static Nostr client. The container serves the production SPA. Sign-in is NIP-46. Lightning is NWC in Settings. Umbrel login is not wrapped in front of the app.
 
-The published container image is still `ghcr.io/bitsperitybtc/bitspark`. There is no separate Horizon image yet. The community app id and display name do not alias the previous `bitsperity-bitspark` listing.
+The container image is `ghcr.io/bitsperitybtc/horizon`. The package is still private; Umbrel can pull it after the owner makes it public. The community app id and display name do not alias the previous listing.
 
 ### How umbrelOS updates this app
 
@@ -32,14 +32,14 @@ Update copies only `docker-compose.yml` (then `umbrel-app.yml` after start). Sam
 Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`), not an architecture-specific blob:
 
 ```text
-ghcr.io/bitsperitybtc/bitspark:sha-b2437ef@sha256:7d78486e32f26e671b77eb8b6e8ac79b280f08f6ffcf4112b321453686b46ae9
+ghcr.io/bitsperitybtc/horizon:0.0.1@sha256:42cd0b317612e30bdd1ffc1be5b78e165c8ef578b5ea6717cb61386e136df281
 ```
 
 To ship a new SPA (Umbrel: community store refresh, then **Update** on bitsperity Horizon):
 
-1. Publish `ghcr.io/bitsperitybtc/bitspark` (push `chore/open-source-readiness` / `main` / `v*`, or `workflow_dispatch`). Do not use `latest` in compose.
-2. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/bitspark:<tag>` — copy the **index** digest (`linux/amd64` + `linux/arm64`), not a blob digest.
-3. Pin `image: ghcr.io/bitsperitybtc/bitspark:<tag>@sha256:<index-digest>`
+1. Publish `ghcr.io/bitsperitybtc/horizon` (push `main` / `v*`, or `workflow_dispatch`). Do not use `latest` in compose. The package must be public or Umbrel cannot pull it.
+2. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/horizon:<tag>` — copy the **index** digest (`linux/amd64` + `linux/arm64`), not a blob digest.
+3. Pin `image: ghcr.io/bitsperitybtc/horizon:<tag>@sha256:<index-digest>`
 4. Set `version` in `umbrel-app.yml` to that tag (must differ from the installed version)
 5. Fill `releaseNotes`. If `icon.png` changed, set `icon:` to `.../<commit>/bitsperity-horizon/icon.png`
 6. Push this store repo
