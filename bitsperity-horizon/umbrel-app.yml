@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: bitcoin
 name: bitsperity Horizon
-version: "sha-b2437ef.4"
+version: "0.0.1"
 tagline: Idea Engine on Nostr
 description: >-
   bitsperity Horizon is a client-side Idea Engine on Nostr. Shape ideas, post paid jobs,
@@ -17,13 +17,13 @@ description: >-
   Browse ideas and jobs without an account. Publishing, applying, tipping, and
   settlement need a signer and, when money moves, a connected wallet.
 releaseNotes: >-
-  Community listing renamed to bitsperity Horizon (app id bitsperity-horizon).
-  Container pin is unchanged (main sha-b2437ef).
+  Community listing as bitsperity Horizon (app id bitsperity-horizon),
+  pinned to ghcr.io/bitsperitybtc/horizon 0.0.1.
 developer: Bitsperity
-website: https://github.com/Bitsperitybtc/bitspark_btc
+website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
-repo: https://github.com/Bitsperitybtc/bitspark_btc
-support: https://github.com/Bitsperitybtc/bitspark_btc/issues
+repo: https://github.com/Bitsperitybtc/horizon
+support: https://github.com/Bitsperitybtc/horizon/issues
 port: 3847
 gallery:
   - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-horizon/gallery/1.png
