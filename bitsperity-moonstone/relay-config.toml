@@ -3,8 +3,8 @@
 
 [info]
 relay_url = "ws://127.0.0.1:8741/"
-name = "nostr-signer-mailbox"
-description = "NIP-46 mailbox for Nostr Signer (kind 24133 only)."
+name = "bitsperity-moonstone-mailbox"
+description = "NIP-46 mailbox for bitsperity Moonstone (kind 24133 only)."
 
 [database]
 in_memory = true
