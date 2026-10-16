@@ -1,14 +1,25 @@
+# Umbrel package. Canonical copy: Bitsperitybtc/horizon umbrel/bitsperity-horizon/;
+# Bitsperitybtc/umbrel-community-app-store carries an identical copy.
+# Umbrel pulls the image by digest; the Docker workflow builds it from a `v*` tag.
 version: "3.7"
 
 services:
   app_proxy:
     environment:
       APP_HOST: bitsperity-horizon_web_1
-      APP_PORT: 80
+      APP_PORT: "80"
       PROXY_AUTH_ADD: "false"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.0.1@sha256:42cd0b317612e30bdd1ffc1be5b78e165c8ef578b5ea6717cb61386e136df281
+    image: ghcr.io/bitsperitybtc/horizon:0.1.0@sha256:043eb187ded223adce896063be2aaab9fe90451a3ee8ee58605201f351420f6b
     restart: on-failure
     stop_grace_period: 1m
     init: true
+    volumes:
+      - ./signer-config.json:/usr/share/nginx/html/signer-config.json:ro
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
