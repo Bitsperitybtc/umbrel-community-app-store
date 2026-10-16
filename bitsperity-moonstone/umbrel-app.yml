@@ -2,29 +2,32 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: bitsperity Moonstone
-version: "0.1.1"
+version: "0.2.0"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
-  bitsperity Moonstone holds your Nostr identities on this node and signs events for any
-  compliant NIP-46 client (Amber, nsec.app, Alby, bitsperity Horizon, and others). Keys
-  are encrypted at rest (NIP-49). You approve, deny, and revoke apps per
+  bitsperity Moonstone holds your Nostr identities on this node and signs for
+  any compliant NIP-46 client, including the other bitsperity apps. Keys are
+  encrypted at rest (NIP-49). You approve, deny, and revoke each app per
   identity in this UI. Signing happens over a bundled mailbox relay — never
-  over HTTP.
+  over HTTP. Moonstone is never hosted publicly.
 
 
   Two ports: the UI on 8740 (behind Umbrel login) and the NIP-46 mailbox
   WebSocket on 8741 (no Umbrel cookie; NIP-46 is the access control). Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  First community listing as bitsperity Moonstone. NIP-46 remote signer:
-  identities, per-identity unlock, one-click pairing, bundled kind-24133 mailbox.
+  New interface with day and night themes and a phone-friendly menu. Damaged
+  key files now show a clear message with Remove and Re-import instead of
+  failing silently. Under the hood, signing uses the shared bitsperity Kit.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
 repo: https://github.com/Bitsperitybtc/moonstone
 support: https://github.com/Bitsperitybtc/moonstone/issues
 port: 8740
-gallery: []
+gallery:
+  - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-moonstone/gallery/1.png
+  - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-moonstone/gallery/2.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
