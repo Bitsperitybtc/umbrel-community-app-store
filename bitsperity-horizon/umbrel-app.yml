@@ -1,24 +1,25 @@
 manifestVersion: 1
 id: bitsperity-horizon
-category: bitcoin
-name: bitsperity Horizon
-version: "0.0.1"
-tagline: Idea Engine on Nostr
+category: finance
+name: Horizon
+version: "0.1.0"
+tagline: Ideas and paid work on Nostr
 description: >-
-  bitsperity Horizon is a client-side Idea Engine on Nostr. Shape ideas, post paid jobs,
-  and settle with Lightning — no central platform in the middle.
+  bitsperity Horizon is a client-side market for ideas and paid work on
+  Nostr. Ideas, jobs, offers, and contracts live on relays; Lightning
+  settlement uses NWC in the browser. There is no Horizon backend and no
+  Bitcoin node dependency.
 
 
-  Sign in with a Nostr signer (NIP-46). Lightning payments use Wallet Connect
-  (NWC) from Settings. Identity and wallet stay in your browser; events live on
-  relays.
-
-
-  Browse ideas and jobs without an account. Publishing, applying, tipping, and
-  settlement need a signer and, when money moves, a connected wallet.
+  Browse ideas and jobs without an account. To publish, apply, or pay,
+  connect a NIP-46 signer (for example bitsperity Moonstone) and, when money
+  moves, a NWC wallet. Session and wallet data stay in the browser, not on
+  the Umbrel disk.
 releaseNotes: >-
-  Community listing as bitsperity Horizon (app id bitsperity-horizon),
-  pinned to ghcr.io/bitsperitybtc/horizon 0.0.1.
+  First release as Horizon. New day and night themes with a phone-friendly
+  menu. Pages show a clear message and a Retry button when relays do not
+  answer, instead of loading forever. Offers, contracts, reviews and
+  Lightning settlement are covered end to end with two signed-in people.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
@@ -29,6 +30,7 @@ gallery:
   - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-horizon/gallery/1.png
   - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-horizon/gallery/2.png
   - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-horizon/gallery/3.png
+  - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-horizon/gallery/4.png
 path: ""
 defaultUsername: ""
 defaultPassword: ""
