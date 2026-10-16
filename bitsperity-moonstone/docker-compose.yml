@@ -1,3 +1,9 @@
+# Umbrel package. Canonical copy: Bitsperitybtc/moonstone bitsperity-moonstone/;
+# Bitsperitybtc/umbrel-community-app-store carries an identical copy.
+# Umbrel pulls the image by digest; ghcr.yml builds it from a `v*` tag.
+#
+# UI 8740 = app_proxy (Umbrel login). Mailbox 8741 = published WebSocket, no
+# cookie (NIP-46 is the access control).
 version: "3.7"
 
 services:
@@ -7,7 +13,7 @@ services:
       APP_PORT: "8740"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.1.1@sha256:f8cc143299940e5097e0cab659cc3328aa5745395b0f478ef507ae0822591f6f
+    image: ghcr.io/bitsperitybtc/moonstone:0.2.0@sha256:6efd9f12f6728c3524e06a8b74f6c7672ec67ba6cf6b57c8c58c9eecdb80013c
     restart: on-failure
     stop_grace_period: 1m
     volumes:
