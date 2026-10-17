@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.0"
+version: "0.1.1"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -16,10 +16,11 @@ description: >-
   moves, a NWC wallet. Session and wallet data stay in the browser, not on
   the Umbrel disk.
 releaseNotes: >-
-  First release as Horizon. New day and night themes with a phone-friendly
-  menu. Pages show a clear message and a Retry button when relays do not
-  answer, instead of loading forever. Offers, contracts, reviews and
-  Lightning settlement are covered end to end with two signed-in people.
+  Built on bitsperity Kit 0.3.0. Clearer messages when a wallet (NWC) link
+  or a signer (bunker) link is wrong; relays in a bunker link are now
+  checked. Lightning tips and zap splits use the shared Kit code: payment
+  details are checked more strictly, and a Lightning address whose server
+  answers with a redirect is no longer followed.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
