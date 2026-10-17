@@ -13,7 +13,7 @@ services:
       APP_PORT: "8740"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.2.0@sha256:6efd9f12f6728c3524e06a8b74f6c7672ec67ba6cf6b57c8c58c9eecdb80013c
+    image: ghcr.io/bitsperitybtc/moonstone:0.2.1@sha256:b30e4fa2e063d8fe1ae28d6c97d89502e7a2f3b0325c35755c6f6ba0e2d001ad
     restart: on-failure
     stop_grace_period: 1m
     volumes:

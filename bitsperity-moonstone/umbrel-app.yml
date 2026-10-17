@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: bitsperity Moonstone
-version: "0.2.0"
+version: "0.2.1"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -16,9 +16,9 @@ description: >-
   WebSocket on 8741 (no Umbrel cookie; NIP-46 is the access control). Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  New interface with day and night themes and a phone-friendly menu. Damaged
-  key files now show a clear message with Remove and Re-import instead of
-  failing silently. Under the hood, signing uses the shared bitsperity Kit.
+  Maintenance release built on bitsperity Kit 0.3.0, so Moonstone and
+  Horizon 0.1.1 run the same signing code. No changes to how you use
+  Moonstone; your identities, pairings and settings stay as they are.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
