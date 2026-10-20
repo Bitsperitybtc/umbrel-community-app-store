@@ -21,7 +21,7 @@ services:
       LUNATION_DB: /data/lunation.sqlite
       LUNATION_BACKUP_DIR: /data/backups
       APP_SEED: ${APP_SEED}
-      LUNATION_ORIGINS: http://${DEVICE_DOMAIN_NAME}:8748
+      LUNATION_ORIGINS: http://${DEVICE_DOMAIN_NAME}:8748,http://${DEVICE_HOSTNAME}:8748
       LUNATION_TRUSTED_PROXIES: 10.21.0.0/16
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/v1/health"]

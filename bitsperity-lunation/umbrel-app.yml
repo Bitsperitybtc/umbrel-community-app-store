@@ -11,7 +11,7 @@ developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
 dependencies: []
 repo: https://github.com/Bitsperitybtc/lunation
-support: https://github.com/Bitsperitybtc/lunation
+support: https://github.com/Bitsperitybtc/lunation/issues
 port: 8748
 gallery: []
 path: ""
@@ -23,4 +23,4 @@ releaseNotes: >-
   Nostr. A backup is a SQLite VACUUM INTO copy.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
-submission: ""
+submission: https://github.com/Bitsperitybtc/umbrel-community-app-store

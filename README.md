@@ -104,6 +104,8 @@ Do not use `latest`. Do not use compose `build:`. Keep the mailbox sidecar diges
 
 Lunation is the Bitsperity planning server. It keeps one SQLite database under `${APP_DATA_DIR}/data` and serves the plan over HTTP. Sign-in is Nostr. Umbrel login is not put in front of the app (`PROXY_AUTH_ADD: "false"`). umbrelOS sets `APP_SEED`, and compose passes it through unchanged.
 
+Sign in via `http://umbrel.local:8748` or `http://<device hostname>:8748` (Tailscale MagicDNS). A raw IP is not an allowed origin in 0.1.0.
+
 The canonical copy is `umbrel/bitsperity-lunation/` in `Bitsperitybtc/lunation`. This folder has an identical copy, plus `icon.png` rendered from that repo's `icon.svg`.
 
 ### Image pin
