@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: bitsperity-lunation_web_1
+      APP_PORT: "8080"
+      PROXY_AUTH_ADD: "false"
+
+  web:
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of the v0.1.0 tag build.
+    image: ghcr.io/bitsperitybtc/lunation:0.1.0@sha256:1aad777dbccec2c30b3cece5739808d54cf024dbe0beccb69b3d177ccb0f60bc
+    restart: on-failure
+    stop_grace_period: 1m
+    init: true
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8080"
+      LUNATION_DB: /data/lunation.sqlite
+      LUNATION_BACKUP_DIR: /data/backups
+      APP_SEED: ${APP_SEED}
+      LUNATION_ORIGINS: http://${DEVICE_DOMAIN_NAME}:8748,http://${DEVICE_HOSTNAME}:8748
+      LUNATION_TRUSTED_PROXIES: 10.21.0.0/16
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s

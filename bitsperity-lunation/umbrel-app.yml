@@ -1,0 +1,26 @@
+manifestVersion: 1
+id: bitsperity-lunation
+category: developer
+name: Lunation
+version: "0.1.0"
+tagline: Plan in cycles
+description: >-
+  Lunation is the Bitsperity planning server. It keeps a SQLite database and
+  serves the plan over HTTP.
+developer: Bitsperity
+website: https://github.com/Bitsperitybtc/lunation
+dependencies: []
+repo: https://github.com/Bitsperitybtc/lunation
+support: https://github.com/Bitsperitybtc/lunation/issues
+port: 8748
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  First release of the planning server. Spaces, projects, issues, and a
+  queue live in one SQLite database and are served over HTTP. Sign-in is
+  Nostr. A backup is a SQLite VACUUM INTO copy.
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
+submitter: Bitsperity
+submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
