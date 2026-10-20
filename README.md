@@ -94,6 +94,36 @@ To bump:
 
 Do not use `latest`. Do not use compose `build:`. Keep the mailbox sidecar digest-pinned.
 
+## Lunation
+
+| | |
+|---|---|
+| Community app ID | `bitsperity-lunation` |
+| UI | `http://umbrel.local:8748` |
+| Source | [Bitsperitybtc/lunation](https://github.com/Bitsperitybtc/lunation) |
+
+Lunation is the Bitsperity planning server. It keeps one SQLite database under `${APP_DATA_DIR}/data` and serves the plan over HTTP. Sign-in is Nostr. Umbrel login is not put in front of the app (`PROXY_AUTH_ADD: "false"`). umbrelOS sets `APP_SEED`, and compose passes it through unchanged.
+
+The canonical copy is `umbrel/bitsperity-lunation/` in `Bitsperitybtc/lunation`. This folder has an identical copy, plus `icon.png` rendered from that repo's `icon.svg`.
+
+### Image pin
+
+Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`) of the `v0.1.0` tag build:
+
+```text
+ghcr.io/bitsperitybtc/lunation:0.1.0@sha256:1aad777dbccec2c30b3cece5739808d54cf024dbe0beccb69b3d177ccb0f60bc
+```
+
+The package `ghcr.io/bitsperitybtc/lunation` must be public, or Umbrel cannot pull it.
+
+To bump:
+
+1. Tag `vX.Y.Z` on `lunation` `main` (the Docker workflow publishes the image)
+2. Pin `image: ghcr.io/bitsperitybtc/lunation:<tag>@sha256:<index-digest>`
+3. Set `version` in `umbrel-app.yml` to that tag and fill `releaseNotes`
+
+Do not use `latest`. Do not use compose `build:`. `APP_PORT` stays `8080`.
+
 ## Layout
 
 ```text
@@ -109,5 +139,9 @@ bitsperity-moonstone/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + signer + mailbox relay
   relay-config.toml           Kind 24133 only
+  icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
+bitsperity-lunation/
+  umbrel-app.yml              Listing
+  docker-compose.yml          app_proxy + web image
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 ```
