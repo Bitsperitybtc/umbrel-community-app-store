@@ -15,7 +15,7 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.3.1@sha256:9c578211e9d6d77530b89b02d0b0e693e14d0b86258bc2f4c2ad7cfb81b85ae2
+    image: ghcr.io/bitsperitybtc/moonstone:0.3.2@sha256:a0b9f8b75cdcdd3a5c2d675152294838bed5567e3a591944681564c908407ddf
     restart: on-failure
     stop_grace_period: 1m
     volumes:
@@ -26,7 +26,10 @@ services:
       # umbrelOS app-network gateway that the 2.0 app gateway proxies from
       MOONSTONE_PROXY_HOST: "10.21.0.1"
       LISTEN: 0.0.0.0:8740
-      DEFAULT_SIGNER_DIAL: ws://relay:8080
+      # Container name: all Umbrel apps share umbrel_main_network, where `relay` can be another app.
+      DEFAULT_SIGNER_DIAL: ws://bitsperity-moonstone_relay_1:8080
+      # Local relays /nostr-mcp may open: the official Nostr Relay app's relay container.
+      NOSTR_LOCAL_RELAYS: ws://nostr-relay_relay_1:8080
       LOG_LEVEL: info
     depends_on:
       - relay
