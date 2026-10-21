@@ -11,15 +11,20 @@ services:
     environment:
       APP_HOST: bitsperity-moonstone_signer_1
       APP_PORT: "8740"
+      # Exact paths only. No wildcards, so nothing else under /mcp or /nostr-mcp is open.
+      PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.2.1@sha256:b30e4fa2e063d8fe1ae28d6c97d89502e7a2f3b0325c35755c6f6ba0e2d001ad
+    image: ghcr.io/bitsperitybtc/moonstone:0.3.0@sha256:df81478d2852e3b54b65344191ec80ad99ea5d4b996be49c524fd64e8291c17b
     restart: on-failure
     stop_grace_period: 1m
     volumes:
       - ${APP_DATA_DIR}/data:/data
     environment:
       DATA_DIR: /data
+      APP_SEED: ${APP_SEED}
+      # umbrelOS app-network gateway that the 2.0 app gateway proxies from
+      MOONSTONE_PROXY_HOST: "10.21.0.1"
       LISTEN: 0.0.0.0:8740
       DEFAULT_SIGNER_DIAL: ws://relay:8080
       LOG_LEVEL: info

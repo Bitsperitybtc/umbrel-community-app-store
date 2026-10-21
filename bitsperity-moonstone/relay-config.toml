@@ -7,6 +7,8 @@ name = "bitsperity-moonstone-mailbox"
 description = "NIP-46 mailbox for bitsperity Moonstone (kind 24133 only)."
 
 [database]
+# in_memory is only safe as long as exclusively ephemeral kinds (24133) are allowed;
+# whoever allows further kinds must switch to a file-backed SQLite DB on tmpfs (see Kit #125).
 in_memory = true
 
 [network]
