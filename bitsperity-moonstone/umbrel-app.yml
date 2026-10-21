@@ -1,8 +1,8 @@
 manifestVersion: 1
 id: bitsperity-moonstone
 category: social
-name: bitsperity Moonstone
-version: "0.3.0"
+name: Moonstone
+version: "0.3.1"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -16,13 +16,10 @@ description: >-
   WebSocket on 8741 (no Umbrel cookie; NIP-46 is the access control). Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  AI agents can now work with Moonstone over two MCP endpoints, each with its
-  own token derived from your Umbrel: /mcp to manage identities, grants,
-  requests and the audit log, and /nostr-mcp to read Nostr and publish as an
-  identity you approve. Agents sign only the event kinds you pick when you
-  create them. Breaking: scripts that call /api need the API token shown in
-  Settings. Also: NIP-46 hardening, stricter passphrases for new keys, and a
-  cleaner shutdown. Built for the umbrelOS 2.0 app gateway.
+  The mailbox relay now reads its config, so it stays a kind-24133 mailbox
+  instead of an open relay. Settings can Show and Copy the /mcp and
+  /nostr-mcp tokens, behind the same Umbrel login as the rest of the UI.
+  The home-screen name is Moonstone.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
