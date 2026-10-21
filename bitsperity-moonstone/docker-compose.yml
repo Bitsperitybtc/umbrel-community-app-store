@@ -15,7 +15,7 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.3.0@sha256:df81478d2852e3b54b65344191ec80ad99ea5d4b996be49c524fd64e8291c17b
+    image: ghcr.io/bitsperitybtc/moonstone:0.3.1@sha256:9c578211e9d6d77530b89b02d0b0e693e14d0b86258bc2f4c2ad7cfb81b85ae2
     restart: on-failure
     stop_grace_period: 1m
     volumes:
@@ -50,4 +50,7 @@ services:
     ports:
       - "8741:8080"
     volumes:
-      - ./relay-config.toml:/usr/src/app/config.toml:ro
+      # umbreld's common fragment is the first compose file, so a relative
+      # ./relay-config.toml resolves outside this app and the relay starts
+      # on its defaults. APP_DATA_DIR is absolute and holds this file.
+      - ${APP_DATA_DIR}/relay-config.toml:/usr/src/app/config.toml:ro
