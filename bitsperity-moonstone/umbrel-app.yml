@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.3.1"
+version: "0.3.2"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -16,10 +16,13 @@ description: >-
   WebSocket on 8741 (no Umbrel cookie; NIP-46 is the access control). Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  The mailbox relay now reads its config, so it stays a kind-24133 mailbox
-  instead of an open relay. Settings can Show and Copy the /mcp and
-  /nostr-mcp tokens, behind the same Umbrel login as the rest of the UI.
-  The home-screen name is Moonstone.
+  Moonstone now really uses its bundled mailbox relay. Before, the signer
+  could reach another app's relay with the same name, such as the Umbrel
+  Nostr Relay app. Agent pairing also works on relays that do not confirm
+  kind-24133 events, which before left the /nostr-mcp session stuck after
+  approval. Agents can publish to the Umbrel Nostr Relay app through the
+  Nostr MCP (NOSTR_LOCAL_RELAYS setting). Relay lists in Settings save when
+  you add or remove a relay.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
@@ -41,6 +44,11 @@ environment:
       - signer
     default: ""
     note: "Extra hostnames for the UI, comma-separated and exact, such as umbrel.tail1234.ts.net. IP addresses, umbrel and *.local work without this."
+  - name: NOSTR_LOCAL_RELAYS
+    services:
+      - signer
+    default: ws://nostr-relay_relay_1:8080
+    note: "Local relays the Nostr MCP may read and publish to, comma-separated ws:// or wss:// URLs. The default is the Umbrel Nostr Relay app. Every other private host stays blocked."
   - name: LOG_LEVEL
     services:
       - signer
