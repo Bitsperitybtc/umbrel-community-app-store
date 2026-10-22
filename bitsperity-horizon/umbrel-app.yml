@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.6"
+version: "0.1.7"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -16,10 +16,9 @@ description: >-
   moves, a NWC wallet. Session and wallet data stay in the browser, not on
   the Umbrel disk.
 releaseNotes: >-
-  Stay signed in: tick Stay signed in on this device when you sign in, and
-  Horizon reconnects to your signer by itself for up to 30 days. Your key
-  stays in Moonstone; revoke the app there or use Forget this device in
-  Settings.
+  Stay signed in now survives a short network drop or a signer restart:
+  Horizon keeps your device sign-in and reconnects by itself once the signer
+  is reachable again.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
