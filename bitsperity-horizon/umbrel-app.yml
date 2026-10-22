@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.4"
+version: "0.1.5"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -16,13 +16,11 @@ description: >-
   moves, a NWC wallet. Session and wallet data stay in the browser, not on
   the Umbrel disk.
 releaseNotes: >-
-  Comments, community threads, replies and jobs now work without a relay
-  list (NIP-65): Horizon publishes them on the relays it reads from, and a
-  comment or reply that is not published says why under the form. The
-  Umbrel Nostr Relay app is reached through Horizon's own address at /relay,
-  so reading and publishing also work when Horizon is open over https, such
-  as in the Umbrel iOS app. Same-node sign-in needs Moonstone 0.3.4 or
-  later.
+  Horizon now reaches the Umbrel Nostr Relay at /relay on an install that
+  still had the old relay setting (ws://umbrel.local:4848) from an earlier
+  version, so reading and publishing work when Horizon is open over https,
+  such as in the Umbrel iOS app. A relay setting you changed yourself is
+  kept. Same-node sign-in needs Moonstone 0.3.4 or later.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
