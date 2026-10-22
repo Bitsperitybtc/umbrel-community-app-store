@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.3.5"
+version: "0.3.6"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -17,14 +17,13 @@ description: >-
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  A pairing an agent is waiting on now shows on the keyring as "Waiting for
-  your approval", with the app, the identity it asked for, and when it
-  expires. Review opens the usual approve screen, so you no longer need the
-  exact link the agent sent. Deny takes it off the keyring. Agents outside
-  Moonstone can list their link with the admin MCP tool pairing_offer.
-  Since 0.3.3, the Nostr MCP ends an agent's session when you revoke its
-  client, revoke the agent, or delete the identity, so it no longer shows
-  as approved.
+  Anything waiting for your approval is reachable from every page: the
+  header shows how many requests and pairings wait and links to them. An
+  identity's page lists the requests and pairings for that identity, and
+  Review opens the approve screen with that identity already chosen. The
+  screens were tidied: long keys and addresses no longer overflow on a
+  phone, keys are shortened with a Copy button, and sections are spaced
+  and ordered more clearly.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
