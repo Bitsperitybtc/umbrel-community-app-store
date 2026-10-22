@@ -11,12 +11,16 @@ services:
       PROXY_AUTH_ADD: "false"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.1.1@sha256:332b19febfce99f9111ec62fd9613fdc9e5b225069919b47fc1ec5e945f16fa6
+    image: ghcr.io/bitsperitybtc/horizon:0.1.2@sha256:785280e28299c25e84b74dc96126ec6b0a17502fcbfd5f45d7c8adb6def77251
     restart: on-failure
     stop_grace_period: 1m
     init: true
     volumes:
-      - ./signer-config.json:/usr/share/nginx/html/signer-config.json:ro
+      # umbreld's common fragment is the first compose file, so a relative
+      # ./signer-config.json resolves outside this app and nginx never serves
+      # it. APP_DATA_DIR is absolute and holds both files.
+      - ${APP_DATA_DIR}/signer-config.json:/usr/share/nginx/html/signer-config.json:ro
+      - ${APP_DATA_DIR}/relay-config.json:/usr/share/nginx/html/relay-config.json:ro
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
       interval: 30s
