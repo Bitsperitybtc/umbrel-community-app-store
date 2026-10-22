@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.3.8"
+version: "0.3.9"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -17,8 +17,14 @@ description: >-
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  An app you revoked can no longer queue new approval requests by
-  reconnecting; it is told it was revoked and signs you out.
+  The Admin MCP and Nostr MCP tokens in Settings got a proper panel: tap
+  Show token to see the token, the server URL and the header your agent
+  needs, each with a Copy button. New: Regenerate token. After you confirm,
+  the old token stops working at once, also for agents connected right now,
+  and you give your agents the new one. Each token is regenerated on its
+  own and is kept in Moonstone's app data, so it stays the same across
+  restarts and updates. Your current tokens keep working after this update
+  until you regenerate them.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
