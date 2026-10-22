@@ -11,7 +11,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.1.7@sha256:96109a543c42744490939e2e0d65881c9596ca000c6b0e3235e7595ab7a10ca9
+    image: ghcr.io/bitsperitybtc/horizon:0.1.8@sha256:52ce10e7d75ae737203625c4a560a9c5292c08a45fa12cabad6c9fcf408120fd
     restart: on-failure
     stop_grace_period: 1m
     init: true

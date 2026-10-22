@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.7"
+version: "0.1.8"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -16,9 +16,10 @@ description: >-
   moves, a NWC wallet. Session and wallet data stay in the browser, not on
   the Umbrel disk.
 releaseNotes: >-
-  Stay signed in now survives a short network drop or a signer restart:
-  Horizon keeps your device sign-in and reconnects by itself once the signer
-  is reachable again.
+  When Horizon has stopped retrying to reach your signer, the banner now
+  says "Signer not reachable." instead of "Retrying…". Sign in again stays
+  next to it, and Horizon still retries when you come back online or to
+  the tab.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
