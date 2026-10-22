@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.10"
+version: "0.1.11"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -18,17 +18,23 @@ description: >-
 
 
   For agents, the app also runs the Horizon MCP at /mcp on the app port. It
-  needs a bearer token, which the page /mcp-token shows after the Umbrel
-  login. The MCP signs through Moonstone.
+  needs a bearer token, which Settings, Identity, Agent access (MCP) shows
+  after the Umbrel login, and where you can also regenerate it. The MCP signs
+  through Moonstone.
 releaseNotes: >-
-  Horizon's MCP server for AI agents now runs on your Umbrel and starts with
-  the app. Agents reach it at /mcp on Horizon's port, on your network or over
-  Tailscale, with a token that only you can see: Settings, Identity, Show
-  MCP token, then sign in with your Umbrel password. The agent signs through
-  Moonstone, where you approve it. This test release also turns on local test
-  identities and a reset tool that removes a local test identity's posts from
-  your Umbrel relay; it never touches an identity from Moonstone. Both can be
-  switched off under Environment in the app settings.
+  The MCP token for AI agents now lives inside Horizon: Settings, Identity,
+  Agent access (MCP). Tap Show token (Horizon asks for your Umbrel password
+  first) to see the token, the server URL and the header to give your agent,
+  each with a Copy button. New: Regenerate token. After you confirm, the old
+  token stops working at once, also for agents that are connected right now,
+  and you paste the new one into your agents. The token is kept in Horizon's
+  app data, so it stays the same across restarts and updates. Your current
+  token keeps working after this update until you regenerate it. For agents:
+  every MCP tool now tells the agent which parameters it takes, a failing
+  tool returns its real error message (for example "Job not found") instead
+  of "internal error", and bookmarks and lists accept a job by its naddr. In
+  Horizon: polls and funding goals created by an agent now show their votes
+  and zaps in the browser, and an idea's Overview shows the comments on it.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
