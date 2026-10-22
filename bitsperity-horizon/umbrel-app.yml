@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.2"
+version: "0.1.3"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -16,11 +16,12 @@ description: >-
   moves, a NWC wallet. Session and wallet data stay in the browser, not on
   the Umbrel disk.
 releaseNotes: >-
-  Sign in with Moonstone on the same Umbrel: Horizon now finds Moonstone by
-  itself, and "Open in signer" opens its approval page. Moonstone lists the
-  app as Horizon. Pairing and signing also work on relays that do not
-  confirm each request. New posts go to the Umbrel Nostr Relay app at
-  ws://umbrel.local:4848 until your own relay list takes over.
+  Sign in with Moonstone on the same Umbrel also works when Horizon is open
+  over https, such as in the Umbrel iOS app: Nostr Connect now uses
+  Moonstone's mailbox at wss://<host>:8740/mailbox (ws:// over http). This
+  needs Moonstone 0.3.4 or later; with an older Moonstone the sign-in view
+  says that the mailbox does not answer. A ws:// relay entered on an https
+  page is refused with a clear message instead of hanging.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
