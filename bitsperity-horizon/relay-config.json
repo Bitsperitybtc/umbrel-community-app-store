@@ -1,4 +1,4 @@
 {
-  "relays": ["ws://umbrel.local:4848"],
+  "relays": ["self"],
   "bootstrap": []
 }

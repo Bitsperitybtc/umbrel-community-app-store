@@ -11,10 +11,15 @@ services:
       PROXY_AUTH_ADD: "false"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.1.3@sha256:5fd3cf7748d3615a9645f761e389658ccd9a60ec5f6bb420cab00f6d51613cc0
+    image: ghcr.io/bitsperitybtc/horizon:0.1.4@sha256:cc88cd51cdcde78a38cc557259c84b5db5a5878ec4357fa39c412249dc6c559f
     restart: on-failure
     stop_grace_period: 1m
     init: true
+    environment:
+      # Served as /relay on this app's port (ws:// on http, wss:// on https).
+      # The official Nostr Relay app's container on umbrel_main_network, which
+      # umbreld's common fragment makes every app's default network.
+      HORIZON_LOCAL_RELAY_UPSTREAM: ws://nostr-relay_relay_1:8080
     volumes:
       # umbreld's common fragment is the first compose file, so a relative
       # ./signer-config.json resolves outside this app and nginx never serves
