@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.12"
+version: "0.1.13"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,16 +22,15 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Comments on an idea now stay with the idea when its author edits it. They
-  use the same comment format as job comments, and a comment written before
-  the latest edit says "written on an earlier version" next to its time.
-  Comments made the old way on an idea are no longer shown. When an author
-  deletes an idea, job, list or draft, other Nostr apps can now also see that
-  it was deleted, and Horizon and the MCP no longer list it. For agents:
-  list_comments takes the idea's ref, create_comment takes either an ideaRef
-  or a jobRef, and get_idea and get_job do not return what the author
-  deleted. The header shows the Horizon app icon again instead of the small
-  tab icon.
+  Links and zaps on jobs and ideas now keep working after the author edits
+  them. Job zaps go to the job itself rather than one version of it, and
+  links in the activity feed open the current version. The job list on an
+  idea keeps jobs that people outside the idea team linked to it: the team's
+  jobs come first, the others follow marked "Not from the idea team", and
+  every job shows its status. Open-job counts and polls still count only the
+  idea team. For agents: like_event also likes the idea or job across edits,
+  confirm_contract and publish_pr_review read the job from the contract, and
+  list_jobs for an idea marks jobs from outside the team with fromTeam.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
