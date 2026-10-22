@@ -13,12 +13,12 @@ services:
     environment:
       APP_HOST: bitsperity-horizon_web_1
       APP_PORT: "80"
-      # No Umbrel login anywhere except the MCP token page.
+      # No Umbrel login anywhere except the MCP token endpoint (JSON + regenerate).
       PROXY_AUTH_WHITELIST: "*"
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.1.10@sha256:06643c14a21f440b92f75d9592c951a1da2faa4973605d667c8752e32d84fa0d
+    image: ghcr.io/bitsperitybtc/horizon:0.1.11@sha256:844b57624979e3dd2b3830643cab6c0ac3ecda00c0bda19cfb1854235abf5a64
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -45,7 +45,7 @@ services:
       start_period: 10s
 
   mcp:
-    image: ghcr.io/bitsperitybtc/horizon:0.1.10@sha256:06643c14a21f440b92f75d9592c951a1da2faa4973605d667c8752e32d84fa0d
+    image: ghcr.io/bitsperitybtc/horizon:0.1.11@sha256:844b57624979e3dd2b3830643cab6c0ac3ecda00c0bda19cfb1854235abf5a64
     command: ["node", "/opt/horizon-mcp/horizon-mcp.mjs"]
     restart: on-failure
     stop_grace_period: 30s
@@ -55,7 +55,8 @@ services:
       - ${APP_DATA_DIR}/mcp:/data
       - ${APP_DATA_DIR}/mcp-run:/run/horizon-mcp
     environment:
-      # Bearer = deriveMcpToken(APP_SEED, "bitsperity-horizon"). Not logged, not stored.
+      # Seeds the first bearer: deriveMcpToken(APP_SEED, "bitsperity-horizon"), written to
+      # /data/mcp-token (0600) on first start; Regenerate replaces it there. Never logged.
       APP_SEED: ${APP_SEED}
       HORIZON_MCP_DATA_DIR: /data
       # Relays the MCP reads and publishes on: the official Nostr Relay app.
