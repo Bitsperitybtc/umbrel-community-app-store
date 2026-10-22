@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.3.6"
+version: "0.3.7"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -17,13 +17,14 @@ description: >-
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  Anything waiting for your approval is reachable from every page: the
-  header shows how many requests and pairings wait and links to them. An
-  identity's page lists the requests and pairings for that identity, and
-  Review opens the approve screen with that identity already chosen. The
-  screens were tidied: long keys and addresses no longer overflow on a
-  phone, keys are shortened with a Copy button, and sections are spaced
-  and ordered more clearly.
+  Approve or deny right inside an identity: each request and pairing
+  waiting on an identity's page has Approve and Deny buttons that act for
+  that identity at once. A pairing that asked for no particular identity
+  can be approved as the identity you are looking at. When the full
+  approve screen would ask for something first, such as a passphrase for a
+  locked identity or a new relay, the card sends you there instead.
+  Details opens the full approve screen, and approving or denying there
+  now brings you back to the identity instead of the keyring.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
