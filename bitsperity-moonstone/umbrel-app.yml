@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.3.2"
+version: "0.3.4"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -13,16 +13,16 @@ description: >-
 
 
   Two ports: the UI on 8740 (behind Umbrel login) and the NIP-46 mailbox
-  WebSocket on 8741 (no Umbrel cookie; NIP-46 is the access control). Add a
+  WebSocket on 8741 (no Umbrel cookie; NIP-46 is the access control). Pages
+  opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  Moonstone now really uses its bundled mailbox relay. Before, the signer
-  could reach another app's relay with the same name, such as the Umbrel
-  Nostr Relay app. Agent pairing also works on relays that do not confirm
-  kind-24133 events, which before left the /nostr-mcp session stuck after
-  approval. Agents can publish to the Umbrel Nostr Relay app through the
-  Nostr MCP (NOSTR_LOCAL_RELAYS setting). Relay lists in Settings save when
-  you add or remove a relay.
+  Login from a page opened over https, such as an app in the Umbrel iOS
+  app, works: the mailbox relay is also served as wss://<host>:8740/mailbox,
+  and Moonstone shows that address on https. Approving a pairing on this
+  node's own mailbox no longer waits three seconds for an unreachable relay.
+  The admin MCP can now do what the UI does except approve: create and
+  delete identities, set agent kinds, revoke agents, and change settings.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []

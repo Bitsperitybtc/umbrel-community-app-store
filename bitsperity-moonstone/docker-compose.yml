@@ -3,7 +3,8 @@
 # Umbrel pulls the image by digest; ghcr.yml builds it from a `v*` tag.
 #
 # UI 8740 = app_proxy (Umbrel login). Mailbox 8741 = published WebSocket, no
-# cookie (NIP-46 is the access control).
+# cookie (NIP-46 is the access control). The same relay is wss://<host>:8740/mailbox
+# for https pages (Umbrel serves app ports over https; 8741 is plain ws).
 version: "3.7"
 
 services:
@@ -12,10 +13,11 @@ services:
       APP_HOST: bitsperity-moonstone_signer_1
       APP_PORT: "8740"
       # Exact paths only. No wildcards, so nothing else under /mcp or /nostr-mcp is open.
-      PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health"
+      # /mailbox is the WebSocket path to the bundled relay; like 8741 it has no cookie.
+      PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health,/mailbox"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.3.2@sha256:a0b9f8b75cdcdd3a5c2d675152294838bed5567e3a591944681564c908407ddf
+    image: ghcr.io/bitsperitybtc/moonstone:0.3.4@sha256:9063c6156b0aa0b3b59c380731b7aa0db3afb62a46e831d119ef2c11e768cd00
     restart: on-failure
     stop_grace_period: 1m
     volumes:
