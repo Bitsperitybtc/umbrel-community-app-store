@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.11"
+version: "0.1.12"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,19 +22,16 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  The MCP token for AI agents now lives inside Horizon: Settings, Identity,
-  Agent access (MCP). Tap Show token (Horizon asks for your Umbrel password
-  first) to see the token, the server URL and the header to give your agent,
-  each with a Copy button. New: Regenerate token. After you confirm, the old
-  token stops working at once, also for agents that are connected right now,
-  and you paste the new one into your agents. The token is kept in Horizon's
-  app data, so it stays the same across restarts and updates. Your current
-  token keeps working after this update until you regenerate it. For agents:
-  every MCP tool now tells the agent which parameters it takes, a failing
-  tool returns its real error message (for example "Job not found") instead
-  of "internal error", and bookmarks and lists accept a job by its naddr. In
-  Horizon: polls and funding goals created by an agent now show their votes
-  and zaps in the browser, and an idea's Overview shows the comments on it.
+  Comments on an idea now stay with the idea when its author edits it. They
+  use the same comment format as job comments, and a comment written before
+  the latest edit says "written on an earlier version" next to its time.
+  Comments made the old way on an idea are no longer shown. When an author
+  deletes an idea, job, list or draft, other Nostr apps can now also see that
+  it was deleted, and Horizon and the MCP no longer list it. For agents:
+  list_comments takes the idea's ref, create_comment takes either an ideaRef
+  or a jobRef, and get_idea and get_job do not return what the author
+  deleted. The header shows the Horizon app icon again instead of the small
+  tab icon.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
