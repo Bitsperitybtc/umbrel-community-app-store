@@ -1,6 +1,11 @@
 # Umbrel package. Canonical copy: Bitsperitybtc/horizon umbrel/bitsperity-horizon/;
 # Bitsperitybtc/umbrel-community-app-store carries an identical copy.
 # Umbrel pulls the image by digest; the Docker workflow builds it from a `v*` tag.
+#
+# Port 3847 (app gateway -> web nginx) serves the SPA, /relay and the MCP:
+# /mcp needs the bearer from /mcp-token; /mcp-token itself needs the Umbrel login.
+# The mcp service runs the same image and listens only on a Unix socket in
+# ${APP_DATA_DIR}/mcp-run, which only web and mcp mount.
 version: "3.7"
 
 services:
@@ -8,10 +13,12 @@ services:
     environment:
       APP_HOST: bitsperity-horizon_web_1
       APP_PORT: "80"
-      PROXY_AUTH_ADD: "false"
+      # No Umbrel login anywhere except the MCP token page.
+      PROXY_AUTH_WHITELIST: "*"
+      PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.1.8@sha256:52ce10e7d75ae737203625c4a560a9c5292c08a45fa12cabad6c9fcf408120fd
+    image: ghcr.io/bitsperitybtc/horizon:0.1.10@sha256:06643c14a21f440b92f75d9592c951a1da2faa4973605d667c8752e32d84fa0d
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -20,15 +27,56 @@ services:
       # The official Nostr Relay app's container on umbrel_main_network, which
       # umbreld's common fragment makes every app's default network.
       HORIZON_LOCAL_RELAY_UPSTREAM: ws://nostr-relay_relay_1:8080
+      # umbreld's app gateway connects from the app network gateway. nginx
+      # serves /mcp-token only to it, so the Umbrel login above applies.
+      HORIZON_PROXY_PEER: "10.21.0.1"
     volumes:
       # umbreld's common fragment is the first compose file, so a relative
       # ./signer-config.json resolves outside this app and nginx never serves
       # it. APP_DATA_DIR is absolute and holds both files.
       - ${APP_DATA_DIR}/signer-config.json:/usr/share/nginx/html/signer-config.json:ro
       - ${APP_DATA_DIR}/relay-config.json:/usr/share/nginx/html/relay-config.json:ro
+      - ${APP_DATA_DIR}/mcp-run:/run/horizon-mcp
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 10s
+
+  mcp:
+    image: ghcr.io/bitsperitybtc/horizon:0.1.10@sha256:06643c14a21f440b92f75d9592c951a1da2faa4973605d667c8752e32d84fa0d
+    command: ["node", "/opt/horizon-mcp/horizon-mcp.mjs"]
+    restart: on-failure
+    stop_grace_period: 30s
+    init: true
+    volumes:
+      # NIP-46 client key, NWC secret and, with NOSTR_LOCAL_KEYS=1, local test keys.
+      - ${APP_DATA_DIR}/mcp:/data
+      - ${APP_DATA_DIR}/mcp-run:/run/horizon-mcp
+    environment:
+      # Bearer = deriveMcpToken(APP_SEED, "bitsperity-horizon"). Not logged, not stored.
+      APP_SEED: ${APP_SEED}
+      HORIZON_MCP_DATA_DIR: /data
+      # Relays the MCP reads and publishes on: the official Nostr Relay app.
+      NOSTR_LOCAL_RELAYS: ws://nostr-relay_relay_1:8080
+      # Same-node Moonstone: approval links and its mailbox relay container.
+      MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
+      MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
+      # Test release defaults: local test identities and reset_test_data.
+      NOSTR_LOCAL_KEYS: "1"
+      HORIZON_TEST_RESET: "1"
+      # Payment tools appear once HORIZON_NWC_URI is set (App Settings -> Environment).
+      HORIZON_NWC_SIDE: client
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get({socketPath:'/run/horizon-mcp/mcp.sock',path:'/mcp/health'},(r)=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
