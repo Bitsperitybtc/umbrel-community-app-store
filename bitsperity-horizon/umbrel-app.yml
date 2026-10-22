@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.8"
+version: "0.1.9"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -15,11 +15,20 @@ description: >-
   connect a NIP-46 signer (for example bitsperity Moonstone) and, when money
   moves, a NWC wallet. Session and wallet data stay in the browser, not on
   the Umbrel disk.
+
+
+  For agents, the app also runs the Horizon MCP at /mcp on the app port. It
+  needs a bearer token, which the page /mcp-token shows after the Umbrel
+  login. The MCP signs through Moonstone.
 releaseNotes: >-
-  When Horizon has stopped retrying to reach your signer, the banner now
-  says "Signer not reachable." instead of "Retrying…". Sign in again stays
-  next to it, and Horizon still retries when you come back online or to
-  the tab.
+  Horizon's MCP server for AI agents now runs on your Umbrel and starts with
+  the app. Agents reach it at /mcp on Horizon's port, on your network or over
+  Tailscale, with a token that only you can see: open /mcp-token on Horizon's
+  address and sign in with your Umbrel password. The agent signs through
+  Moonstone, where you approve it. This test release also turns on local test
+  identities and a reset tool that removes an identity's test posts from your
+  Umbrel relay; both can be switched off under Environment in the app
+  settings.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies: []
@@ -37,3 +46,37 @@ defaultPassword: ""
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-horizon/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
+environment:
+  - name: NOSTR_LOCAL_RELAYS
+    services:
+      - mcp
+    default: ws://nostr-relay_relay_1:8080
+    note: "Relays the MCP reads and publishes on, comma-separated ws:// or wss:// URLs. The default is the Umbrel Nostr Relay app."
+  - name: NOSTR_LOCAL_KEYS
+    services:
+      - mcp
+    default: "1"
+    options:
+      - "0"
+      - "1"
+    note: "1 lets the MCP create local test identities (keys stored in this app's data). Testing only. 0 leaves signing to Moonstone."
+  - name: HORIZON_TEST_RESET
+    services:
+      - mcp
+    default: "1"
+    options:
+      - "0"
+      - "1"
+    note: "1 adds the MCP tool reset_test_data, which deletes the active identity's events on the relays above. Testing only."
+  - name: HORIZON_NWC_URI
+    services:
+      - mcp
+    note: "Optional nostr+walletconnect:// URI for the MCP payment tools, for example a test wallet. Empty means no payment tools."
+  - name: HORIZON_NWC_SIDE
+    services:
+      - mcp
+    default: client
+    options:
+      - client
+      - contractor
+    note: "client can pay invoices, contractor can create them."
