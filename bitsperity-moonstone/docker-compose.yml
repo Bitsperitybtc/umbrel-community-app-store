@@ -17,7 +17,7 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health,/mailbox"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.3.10@sha256:0f7e251b83630c5ac84b72ac6d314df54fdfe6d7d23e27671fed0d4804592874
+    image: ghcr.io/bitsperitybtc/moonstone:0.3.11@sha256:35be621d980ea717a58ce950925a74ab4e847bf2bab4551c97c2422d36879970
     restart: on-failure
     stop_grace_period: 1m
     volumes:
@@ -52,13 +52,16 @@ services:
     # NIP-46 mailbox: bitsperity Beacon (strfry), multi-arch, kind 24133 only.
     # Port 8080 inside, so DEFAULT_SIGNER_DIAL and stored dials stay valid.
     # The database is a tmpfs, so nothing survives a restart (24133 is ephemeral).
+    # strfry runs as uid 1000; a tmpfs without uid/gid is root-owned and strfry
+    # exits with "mdb_env_open: Permission denied" (as in Moonstone 0.3.10).
     # Digest: ghcr.io/bitsperitybtc/beacon:0.1.0 multi-arch index (amd64 + arm64).
     image: ghcr.io/bitsperitybtc/beacon:0.1.0@sha256:169feb1675be56c0becf41fdef11aa08737361e6cf25d54d41e17c2e514d6ca6
     restart: on-failure
     ports:
       - "8741:8080"
+    user: "1000:1000"
     tmpfs:
-      - /app/strfry-db
+      - /app/strfry-db:uid=1000,gid=1000,mode=0700
     environment:
       RELAY_WRITE_KINDS: "24133"
     command:
