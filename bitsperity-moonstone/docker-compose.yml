@@ -17,7 +17,7 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health,/mailbox"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.3.9@sha256:d5bc73bec3165879ae0cd95330fd9d964d12654d6c6e6e18d7d2a58ec94b2c55
+    image: ghcr.io/bitsperitybtc/moonstone:0.3.10@sha256:0f7e251b83630c5ac84b72ac6d314df54fdfe6d7d23e27671fed0d4804592874
     restart: on-failure
     stop_grace_period: 1m
     volumes:
@@ -30,8 +30,8 @@ services:
       LISTEN: 0.0.0.0:8740
       # Container name: all Umbrel apps share umbrel_main_network, where `relay` can be another app.
       DEFAULT_SIGNER_DIAL: ws://bitsperity-moonstone_relay_1:8080
-      # Local relays /nostr-mcp may open: the official Nostr Relay app's relay container.
-      NOSTR_LOCAL_RELAYS: ws://nostr-relay_relay_1:8080
+      # Local relays /nostr-mcp may open: the bitsperity Beacon app's relay container.
+      NOSTR_LOCAL_RELAYS: ws://bitsperity-beacon_relay_1:7777
       LOG_LEVEL: info
     depends_on:
       - relay
@@ -49,13 +49,25 @@ services:
       start_period: 20s
 
   relay:
-    # Pin the mailbox sidecar by digest. Kind 24133 only (see relay-config.toml).
-    image: scsibug/nostr-rs-relay:latest@sha256:03f54bfbffff80a50db62c9287913bd25a2dec08033b56d2122bc2550363d5c5
+    # NIP-46 mailbox: bitsperity Beacon (strfry), multi-arch, kind 24133 only.
+    # Port 8080 inside, so DEFAULT_SIGNER_DIAL and stored dials stay valid.
+    # The database is a tmpfs, so nothing survives a restart (24133 is ephemeral).
+    # Digest: ghcr.io/bitsperitybtc/beacon:0.1.0 multi-arch index (amd64 + arm64).
+    image: ghcr.io/bitsperitybtc/beacon:0.1.0@sha256:169feb1675be56c0becf41fdef11aa08737361e6cf25d54d41e17c2e514d6ca6
     restart: on-failure
     ports:
       - "8741:8080"
-    volumes:
-      # umbreld's common fragment is the first compose file, so a relative
-      # ./relay-config.toml resolves outside this app and the relay starts
-      # on its defaults. APP_DATA_DIR is absolute and holds this file.
-      - ${APP_DATA_DIR}/relay-config.toml:/usr/src/app/config.toml:ro
+    tmpfs:
+      - /app/strfry-db
+    environment:
+      RELAY_WRITE_KINDS: "24133"
+    command:
+      - --set
+      - relay.port=8080
+      - --set
+      - relay.info.name=bitsperity-moonstone-mailbox
+      - --set
+      - relay.info.description=NIP-46 mailbox for bitsperity Moonstone (kind 24133 only).
+      - --set
+      - events.rejectEventsNewerThanSeconds=1800
+      - relay

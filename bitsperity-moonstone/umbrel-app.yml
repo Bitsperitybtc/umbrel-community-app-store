@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.3.9"
+version: "0.3.10"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -17,14 +17,13 @@ description: >-
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  The Admin MCP and Nostr MCP tokens in Settings got a proper panel: tap
-  Show token to see the token, the server URL and the header your agent
-  needs, each with a Copy button. New: Regenerate token. After you confirm,
-  the old token stops working at once, also for agents connected right now,
-  and you give your agents the new one. Each token is regenerated on its
-  own and is kept in Moonstone's app data, so it stays the same across
-  restarts and updates. Your current tokens keep working after this update
-  until you regenerate them.
+  The bundled mailbox relay now runs on arm64 Umbrels such as the Raspberry
+  Pi 4 and 5. It is now bitsperity Beacon instead of an amd64-only relay.
+  Pairing, saved connections and the mailbox ports stay the same, so there is
+  nothing to change. The Nostr MCP now reads and publishes on the bitsperity
+  Beacon app instead of the Umbrel Nostr Relay app. Install Beacon from this
+  store for those tools, or set NOSTR_LOCAL_RELAYS in the app settings to
+  another relay. Moonstone itself does not need Beacon.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
@@ -49,8 +48,8 @@ environment:
   - name: NOSTR_LOCAL_RELAYS
     services:
       - signer
-    default: ws://nostr-relay_relay_1:8080
-    note: "Local relays the Nostr MCP may read and publish to, comma-separated ws:// or wss:// URLs. The default is the Umbrel Nostr Relay app. Every other private host stays blocked."
+    default: ws://bitsperity-beacon_relay_1:7777
+    note: "Local relays the Nostr MCP may read and publish to, comma-separated ws:// or wss:// URLs. The default is the bitsperity Beacon app (ws://nostr-relay_relay_1:8080 for the Umbrel Nostr Relay app). Every other private host stays blocked."
   - name: LOG_LEVEL
     services:
       - signer
