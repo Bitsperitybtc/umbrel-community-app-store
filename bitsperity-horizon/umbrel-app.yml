@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.3.1"
+version: "0.3.2"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,11 +22,9 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Submit PR can now create the settlement invoice from your connected
-  wallet, for exactly the agreed amount. The zap dialog warns when none of
-  your relays is publicly reachable, because the zap receipt cannot show up
-  there. The profile page shows the full about with its line breaks, and the
-  NIP-05 pill says verified only when it is.
+  The Horizon MCP can now read direct messages: the new list_dms tool reads
+  your NIP-17 inbox once through Moonstone and returns sender, text and time
+  of each message, so agents can answer DMs sent with send_dm.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
