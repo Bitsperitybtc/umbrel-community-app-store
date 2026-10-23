@@ -1,0 +1,39 @@
+manifestVersion: 1
+id: bitsperity-beacon
+category: social
+name: Beacon
+version: "0.1.0"
+tagline: Your own Nostr relay, a steady light at home
+description: >-
+  bitsperity Beacon is the Nostr relay on your own node. Horizon, Moonstone
+  and Lunation publish to it and read from it, and any Nostr client on your
+  network can too. It keeps every addressable event (jobs, offers, profiles,
+  lists), honours deletes, and runs on amd64 and arm64. Built on strfry.
+
+
+  Other apps on this Umbrel reach it at ws://bitsperity-beacon_relay_1:7777.
+  Clients on your network use ws://umbrel.local:8749. Anyone can write by
+  default; list your keys under RELAY_WRITE_PUBKEYS to accept only your own
+  events. Anyone can read.
+releaseNotes: >-
+  First release: strfry 1.1.2 with a write-policy for an optional key
+  allowlist, multi-arch image for amd64 and arm64.
+developer: Bitsperity
+website: https://github.com/Bitsperitybtc/beacon
+dependencies: []
+repo: https://github.com/Bitsperitybtc/beacon
+support: https://github.com/Bitsperitybtc/beacon/issues
+port: 8749
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-beacon/icon.png
+submitter: Bitsperity
+submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
+environment:
+  - name: RELAY_WRITE_PUBKEYS
+    services:
+      - relay
+    default: ""
+    note: "Keys allowed to publish, npub or hex, comma-separated. Empty accepts every author. Anyone can read."
