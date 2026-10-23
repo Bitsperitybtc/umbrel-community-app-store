@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.3.11"
+version: "0.3.12"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -17,10 +17,10 @@ description: >-
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  Fixes the signing mailbox not starting after 0.3.10. Apps could not reach
-  Moonstone to ask for signatures because the mailbox kept restarting. It now
-  starts normally again. Your keys, saved connections and settings are not
-  changed, and there is nothing else to do after updating.
+  The signing mailbox now runs on Beacon 0.1.1 and shuts down cleanly when
+  the app stops or updates. When an agent cannot reach the local relay, the
+  error now says to install Beacon or change NOSTR_LOCAL_RELAYS. Your keys,
+  saved connections and settings are not changed.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
