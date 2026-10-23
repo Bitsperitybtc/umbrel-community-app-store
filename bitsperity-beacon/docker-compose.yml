@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: bitsperity-beacon_relay_1
+      APP_PORT: "7777"
+      # Nostr clients cannot do the Umbrel login; the relay gates writes itself.
+      PROXY_AUTH_ADD: "false"
+
+  relay:
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of the v0.1.0 tag build.
+    image: ghcr.io/bitsperitybtc/beacon:0.1.0@sha256:169feb1675be56c0becf41fdef11aa08737361e6cf25d54d41e17c2e514d6ca6
+    user: "1000:1000"
+    restart: on-failure
+    stop_grace_period: 1m
+    init: true
+    volumes:
+      - ${APP_DATA_DIR}/data:/app/strfry-db
+    environment:
+      RELAY_WRITE_PUBKEYS: ""
