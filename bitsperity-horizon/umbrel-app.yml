@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.14"
+version: "0.1.15"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,12 +22,11 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Horizon now uses bitsperity Beacon, the Nostr relay app from this store,
-  instead of the Umbrel Nostr Relay app. umbrelOS installs Beacon before
-  Horizon and keeps it while Horizon is installed. Ideas, jobs and comments
-  you read and publish in Horizon go to Beacon, and the Horizon MCP reads and
-  publishes there by default too. Events that are only on the Nostr Relay app
-  stay there until you import them into Beacon (see the Beacon README).
+  On an idea with an active poll, the browser scrollbar no longer flickers.
+  The poll card used to disappear and come back whenever the relay sent an
+  unrelated update, which kept changing the page height below the visible
+  area. The poll now stays in place, and the page keeps space for the
+  scrollbar so its width does not shift either.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
