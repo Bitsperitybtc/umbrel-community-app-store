@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.2.0"
+version: "0.3.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,15 +22,11 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Contracts can now be ended by either side, with a reason, and after a
-  contract is done each side can rate the other. Profiles and offers show a
-  track record. A bell in the header lists new offers, contracts, pull
-  requests, reviews and payments that name you. First-time visitors get a
-  short getting-started guide. Offers can be accepted only by the right
-  party, errors say what to do next, and an offer page shows only its own
-  contract. Events now carry relay hints a browser can reach; set them under
-  HORIZON_PUBLIC_RELAYS if the default (this app's /relay) does not fit.
-  Ratings, track record, notifications and contract end are beta.
+  Prompt Requests (beta): anyone can open a Prompt Request on an idea, a
+  shared prompt for the work. Others suggest changes, the author applies or
+  rejects them, and everyone can discuss it. The idea owner or a maintainer
+  can turn a Prompt Request into a job with one click; the job is prefilled
+  and links back to it.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
