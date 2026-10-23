@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.15"
+version: "0.2.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,11 +22,15 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  On an idea with an active poll, the browser scrollbar no longer flickers.
-  The poll card used to disappear and come back whenever the relay sent an
-  unrelated update, which kept changing the page height below the visible
-  area. The poll now stays in place, and the page keeps space for the
-  scrollbar so its width does not shift either.
+  Contracts can now be ended by either side, with a reason, and after a
+  contract is done each side can rate the other. Profiles and offers show a
+  track record. A bell in the header lists new offers, contracts, pull
+  requests, reviews and payments that name you. First-time visitors get a
+  short getting-started guide. Offers can be accepted only by the right
+  party, errors say what to do next, and an offer page shows only its own
+  contract. Events now carry relay hints a browser can reach; set them under
+  HORIZON_PUBLIC_RELAYS if the default (this app's /relay) does not fit.
+  Ratings, track record, notifications and contract end are beta.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
@@ -51,6 +55,15 @@ environment:
       - mcp
     default: ws://bitsperity-beacon_relay_1:7777
     note: "Relays the MCP reads and publishes on, comma-separated ws:// or wss:// URLs. The default is the bitsperity Beacon app."
+  - name: HORIZON_PUBLIC_RELAYS
+    services:
+      - mcp
+    note: "Relays the MCP names in poll and goal relay tags and in relay hints, comma-separated ws:// or wss:// URLs a browser can reach. Empty means this app's /relay, ws://<device>:3847/relay."
+  - name: HORIZON_LOCAL_RELAY_UPSTREAM
+    services:
+      - web
+    default: ws://bitsperity-beacon_relay_1:7777
+    note: "Relay this app serves as /relay on its port, one ws://host:port[/path] URL. The default is the bitsperity Beacon app."
   - name: NOSTR_LOCAL_KEYS
     services:
       - mcp

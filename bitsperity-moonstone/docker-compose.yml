@@ -17,7 +17,7 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health,/mailbox"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.3.11@sha256:35be621d980ea717a58ce950925a74ab4e847bf2bab4551c97c2422d36879970
+    image: ghcr.io/bitsperitybtc/moonstone:0.3.12@sha256:0d6299a6e2d7a8a8b37aad9b1595a84e251df4004a46b82a8f08dfabb544271b
     restart: on-failure
     stop_grace_period: 1m
     volumes:
@@ -54,9 +54,13 @@ services:
     # The database is a tmpfs, so nothing survives a restart (24133 is ephemeral).
     # strfry runs as uid 1000; a tmpfs without uid/gid is root-owned and strfry
     # exits with "mdb_env_open: Permission denied" (as in Moonstone 0.3.10).
-    # Digest: ghcr.io/bitsperitybtc/beacon:0.1.0 multi-arch index (amd64 + arm64).
-    image: ghcr.io/bitsperitybtc/beacon:0.1.0@sha256:169feb1675be56c0becf41fdef11aa08737361e6cf25d54d41e17c2e514d6ca6
+    # Digest: ghcr.io/bitsperitybtc/beacon:0.1.1 multi-arch index (amd64 + arm64).
+    image: ghcr.io/bitsperitybtc/beacon:0.1.1@sha256:58ca033b5669c9c0fe605302235f2315554d213a6047152c5007b1cc774fd7e9
     restart: on-failure
+    # Same as the bitsperity Beacon app: an init reaps strfry's children and forwards
+    # SIGTERM, and strfry gets a minute to close the database before SIGKILL.
+    stop_grace_period: 1m
+    init: true
     ports:
       - "8741:8080"
     user: "1000:1000"

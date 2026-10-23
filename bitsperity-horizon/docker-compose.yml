@@ -18,7 +18,7 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.1.15@sha256:e3af731e134061531b4b581254c7e5248fe7e72c8435aa5ce6b29c83d9855176
+    image: ghcr.io/bitsperitybtc/horizon:0.2.0@sha256:a106c1958df90b42531d185275aab35b2fd6ce35cd7cb1a551b9e5a568812864
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -26,6 +26,7 @@ services:
       # Served as /relay on this app's port (ws:// on http, wss:// on https).
       # The bitsperity Beacon app's relay container on umbrel_main_network, which
       # umbreld's common fragment makes every app's default network.
+      # App Settings -> Environment can point it at another ws:// relay.
       HORIZON_LOCAL_RELAY_UPSTREAM: ws://bitsperity-beacon_relay_1:7777
       # umbreld's app gateway connects from the app network gateway. nginx
       # serves /mcp-token only to it, so the Umbrel login above applies.
@@ -45,7 +46,7 @@ services:
       start_period: 10s
 
   mcp:
-    image: ghcr.io/bitsperitybtc/horizon:0.1.15@sha256:e3af731e134061531b4b581254c7e5248fe7e72c8435aa5ce6b29c83d9855176
+    image: ghcr.io/bitsperitybtc/horizon:0.2.0@sha256:a106c1958df90b42531d185275aab35b2fd6ce35cd7cb1a551b9e5a568812864
     command: ["node", "/opt/horizon-mcp/horizon-mcp.mjs"]
     restart: on-failure
     stop_grace_period: 30s
@@ -64,6 +65,10 @@ services:
       # Same-node Moonstone: approval links and its mailbox relay container.
       MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
       MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
+      # Relay hints in poll, goal and a/e/p tags must be reachable from a browser,
+      # not the container names above. Without HORIZON_PUBLIC_RELAYS (App Settings ->
+      # Environment) the MCP names this app's /relay: ws://${DEVICE_DOMAIN_NAME}:3847/relay.
+      DEVICE_DOMAIN_NAME: ${DEVICE_DOMAIN_NAME}
       # Test release defaults: local test identities and reset_test_data.
       NOSTR_LOCAL_KEYS: "1"
       HORIZON_TEST_RESET: "1"
