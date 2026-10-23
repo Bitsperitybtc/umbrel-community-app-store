@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.3.10"
+version: "0.3.11"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -17,13 +17,10 @@ description: >-
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  The bundled mailbox relay now runs on arm64 Umbrels such as the Raspberry
-  Pi 4 and 5. It is now bitsperity Beacon instead of an amd64-only relay.
-  Pairing, saved connections and the mailbox ports stay the same, so there is
-  nothing to change. The Nostr MCP now reads and publishes on the bitsperity
-  Beacon app instead of the Umbrel Nostr Relay app. Install Beacon from this
-  store for those tools, or set NOSTR_LOCAL_RELAYS in the app settings to
-  another relay. Moonstone itself does not need Beacon.
+  Fixes the signing mailbox not starting after 0.3.10. Apps could not reach
+  Moonstone to ask for signatures because the mailbox kept restarting. It now
+  starts normally again. Your keys, saved connections and settings are not
+  changed, and there is nothing else to do after updating.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
