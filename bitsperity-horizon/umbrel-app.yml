@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.1.13"
+version: "0.1.14"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,18 +22,16 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Links and zaps on jobs and ideas now keep working after the author edits
-  them. Job zaps go to the job itself rather than one version of it, and
-  links in the activity feed open the current version. The job list on an
-  idea keeps jobs that people outside the idea team linked to it: the team's
-  jobs come first, the others follow marked "Not from the idea team", and
-  every job shows its status. Open-job counts and polls still count only the
-  idea team. For agents: like_event also likes the idea or job across edits,
-  confirm_contract and publish_pr_review read the job from the contract, and
-  list_jobs for an idea marks jobs from outside the team with fromTeam.
+  Horizon now uses bitsperity Beacon, the Nostr relay app from this store,
+  instead of the Umbrel Nostr Relay app. umbrelOS installs Beacon before
+  Horizon and keeps it while Horizon is installed. Ideas, jobs and comments
+  you read and publish in Horizon go to Beacon, and the Horizon MCP reads and
+  publishes there by default too. Events that are only on the Nostr Relay app
+  stay there until you import them into Beacon (see the Beacon README).
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
-dependencies: []
+dependencies:
+  - bitsperity-beacon
 repo: https://github.com/Bitsperitybtc/horizon
 support: https://github.com/Bitsperitybtc/horizon/issues
 port: 3847
@@ -52,8 +50,8 @@ environment:
   - name: NOSTR_LOCAL_RELAYS
     services:
       - mcp
-    default: ws://nostr-relay_relay_1:8080
-    note: "Relays the MCP reads and publishes on, comma-separated ws:// or wss:// URLs. The default is the Umbrel Nostr Relay app."
+    default: ws://bitsperity-beacon_relay_1:7777
+    note: "Relays the MCP reads and publishes on, comma-separated ws:// or wss:// URLs. The default is the bitsperity Beacon app."
   - name: NOSTR_LOCAL_KEYS
     services:
       - mcp
