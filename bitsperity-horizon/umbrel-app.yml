@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.4.4"
+version: "0.4.5"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,14 +22,14 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Horizon now keeps one signer key per browser, so signing in again shows
-  your signer the same app and it updates the existing approval instead of
-  adding a new one. Settings → Identity → Forget this device also deletes
-  that key, and the message asking you to approve in your signer is in
-  English. An ended contract's timeline now closes with "Contract ended"
-  instead of showing it as in progress. For agents, the MCP appears in your
-  signer as "Horizon agent (MCP)" and keeps one approval across restarts and
-  new pairings.
+  Signing out now follows NIP-46: Horizon deletes its signer key for that
+  sign-in and tells your signer, which ends the session and removes Horizon
+  from its app list. The next sign-in shows up in your signer as a new app.
+  Reloading the page still keeps you signed in. Settings → Identity → Forget
+  this device is gone, since signing out now does what it did. When your
+  signer is not reachable, the "Signer not reachable" bar has a Sign out
+  button next to Sign in again. For agents, each MCP pairing has its own key
+  again, and pairing an identity again signs the old pairing out.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:

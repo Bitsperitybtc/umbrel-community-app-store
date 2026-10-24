@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.4.3"
+version: "0.5.0"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -17,15 +17,16 @@ description: >-
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  Your identities now have Nostr profiles. Each identity page shows its
-  profile as a header with banner, avatar, name, npub, Lightning address and
-  about, and Edit profile lets you change the name, about, picture, banner,
-  NIP-05 and Lightning address and choose the relays it is published on.
-  Profiles are read from and published to Beacon on this node by default, and
-  fields set by other Nostr clients are kept when you save. The keyring and
-  the Sign as picker show each identity's avatar, with initials when there is
-  no picture. Pictures load through Moonstone, without cookies, from public
-  hosts only. Your keys, identities and approvals are not changed.
+  Each identity page now has Apps, Activity and Security tabs. Apps shows one
+  row per app with its image, name, origin, last activity and what it can do
+  in plain words; several devices of one app share a row and can be revoked
+  one by one. Activity groups the log per app and day with filters. Pairing
+  is one guided flow under Pair an app: paste the app's connection link, or
+  copy your signer link, then review the app and pick the identity. Pairings
+  an agent offers over MCP can be approved from the keyring in one click.
+  Apps that connect with the bunker link now show their name and image, and
+  when an app signs out, its session ends and it leaves Apps, as NIP-46 asks.
+  Your keys, identities and existing approvals are not changed.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
