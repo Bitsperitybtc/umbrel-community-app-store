@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.5.0"
+version: "0.5.1"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -17,16 +17,14 @@ description: >-
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  Each identity page now has Apps, Activity and Security tabs. Apps shows one
-  row per app with its image, name, origin, last activity and what it can do
-  in plain words; several devices of one app share a row and can be revoked
-  one by one. Activity groups the log per app and day with filters. Pairing
-  is one guided flow under Pair an app: paste the app's connection link, or
-  copy your signer link, then review the app and pick the identity. Pairings
-  an agent offers over MCP can be approved from the keyring in one click.
-  Apps that connect with the bunker link now show their name and image, and
-  when an app signs out, its session ends and it leaves Apps, as NIP-46 asks.
-  Your keys, identities and existing approvals are not changed.
+  Agents that use Moonstone's Nostr tools now get a separate key for each
+  pairing. Pairing an identity again shows up as a new connection, and
+  revoking a pairing, deleting an identity or the test reset signs that
+  pairing out properly. Existing agent pairings keep working without a new
+  approval. Deleting an identity no longer stalls the Nostr tools, and an app
+  this identity already revoked gets a clear "revoked" answer when it signs
+  out instead of waiting for a timeout. Your keys, identities and existing
+  approvals are not changed.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
