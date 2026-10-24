@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.4.1"
+version: "0.4.2"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -17,12 +17,13 @@ description: >-
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
 releaseNotes: >-
-  Agents using the Nostr MCP recover on their own when the connection to
-  your signer fails to open: the next lookup tries again, and a lasting
-  failure shows in the app log. An agent that asks for a new pairing stops
-  signing with its previous identity until you approve the new one, and a
-  pairing restored after a restart is marked unverified until its signer
-  answers. Your keys, identities and pairings are not changed.
+  Horizon, the Nostr MCP and other bitsperity apps now keep one client key
+  per app and device, so signing in again or pairing again
+  updates the existing approval instead of adding another row under Apps.
+  An agent whose approval you revoked can be paired again once you approve
+  the new pairing. Two pairings waiting at the same time no longer replace
+  each other, and Activity shows repeated requests as one row with a count
+  (×N). Your keys, identities and existing approvals are not changed.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []

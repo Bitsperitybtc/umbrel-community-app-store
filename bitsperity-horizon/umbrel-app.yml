@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.4.3"
+version: "0.4.4"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,10 +22,14 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  A contract whose signature does not verify now shows as "Contract Not
-  Trustworthy" with a warning not to trust or pay it, instead of "Contract
-  Not Found". For agents, the MCP's use_identity reports the same status as
-  get_session, and the sign-in-required message is shorter.
+  Horizon now keeps one signer key per browser, so signing in again shows
+  your signer the same app and it updates the existing approval instead of
+  adding a new one. Settings → Identity → Forget this device also deletes
+  that key, and the message asking you to approve in your signer is in
+  English. An ended contract's timeline now closes with "Contract ended"
+  instead of showing it as in progress. For agents, the MCP appears in your
+  signer as "Horizon agent (MCP)" and keeps one approval across restarts and
+  new pairings.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
