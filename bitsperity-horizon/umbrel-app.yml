@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.4.2"
+version: "0.4.3"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,12 +22,10 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  The wallet balance in Settings no longer waits forever: it says why it is
-  unavailable when the wallet refuses or does not answer. Logging out or
-  disconnecting forgets everything read from that wallet. Logged out,
-  Horizon asks no third-party Lightning server for zap totals. Idea job lists
-  appear at once, and the MCP reports a contract with a bad signature as
-  invalid instead of not found.
+  A contract whose signature does not verify now shows as "Contract Not
+  Trustworthy" with a warning not to trust or pay it, instead of "Contract
+  Not Found". For agents, the MCP's use_identity reports the same status as
+  get_session, and the sign-in-required message is shorter.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
