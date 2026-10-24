@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.4.0"
+version: "0.4.1"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,12 +22,10 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Direct messages and offers now reach people who have no DM inbox list, and
-  Horizon publishes your own inbox list at login when you have none. Jobs
-  show one clear status, ratings can be given right after paying, and
-  outdated Prompt Request suggestions are marked. Agents get a new
-  list_offers tool; create_contract and confirm_contract take new inputs,
-  so MCP clients built for 0.3 need updating.
+  With the local test identities that this test release turns on, the MCP can
+  now send and read direct messages and offers and save idea and job drafts.
+  Before, these tools refused the test identities because they could not
+  encrypt.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
