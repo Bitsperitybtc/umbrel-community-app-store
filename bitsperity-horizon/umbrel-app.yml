@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.4.6"
+version: "0.5.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,13 +22,14 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Signing out is faster and more reliable. If your signer does not answer,
-  Horizon waits at most 2 seconds before finishing the sign-out instead of up
-  to a minute. If you sign out while Horizon is still waiting for your signer
-  to reconnect and the signer answers afterwards, Horizon now tells it you
-  signed out, so the signer ends that session and removes Horizon from its
-  app list. For agents, removing or re-pairing an MCP identity no longer holds
-  up the other pairings.
+  Horizon gets everyday social features. Reply to comments on ideas, jobs and
+  prompt requests, edit your own comments, threads and replies, and @mention
+  people from your follows. Like, zap, report or delete posts; zaps work
+  without a wallet connection through a QR invoice. Mute people you don't
+  want to see. Community owners and moderators can hide forum posts. New
+  Communities and Search pages, forum notifications, a link for each thread,
+  Markdown in comments, and fixes for offers, job pages and the mobile idea
+  page.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
