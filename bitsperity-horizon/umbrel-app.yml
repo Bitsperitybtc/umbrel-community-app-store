@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.5.0"
+version: "0.6.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,14 +22,14 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Horizon gets everyday social features. Reply to comments on ideas, jobs and
-  prompt requests, edit your own comments, threads and replies, and @mention
-  people from your follows. Like, zap, report or delete posts; zaps work
-  without a wallet connection through a QR invoice. Mute people you don't
-  want to see. Community owners and moderators can hide forum posts. New
-  Communities and Search pages, forum notifications, a link for each thread,
-  Markdown in comments, and fixes for offers, job pages and the mobile idea
-  page.
+  Contract amounts are now private. Only you and the other party see the
+  agreed amount and terms; everyone else sees "Amount private", the parties
+  and the status. Either party can choose to disclose the amount of one
+  contract. Invoices go to the client as an encrypted direct message. Jobs
+  default to "Budget on request". If a client marks a payment as paid and it
+  never arrives, the developer can report it at any time, and the contract
+  shows as Disputed, also in track records. Apply closes once a job has a
+  contract.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
