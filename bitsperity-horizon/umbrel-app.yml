@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.6.0"
+version: "0.7.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,14 +22,11 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Contract amounts are now private. Only you and the other party see the
-  agreed amount and terms; everyone else sees "Amount private", the parties
-  and the status. Either party can choose to disclose the amount of one
-  contract. Invoices go to the client as an encrypted direct message. Jobs
-  default to "Budget on request". If a client marks a payment as paid and it
-  never arrives, the developer can report it at any time, and the contract
-  shows as Disputed, also in track records. Apply closes once a job has a
-  contract.
+  Send thanks in ecash. A Thank button on comments and community posts
+  sends a few sats of Cashu ecash in an encrypted direct message, by name or
+  anonymously, paid from your ecash balance or your connected wallet. Thanks
+  you receive are redeemed automatically and show in Notifications. Settings
+  has a new Ecash section for your balance, mints, deposits and withdrawals.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
