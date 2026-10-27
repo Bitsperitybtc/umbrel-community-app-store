@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.7.1"
+version: "0.8.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,10 +22,11 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Safer ecash deposits. A Lightning deposit or wallet-paid thank-you whose
-  payment went through is no longer lost when the app closes or the mint
-  is briefly unreachable: it is finished on the next wallet load. A
-  thank-you redeemed on a later try now shows only in Notifications.
+  Contracts can be paid by Cashu. Offers and counters carry payment terms:
+  Lightning, Cashu or both, with the developer's mints. The client pays
+  locked ecash by private DM from the ecash balance or the connected
+  wallet, and the developer's app redeems it and confirms receipt once the
+  full amount is in. Lightning-only contracts work as before.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
