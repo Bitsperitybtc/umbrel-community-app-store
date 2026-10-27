@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.9.1"
+version: "0.9.2"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,11 +22,9 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Withdraw ecash straight to your connected wallet, with the amount checked
-  and the mint's fee reserve shown. Zap requests now name public relays so
-  receipts can be found, and private-network relays stay out of zap
-  requests and your published relay list. Lightning invoices in messages
-  show as an invoice with its amount instead of a raw string.
+  Settings → Ecash no longer hangs on "Loading your ecash wallet…" after a
+  reload. The MCP's DM inbox list now names relays other clients can reach
+  instead of the internal Docker relay.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
