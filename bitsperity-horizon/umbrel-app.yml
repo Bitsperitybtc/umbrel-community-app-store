@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.8.1"
+version: "0.9.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,11 +22,13 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Poll votes no longer fail silently. A vote that no relay accepts shows an
-  error, and votes also go to the configured relays, so a retired relay on an
-  old poll no longer blocks voting. Contract payments by Cashu are only
-  redeemed from a mint in the agreed terms, and the community forum no longer
-  reloads and closes open dialogs when the community is refreshed.
+  One Send button and one pay sheet for every payment: private ecash,
+  private Lightning and public zap, always in that order, each with a reason
+  when it can't be used, and nothing picked for you when several work.
+  Contracts pay through the same sheet. Payments that are paid but not
+  delivered, or whose Lightning outcome is unknown, are listed in Settings
+  with Retry or Check wallet, and Finish payment on another device only
+  publishes paid when your saved ecash covers the agreed amount.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
