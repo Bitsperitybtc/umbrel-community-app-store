@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.7.0"
+version: "0.7.1"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,11 +22,10 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Send thanks in ecash. A Thank button on comments and community posts
-  sends a few sats of Cashu ecash in an encrypted direct message, by name or
-  anonymously, paid from your ecash balance or your connected wallet. Thanks
-  you receive are redeemed automatically and show in Notifications. Settings
-  has a new Ecash section for your balance, mints, deposits and withdrawals.
+  Safer ecash deposits. A Lightning deposit or wallet-paid thank-you whose
+  payment went through is no longer lost when the app closes or the mint
+  is briefly unreachable: it is finished on the next wallet load. A
+  thank-you redeemed on a later try now shows only in Notifications.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
