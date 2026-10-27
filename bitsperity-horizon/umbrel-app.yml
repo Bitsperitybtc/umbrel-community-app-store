@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.9.2"
+version: "0.9.3"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,9 +22,10 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Settings → Ecash no longer hangs on "Loading your ecash wallet…" after a
-  reload. The MCP's DM inbox list now names relays other clients can reach
-  instead of the internal Docker relay.
+  New "Withdraw all" in Settings → Ecash sends all your ecash to your
+  connected wallet after the mint's fees, and names any mint too small to
+  withdraw from. A withdrawal that is too big now tells you the most you can
+  withdraw.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
