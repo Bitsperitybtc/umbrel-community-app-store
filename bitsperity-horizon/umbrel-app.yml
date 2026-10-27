@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.9.3"
+version: "0.10.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,10 +22,9 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  New "Withdraw all" in Settings → Ecash sends all your ecash to your
-  connected wallet after the mint's fees, and names any mint too small to
-  withdraw from. A withdrawal that is too big now tells you the most you can
-  withdraw.
+  A new wallet button in the header shows your Lightning and ecash balance
+  and opens a wallet that moves sats between Lightning and ecash both ways,
+  with the fees shown before you pay. It also fits the top bar on phones.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
