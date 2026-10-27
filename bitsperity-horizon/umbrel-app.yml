@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.9.0"
+version: "0.9.1"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,13 +22,11 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  One Send button and one pay sheet for every payment: private ecash,
-  private Lightning and public zap, always in that order, each with a reason
-  when it can't be used, and nothing picked for you when several work.
-  Contracts pay through the same sheet. Payments that are paid but not
-  delivered, or whose Lightning outcome is unknown, are listed in Settings
-  with Retry or Check wallet, and Finish payment on another device only
-  publishes paid when your saved ecash covers the agreed amount.
+  Withdraw ecash straight to your connected wallet, with the amount checked
+  and the mint's fee reserve shown. Zap requests now name public relays so
+  receipts can be found, and private-network relays stay out of zap
+  requests and your published relay list. Lightning invoices in messages
+  show as an invoice with its amount instead of a raw string.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
