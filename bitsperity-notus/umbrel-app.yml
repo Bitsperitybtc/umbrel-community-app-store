@@ -7,7 +7,7 @@ tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
   thesis relations with local d1 and EmbeddingGemma-2 models, and serves the
-  result over HTTP to Spero. Private app, amd64 only.
+  result over HTTP to Spero. Runs on amd64 only.
 
 
   Other apps on this Umbrel reach the API at http://bitsperity-notus_web_1:8096.
