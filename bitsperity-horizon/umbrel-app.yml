@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.10.0"
+version: "0.11.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,9 +22,11 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  A new wallet button in the header shows your Lightning and ecash balance
-  and opens a wallet that moves sats between Lightning and ecash both ways,
-  with the fees shown before you pay. It also fits the top bar on phones.
+  Search now finds ideas, jobs and people on relays that support search, and
+  falls back to what is loaded when none does. Ideas and jobs get topic chips
+  you can click to filter. Ecash payments are counted once even when the same
+  ecash arrives twice, and submitting a PR right after a reload no longer
+  closes the form without sending it.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
