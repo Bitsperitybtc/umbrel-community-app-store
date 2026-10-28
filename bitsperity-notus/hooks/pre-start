@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# umbreld runs this on the host before the containers start (install, start, update).
+# It never overwrites a secret. It only creates what is missing and fixes modes:
+# - notus.env  (600): app secrets. Empty template here; filled by scp from the laptop .env.
+# - db.env     (600): POSTGRES_PASSWORD + DATABASE_URL, generated once. Postgres keeps the
+#                     password it was initialised with, so this file must never be replaced.
+# - relation.env (600): LLAMA_API_KEY for the d1/embed servers, rebuilt from
+#                     RELATION_D1_API_KEY in notus.env on every start (whitespace trimmed).
+# - restore/, data/restore-state/: dump drop zone and restore gate (hooks/restore.sh).
+# - secrets/spero-vault-deploy: placeholder until the real read-only deploy key is copied in.
+set -euo pipefail
+
+data_dir="${APP_DATA_DIR:?APP_DATA_DIR is not set}"
+uid=1000
+gid=1000
+
+mkdir -p "${data_dir}/data/postgres" "${data_dir}/data/vault" "${data_dir}/data/models" \
+  "${data_dir}/secrets" "${data_dir}/restore" "${data_dir}/data/restore-state"
+# restore/: drop zone for notus.dump(.sha256), written by user umbrel (uid 1000) via scp.
+# Only the directories are chowned, never their content.
+chown "${uid}:${gid}" "${data_dir}/data/vault" "${data_dir}/data/models" "${data_dir}/restore" \
+  "${data_dir}/data/restore-state"
+chmod 700 "${data_dir}/secrets"
+# Files below are created private.
+umask 077
+
+# Docker creates a directory for a missing bind source; undo that for single-file mounts.
+for f in notus.env db.env relation.env secrets/spero-vault-deploy; do
+  if [[ -d "${data_dir}/${f}" ]]; then rmdir "${data_dir}/${f}"; fi
+done
+
+if [[ ! -e "${data_dir}/notus.env" ]]; then
+  printf '# Notus secrets. Replace with the laptop .env (scp), keep mode 600.\n' > "${data_dir}/notus.env"
+fi
+
+if [[ ! -e "${data_dir}/db.env" ]]; then
+  pw="$(head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n')"
+  printf 'POSTGRES_PASSWORD=%s\nDATABASE_URL=postgres://notus:%s@bitsperity-notus_postgres_1:5432/notus\n' "${pw}" "${pw}" \
+    > "${data_dir}/db.env"
+fi
+
+key="$(sed -n 's/^[[:space:]]*RELATION_D1_API_KEY[[:space:]]*=//p' "${data_dir}/notus.env" | tail -n 1)"
+key="$(printf '%s' "${key}" | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' -e 's/^"\(.*\)"$/\1/' -e "s/^'\(.*\)'\$/\1/" -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+printf 'LLAMA_API_KEY=%s\n' "${key}" > "${data_dir}/relation.env"
+
+if [[ ! -e "${data_dir}/secrets/spero-vault-deploy" ]]; then
+  printf 'placeholder\n' > "${data_dir}/secrets/spero-vault-deploy"
+fi
+# The container user node (uid 1000) reads the key; ssh refuses group/other-readable keys.
+chown "${uid}:${gid}" "${data_dir}/secrets/spero-vault-deploy"
+chmod 600 "${data_dir}/secrets/spero-vault-deploy"
+
+chmod 600 "${data_dir}/notus.env" "${data_dir}/db.env" "${data_dir}/relation.env"
+chown "${uid}:${gid}" "${data_dir}/notus.env" "${data_dir}/db.env" "${data_dir}/relation.env"

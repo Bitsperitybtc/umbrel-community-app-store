@@ -126,6 +126,26 @@ To bump:
 
 Do not use `latest`. Do not use compose `build:`. `APP_PORT` stays `8080`.
 
+## Notus
+
+| | |
+|---|---|
+| Community app ID | `bitsperity-notus` |
+| UI / API | `http://umbrel.local:8796`; other apps use `http://bitsperity-notus_web_1:8096` |
+| Source | [Bitsperitybtc/notus](https://github.com/Bitsperitybtc/notus) |
+
+Notus collects market news, prices and fundamentals into Postgres 16 and scores thesis relations with local llama.cpp models (d1, EmbeddingGemma-2). amd64 only. Secrets live in `${APP_DATA_DIR}/notus.env`; `hooks/pre-start` creates `db.env`, `relation.env` and the data directories (uid 1000) before compose starts.
+
+A one-shot `restore` service restores `${APP_DATA_DIR}/restore/notus.dump` (sha256-checked) into an empty database, then opens the gate for `web`, which migrates and serves. Runbook: `docs/operations/umbrel-cutover.md` in the notus repo.
+
+The canonical copy is `umbrel/bitsperity-notus/` in `Bitsperitybtc/notus`. This folder has an identical copy, except `icon` and `submission` in `umbrel-app.yml`, plus `icon.png` from the brand assets.
+
+### Image pin
+
+All images are digest-pinned: `ghcr.io/bitsperitybtc/notus:v2.0.1@sha256:5b75a426…`, `postgres:16-alpine@sha256:0cefaabd…`, `ghcr.io/ggml-org/llama.cpp:server-b11946@sha256:d880b2a0…`. The notus package must be public.
+
+To bump: tag on `notus` `main`, pin the new digest in notus `umbrel/bitsperity-notus/`, set `version`, then copy the folder here. Do not use `latest` or compose `build:`.
+
 ## Layout
 
 ```text
@@ -145,5 +165,10 @@ bitsperity-moonstone/
 bitsperity-lunation/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + web image
+  icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
+bitsperity-notus/
+  umbrel-app.yml              Listing
+  docker-compose.yml          app_proxy + postgres + restore + web + llama.cpp
+  hooks/                      pre-start, restore.sh, row-counts.sql, fetch-models.sh
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 ```
