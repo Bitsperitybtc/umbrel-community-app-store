@@ -5,11 +5,14 @@ services:
     environment:
       APP_HOST: bitsperity-lunation_web_1
       APP_PORT: "8080"
-      PROXY_AUTH_ADD: "false"
+      # No Umbrel login anywhere except /mcp-token, the MCP token for
+      # Settings -> Agent-Zugang (MCP). Sign-in elsewhere is Nostr.
+      PROXY_AUTH_WHITELIST: "*"
+      PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of the v0.1.0 tag build.
-    image: ghcr.io/bitsperitybtc/lunation:0.1.0@sha256:1aad777dbccec2c30b3cece5739808d54cf024dbe0beccb69b3d177ccb0f60bc
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of the v0.2.0 tag build.
+    image: ghcr.io/bitsperitybtc/lunation:0.2.0@sha256:9136f3f28e5867babe9ffba66843850c68e4cb7e5b90ab03f6816a64d1ac3a50
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -21,8 +24,13 @@ services:
       LUNATION_DB: /data/lunation.sqlite
       LUNATION_BACKUP_DIR: /data/backups
       APP_SEED: ${APP_SEED}
+      MOONSTONE_URL: ${MOONSTONE_URL}
+      MOONSTONE_RELAYS: ${MOONSTONE_RELAYS}
       LUNATION_ORIGINS: http://${DEVICE_DOMAIN_NAME}:8748,http://${DEVICE_HOSTNAME}:8748
       LUNATION_TRUSTED_PROXIES: 10.21.0.0/16
+      # umbreld's app gateway connects from the app network gateway. /mcp-token
+      # is answered only for that socket address, so the Umbrel login applies.
+      LUNATION_PROXY_PEER: "10.21.0.1"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/v1/health"]
       interval: 30s
