@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.12.3"
+version: "0.12.4"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,9 +22,8 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Jobs: status counts follow the Hiring/Paused/Filled chip, topic and search.
-  Jobs of hidden ideas appear under "Other jobs", filtered groups open, and a
-  failed status load shows an error with Retry.
+  Search: Horizon now searches the local relay (NIP-50) for ideas, jobs,
+  Prompt Requests and people instead of only the loaded items.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
