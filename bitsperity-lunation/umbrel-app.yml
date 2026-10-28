@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "0.1.0"
+version: "0.2.0"
 tagline: Plan in cycles
 description: >-
   Lunation is the Bitsperity planning server. It keeps a SQLite database and
@@ -18,9 +18,20 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  First release of the planning server. Spaces, projects, issues, and a
-  queue live in one SQLite database and are served over HTTP. Sign-in is
-  Nostr. A backup is a SQLite VACUUM INTO copy.
+  New Einstellungen page with Agent-Zugang (MCP): Token anzeigen shows the
+  token, server URL and header your AI agents use, behind your Umbrel
+  password. Token neu erzeugen replaces the token at once; your current
+  token keeps working after this update. Agents can act as an identity you
+  approved in Moonstone (set MOONSTONE_URL and MOONSTONE_RELAYS for MCP).
+  Sign-in works via umbrel.local and your device hostname, and Lunation
+  runs on the latest bitsperity Kit.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
+environment:
+  - name: MOONSTONE_URL
+    services: [web]
+    note: Signer base URL for MCP. No default. Set this for service web, then restart the app.
+  - name: MOONSTONE_RELAYS
+    services: [web]
+    note: Comma-separated relay URLs for MCP. No default. Set this for service web, then restart the app.

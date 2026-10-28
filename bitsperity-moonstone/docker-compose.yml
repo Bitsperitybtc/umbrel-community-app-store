@@ -17,7 +17,7 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health,/mailbox"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.6.0@sha256:489832dba8716e622ee42917a8f20b0784973524ff2266e6f46fe51d5ebf9277
+    image: ghcr.io/bitsperitybtc/moonstone:0.7.0@sha256:29dcf3caf32f69ca6ae4ebd41e2e55f5e4c56100646623a5959f0c06255c0d08
     restart: on-failure
     stop_grace_period: 1m
     volumes:
