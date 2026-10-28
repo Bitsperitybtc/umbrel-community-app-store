@@ -1,0 +1,32 @@
+manifestVersion: 1
+id: bitsperity-notus
+category: finance
+name: Notus
+version: "2.0.1"
+tagline: Financial news intelligence for Spero
+description: >-
+  Notus collects market news, prices and fundamentals into Postgres, scores
+  thesis relations with local d1 and EmbeddingGemma-2 models, and serves the
+  result over HTTP to Spero. Private app, amd64 only.
+
+
+  Other apps on this Umbrel reach the API at http://bitsperity-notus_web_1:8096.
+  Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
+  The paper writer is off until the compose sets it on.
+releaseNotes: >-
+  First Umbrel release. Migration from the laptop: docs/operations/umbrel-cutover.md.
+developer: Bitsperity
+website: https://github.com/Bitsperitybtc/notus
+dependencies: []
+repo: https://github.com/Bitsperitybtc/notus
+support: https://github.com/Bitsperitybtc/notus/issues
+# Not 8096: that host port belongs to Jellyfin on Umbrel. Inside the Umbrel network
+# the web container still listens on 8096 (bitsperity-notus_web_1:8096).
+port: 8796
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-notus/icon.png
+submitter: Bitsperity
+submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
