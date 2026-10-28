@@ -70,9 +70,10 @@ services:
       PORT: "8096"
       HOST: 0.0.0.0
       TZ: UTC
-      # Off until Sascha's go. The laptop .env says on; this line wins over it.
-      # Go = change this to "on" in a PR and update the app.
-      NOTUS_PAPER_WRITER: "off"
+      # On since Sascha's go at the 2026-10-28 cutover; the laptop writer is stopped.
+      # Paper only: paperHost.ts refuses any host but paper-api.alpaca.markets.
+      # This line wins over notus.env. Rollback = "off" in a PR and update the app.
+      NOTUS_PAPER_WRITER: "on"
       RELATION_D1_URL: http://bitsperity-notus_relation-d1_1:8080
       RELATION_EMBED_URL: http://bitsperity-notus_relation-embed_1:8080
       NOTUS_VAULT_DIR: /data/vault
