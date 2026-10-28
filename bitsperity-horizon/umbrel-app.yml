@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.12.0"
+version: "0.12.1"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,10 +22,9 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Ideas and Prompt Requests now open in tabs, so jobs, discussion and history
-  are one tap away, and amounts are shown in bitcoin everywhere. Prompt
-  Requests show their phase, from open to done, and jobs can link to one.
-  An expired settlement invoice can be refreshed instead of being paid late.
+  The side panel on a job no longer covers the job text on wide screens.
+  Prompts left the header: search now finds Prompt Requests, and opening a
+  new one shows the ones the idea already has.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
