@@ -11,8 +11,8 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of the v0.2.0 tag build.
-    image: ghcr.io/bitsperitybtc/lunation:0.2.0@sha256:9136f3f28e5867babe9ffba66843850c68e4cb7e5b90ab03f6816a64d1ac3a50
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of the v0.2.1 tag build.
+    image: ghcr.io/bitsperitybtc/lunation:0.2.1@sha256:7ebd7e08c02eb3f24ab150dacca3bf95a28c5ad20aab24f366bd9de0c8429e18
     restart: on-failure
     stop_grace_period: 1m
     init: true
