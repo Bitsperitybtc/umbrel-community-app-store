@@ -24,8 +24,10 @@ services:
       LUNATION_DB: /data/lunation.sqlite
       LUNATION_BACKUP_DIR: /data/backups
       APP_SEED: ${APP_SEED}
-      MOONSTONE_URL: ${MOONSTONE_URL}
-      MOONSTONE_RELAYS: ${MOONSTONE_RELAYS}
+      # Same-node Moonstone, as in Horizon: approval links and its mailbox relay
+      # container. App Settings -> Environment can point both elsewhere.
+      MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
+      MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
       LUNATION_ORIGINS: http://${DEVICE_DOMAIN_NAME}:8748,http://${DEVICE_HOSTNAME}:8748
       LUNATION_TRUSTED_PROXIES: 10.21.0.0/16
       # umbreld's app gateway connects from the app network gateway. /mcp-token
