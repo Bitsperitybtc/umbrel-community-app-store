@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# umbreld `app-script install` runs pre-install, then `compose pull`, and only then
+# start_app with pre-start. compose refuses to load the file while an env_file is missing,
+# so the env files and directories must exist before the pull. pre-start is idempotent and
+# never overwrites a secret, so it is reused as is.
+set -euo pipefail
+exec "$(dirname "$0")/pre-start"
