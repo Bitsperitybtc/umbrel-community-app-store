@@ -169,6 +169,6 @@ bitsperity-lunation/
 bitsperity-notus/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + postgres + restore + web + llama.cpp
-  hooks/                      pre-start, restore.sh, row-counts.sql, fetch-models.sh
+  hooks/                      pre-install, pre-start, restore.sh, row-counts.sql, fetch-models.sh
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 ```
