@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.1.2"
+version: "3.1.3"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,10 +14,10 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  Data fix: the nightly cleanup no longer deletes price history older than
-  400 days for held positions, Brent/WTI and watchlist symbols. History
-  already lost is restored in a follow-up release. No database migration and
-  no API change.
+  Data fix: price history lost by the old nightly cleanup is reloaded
+  automatically on the next prices sync (5 years for held positions,
+  Brent/WTI and watchlist symbols). The cleanup now logs the real number of
+  deleted rows. No database migration and no API change.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []
