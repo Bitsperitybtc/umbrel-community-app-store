@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.1.1"
+version: "3.1.2"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,9 +14,10 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  Mobile fixes: on iPhone the Cockpit is no longer cut off at the bottom, the
-  News feed list and its pager are visible again, and the Macro side panel
-  scrolls to the end. No database migration and no API change.
+  Data fix: the nightly cleanup no longer deletes price history older than
+  400 days for held positions, Brent/WTI and watchlist symbols. History
+  already lost is restored in a follow-up release. No database migration and
+  no API change.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []
