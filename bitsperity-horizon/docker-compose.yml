@@ -18,7 +18,7 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.12.6@sha256:bdd46fb0cbdd72357f90b339d8eae4367a871cbba0c2c83f1b9ae2e05513074d
+    image: ghcr.io/bitsperitybtc/horizon:0.13.0@sha256:07dce67586d17eefcaf28b6ef1ebe6518699774c93e9a5fd60b24993d486f5b3
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -46,7 +46,7 @@ services:
       start_period: 10s
 
   mcp:
-    image: ghcr.io/bitsperitybtc/horizon:0.12.6@sha256:bdd46fb0cbdd72357f90b339d8eae4367a871cbba0c2c83f1b9ae2e05513074d
+    image: ghcr.io/bitsperitybtc/horizon:0.13.0@sha256:07dce67586d17eefcaf28b6ef1ebe6518699774c93e9a5fd60b24993d486f5b3
     command: ["node", "/opt/horizon-mcp/horizon-mcp.mjs"]
     restart: on-failure
     stop_grace_period: 30s

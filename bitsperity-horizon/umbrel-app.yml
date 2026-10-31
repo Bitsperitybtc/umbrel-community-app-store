@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.12.6"
+version: "0.13.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,7 +22,11 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Horizon runs on bitsperity Kit 0.22.0. No visible change.
+  Proof-of-work levels: ideas and profiles show a level badge. Anyone can
+  level up an idea; only you can level up your own profile. Mining runs in
+  the background, with a header indicator and a work board. You get a
+  notification when a level you mined is published. The profile card fits
+  small phones and the stats grid uses three columns up to 768 px.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
