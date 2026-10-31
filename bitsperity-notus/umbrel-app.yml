@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.1.6"
+version: "3.1.7"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,12 +14,10 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  Notus no longer depends on EODHD for calendar and fundamentals: earnings come
-  from Finnhub, fundamentals from SEC filings with the Finnhub company profile
-  as fallback. The chart shows live US prices on demand while it is open.
-  Acceptance fixes across the stock page, charts, cockpit and scanner (dates,
-  freshness badges, empty states). Coverage is US only: non-US symbols show
-  "Not covered (US only)" and are no longer synced. No database migration.
+  Prices for every US ticker now come from one nightly EODHD bulk request per
+  trading day, and missed trading days are caught up automatically. A nightly
+  gap fill brings up to 100 stale but still listed symbols up to date.
+  No database migration.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []
