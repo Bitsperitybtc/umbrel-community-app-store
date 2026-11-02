@@ -66,19 +66,11 @@ environment:
   - name: NOSTR_LOCAL_KEYS
     services:
       - mcp
-    default: "1"
-    options:
-      - "0"
-      - "1"
-    note: "1 lets the MCP create local test identities (keys stored in this app's data). Testing only. 0 leaves signing to Moonstone."
+    note: "Testing only. Empty means off: signing goes through Moonstone. Set to 1 to let the MCP create local test identities, with keys stored in this app's data."
   - name: HORIZON_TEST_RESET
     services:
       - mcp
-    default: "1"
-    options:
-      - "0"
-      - "1"
-    note: "1 adds the MCP tool reset_test_data, which deletes the active local test identity's events on the relays above. Moonstone identities are refused. Testing only."
+    note: "Testing only. Empty means off. Set to 1 to add the MCP tool reset_test_data, which deletes the active local test identity's events on the relays above. Moonstone identities are refused."
   - name: HORIZON_NWC_URI
     services:
       - mcp

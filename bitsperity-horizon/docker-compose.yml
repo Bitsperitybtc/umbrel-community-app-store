@@ -52,7 +52,7 @@ services:
     stop_grace_period: 30s
     init: true
     volumes:
-      # NIP-46 client key, NWC secret and, with NOSTR_LOCAL_KEYS=1, local test keys.
+      # NIP-46 client key, NWC secret and, when NOSTR_LOCAL_KEYS=1 is set, local test keys.
       - ${APP_DATA_DIR}/mcp:/data
       - ${APP_DATA_DIR}/mcp-run:/run/horizon-mcp
     environment:
@@ -69,9 +69,8 @@ services:
       # not the container names above. Without HORIZON_PUBLIC_RELAYS (App Settings ->
       # Environment) the MCP names this app's /relay: ws://${DEVICE_DOMAIN_NAME}:3847/relay.
       DEVICE_DOMAIN_NAME: ${DEVICE_DOMAIN_NAME}
-      # Test release defaults: local test identities and reset_test_data.
-      NOSTR_LOCAL_KEYS: "1"
-      HORIZON_TEST_RESET: "1"
+      # No test defaults: NOSTR_LOCAL_KEYS and HORIZON_TEST_RESET stay unset (off).
+      # They are opt-in through App Settings -> Environment, for testing only.
       # Payment tools appear once HORIZON_NWC_URI is set (App Settings -> Environment).
       HORIZON_NWC_SIDE: client
     healthcheck:

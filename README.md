@@ -234,3 +234,7 @@ bitsperity-notus/
   hooks/                      pre-install, pre-start, restore.sh, row-counts.sql, fetch-models.sh
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 ```
+
+## License
+
+Packaging files are Apache-2.0 ([LICENSE](LICENSE)); icons and gallery images are CC BY-SA 4.0. Each app's code licence is in its source repository; the Beacon image (strfry) is GPL-3.0-only. Details in [NOTICE](NOTICE).
