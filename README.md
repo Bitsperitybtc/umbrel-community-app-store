@@ -4,6 +4,24 @@ Community app store for umbrelOS. Add this repository URL in umbrelOS: **App Sto
 
 Apps in this store use the `bitsperity-` ID prefix. That prefix is required by umbrelOS for community listings. The official Umbrel App Store package will use `horizon` with the same compose shape.
 
+## Apps
+
+| App | Community app ID | Host port | Source | Depends on |
+|---|---|---|---|---|
+| Beacon | `bitsperity-beacon` | `8749` (Nostr relay, `ws://umbrel.local:8749`) | [Bitsperitybtc/beacon](https://github.com/Bitsperitybtc/beacon) | none |
+| Horizon | `bitsperity-horizon` | `3847` (SPA, `/relay` and `/mcp`) | [Bitsperitybtc/horizon](https://github.com/Bitsperitybtc/horizon) | `bitsperity-beacon` |
+| Lunation | `bitsperity-lunation` | `8748` | [Bitsperitybtc/lunation](https://github.com/Bitsperitybtc/lunation) | none |
+| Moonstone | `bitsperity-moonstone` | `8740` (UI, Umbrel login) and `8741` (mailbox relay, published) | [Bitsperitybtc/moonstone](https://github.com/Bitsperitybtc/moonstone) | none |
+| Notus | `bitsperity-notus` | `8796` (the container listens on `8096`) | [Bitsperitybtc/notus](https://github.com/Bitsperitybtc/notus) | none |
+
+The ports are the `port:` of each `umbrel-app.yml`, plus `8741` published by the Moonstone compose file. Moonstone's mailbox relay runs the Beacon image, but it is not the Beacon app and has no dependency on it. No other compose file in this store publishes a host port.
+
+Port check (2 Nov 2026, [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps) at `7a94db0`): none of `3847`, `8740`, `8741`, `8748`, `8749` or `8796` is the `port:` of an app there, and none appears in any `.yml`, `.yaml`, `.sh` or `.env*` file of that repo (the only hit for `3847` is a pull-request number in a `submission:` URL). Re-run it with:
+
+```sh
+grep -rn -w -E '3847|8740|8741|8748|8749|8796' --include='*.yml' --include='*.yaml' --include='*.sh' --include='*.env*' .
+```
+
 ## bitsperity Horizon
 
 | | |
@@ -13,38 +31,53 @@ Apps in this store use the `bitsperity-` ID prefix. That prefix is required by u
 | Host URL | `http://umbrel.local:3847` |
 | Source | [Bitsperitybtc/horizon](https://github.com/Bitsperitybtc/horizon) |
 
-bitsperity Horizon is a static Nostr client. The container serves the production SPA. Sign-in is NIP-46. Lightning is NWC in Settings. Umbrel login is not wrapped in front of the app.
+bitsperity Horizon is a Nostr client. The `web` container serves the production SPA and its `/relay`, which by default forwards to the Beacon app. Sign-in is NIP-46. Lightning is NWC in Settings. The `mcp` container, from the same image, serves the Horizon MCP at `/mcp` on the app port; it needs a bearer token. `PROXY_AUTH_WHITELIST` is `*` and only `/mcp-token` is blocked, so `/mcp-token` is the one path behind the Umbrel login and everything else is open.
 
-The container image is `ghcr.io/bitsperitybtc/horizon`. The package is still private; Umbrel can pull it after the owner makes it public. The community app id and display name do not alias the previous listing.
+The container image is `ghcr.io/bitsperitybtc/horizon`. The images of all apps in this store that are built from the bitsperity repos (`beacon`, `horizon`, `lunation`, `moonstone`) pull anonymously: on 2 Nov 2026 each index digest pinned here was read from GHCR without a login and listed `linux/amd64` and `linux/arm64`. The community app id and display name do not alias the previous listing.
+
+#### Check an image digest
+
+Run this after every pin change, with no login. A `401` or `404` means the package is private or the digest is wrong.
+
+```sh
+repo=bitsperitybtc/horizon   # package name under ghcr.io
+ref=0.14.0                   # a tag, or the sha256:… digest from docker-compose.yml
+token=$(curl -s "https://ghcr.io/token?scope=repository:$repo:pull" | jq -r .token)
+accept='Accept: application/vnd.oci.image.index.v1+json'
+# The index digest of the tag (this is the value to pin):
+curl -sI -H "Authorization: Bearer $token" -H "$accept" "https://ghcr.io/v2/$repo/manifests/$ref" | grep -i docker-content-digest
+# The platforms in that index; both linux/amd64 and linux/arm64 must be there:
+curl -s -H "Authorization: Bearer $token" -H "$accept" "https://ghcr.io/v2/$repo/manifests/$ref" \
+  | jq -r '.manifests[].platform | select(.architecture != "unknown") | "\(.os)/\(.architecture)"'
+```
+
+The digest printed for a tag must equal the one in `docker-compose.yml`. `docker buildx imagetools inspect ghcr.io/$repo:$ref` shows the same index.
 
 ### How umbrelOS updates this app
 
 Two layers. Refreshing the community store only git-clones this repo (catalog). The installed app stays on the old compose and `umbrel-app.yml` until its **Update** button is used.
 
-Umbrel shows **Update** when `version` in the catalog `umbrel-app.yml` differs from the copy in `app-data`. String inequality, not semver. Changing `icon.png` without bumping `version` does nothing on an already-installed app.
+Umbrel shows **Update** when `version` in the catalog `umbrel-app.yml` differs from the copy in `app-data`. `version` is compared as a string (`!==`), not as semver, so any different value counts, a lower one too. Changing `icon.png` without bumping `version` does nothing on an already-installed app.
 
 The desktop/store icon is the `icon:` HTTP URL, not the file in the clone. `raw.githubusercontent.com/.../master/...` is cached: after replacing `icon.png`, point `icon:` at the commit that contains the new PNG (not `master`).
 
-Update copies only `docker-compose.yml` (then `umbrel-app.yml` after start). Same image pin → pull is a no-op; the running SPA does not change.
+Update stops the app, runs the installed `hooks/pre-update`, and copies only `docker-compose.yml`, `*.template`, `exports.sh`, `torrc` and `hooks/` into `app-data`. It then pulls the images, and only after that copies `umbrel-app.yml`. Every other file in the folder (`icon.png`, `gallery/`, config files) is not copied, and the data directories stay. A package that needs a changed file outside that list must rewrite it itself in a hook (Horizon's `hooks/pre-start` does this for its two JSON config files). Same image pin → pull is a no-op; the running app does not change.
+
+Source: [`app-script`](https://github.com/getumbrel/umbrel/blob/821cca5/packages/umbreld/source/modules/apps/legacy-compat/app-script) (`UPDATE_FILES_WHITELIST_PRE` and `UPDATE_FILES_WHITELIST_POST` in the `update` and `pre-patch-update` commands) and `updates` in [`apps/routes.ts`](https://github.com/getumbrel/umbrel/blob/821cca5/packages/umbreld/source/modules/apps/routes.ts), both read at commit `821cca5`.
 
 ### Image pin
 
 Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`), not an architecture-specific blob:
 
 ```text
-ghcr.io/bitsperitybtc/horizon:0.0.1@sha256:42cd0b317612e30bdd1ffc1be5b78e165c8ef578b5ea6717cb61386e136df281
+ghcr.io/bitsperitybtc/horizon:<version>@sha256:<index digest>
 ```
 
-To ship a new SPA (Umbrel: community store refresh, then **Update** on bitsperity Horizon):
+Both services (`web`, `mcp`) use the same image line; keep them identical. The current pin is in `bitsperity-horizon/docker-compose.yml`.
 
-1. Publish `ghcr.io/bitsperitybtc/horizon` (push `main` / `v*`, or `workflow_dispatch`). Do not use `latest` in compose. The package must be public or Umbrel cannot pull it.
-2. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/horizon:<tag>` — copy the **index** digest (`linux/amd64` + `linux/arm64`), not a blob digest.
-3. Pin `image: ghcr.io/bitsperitybtc/horizon:<tag>@sha256:<index-digest>`
-4. Set `version` in `umbrel-app.yml` to that tag (must differ from the installed version)
-5. Fill `releaseNotes`. If `icon.png` changed, set `icon:` to `.../<commit>/bitsperity-horizon/icon.png`
-6. Push this store repo
+To ship a new Horizon, follow the [release checklist](#release-checklist), then on the Umbrel: community store refresh, then **Update** on bitsperity Horizon. Do not use `latest` in compose. The package must be public or Umbrel cannot pull it.
 
-Listing-only (icon/copy, same container): bump `version` (e.g. `sha-32593df.1`), keep the image pin, cache-bust `icon:` if the PNG changed.
+Listing-only (icon/copy, same container): bump `version`, keep the image pin, and set `icon:` to the commit that holds the PNG if the PNG changed.
 
 Do not use compose `build:`. `APP_PORT` stays `80`.
 
@@ -78,21 +111,36 @@ Existing installs do not migrate. Umbrel keeps the data directory under the prev
 
 ### Image pin
 
-Compose uses `ghcr.io/bitsperitybtc/moonstone:0.1.0`. The package is not publicly readable yet, so this listing does not pin a digest copied from `nostr-signer`. After the first GHCR push, make the package **public** or Umbrel cannot pull it, then pin the multi-arch index digest:
+Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`) of the Moonstone tag build for `signer`, and the Beacon image `ghcr.io/bitsperitybtc/beacon:<version>@sha256:<index digest>` for the `relay` mailbox sidecar:
 
 ```text
-ghcr.io/bitsperitybtc/moonstone:0.1.0
+ghcr.io/bitsperitybtc/moonstone:<version>@sha256:<index digest>
 ```
 
-To bump:
+Both packages are public. The current pins are in `bitsperity-moonstone/docker-compose.yml`. To bump, follow the [release checklist](#release-checklist). Do not use `latest`. Do not use compose `build:`. Keep the mailbox sidecar digest-pinned.
 
-1. Tag `vX.Y.Z` on `moonstone` `main` (GHCR workflow publishes the image)
-2. Make `ghcr.io/bitsperitybtc/moonstone` public
-3. `docker buildx imagetools inspect ghcr.io/bitsperitybtc/moonstone:<tag>`
-4. Pin `image: ghcr.io/bitsperitybtc/moonstone:<tag>@sha256:<index-digest>`
-5. Set `version` in `umbrel-app.yml` to that tag
+## bitsperity Beacon
 
-Do not use `latest`. Do not use compose `build:`. Keep the mailbox sidecar digest-pinned.
+| | |
+|---|---|
+| Community app ID | `bitsperity-beacon` |
+| Relay for clients on the network | `ws://umbrel.local:8749` |
+| Relay for other apps on this Umbrel | `ws://bitsperity-beacon_relay_1:7777` |
+| Source | [Bitsperitybtc/beacon](https://github.com/Bitsperitybtc/beacon) |
+
+Nostr relay (strfry) for the apps on this Umbrel. The Umbrel login is not put in front of the app (`PROXY_AUTH_ADD: "false"`) because Nostr clients cannot do it; the relay gates writes itself: empty `RELAY_WRITE_PUBKEYS` (the default) accepts every author, a list accepts only those keys. The database is the strfry LMDB in `${APP_DATA_DIR}/data`. The healthcheck reads the NIP-11 document on `127.0.0.1:7777`.
+
+Horizon declares `dependencies: [bitsperity-beacon]`, so install Beacon first.
+
+### Image pin
+
+Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`) of the Beacon tag build:
+
+```text
+ghcr.io/bitsperitybtc/beacon:<version>@sha256:<index digest>
+```
+
+The current pin is in `bitsperity-beacon/docker-compose.yml`. To bump, follow the [release checklist](#release-checklist).
 
 ## Lunation
 
@@ -102,29 +150,21 @@ Do not use `latest`. Do not use compose `build:`. Keep the mailbox sidecar diges
 | UI | `http://umbrel.local:8748` |
 | Source | [Bitsperitybtc/lunation](https://github.com/Bitsperitybtc/lunation) |
 
-Lunation is the Bitsperity planning server. It keeps one SQLite database under `${APP_DATA_DIR}/data` and serves the plan over HTTP. Sign-in is Nostr. Umbrel login is not put in front of the app (`PROXY_AUTH_ADD: "false"`). umbrelOS sets `APP_SEED`, and compose passes it through unchanged.
+Lunation is the Bitsperity planning server. It keeps one SQLite database under `${APP_DATA_DIR}/data` and serves the plan over HTTP. Sign-in is Nostr. Umbrel login is not put in front of the app: `PROXY_AUTH_WHITELIST` is `*` and only `/mcp-token` is blocked, so `/mcp-token` is the one path behind the Umbrel login. umbrelOS sets `APP_SEED`, and compose passes it through unchanged. `hooks/pre-start` creates `data/` with uid 1000, so a linter error about a missing `data/` directory in the package is harmless here.
 
-Sign in via `http://umbrel.local:8748` or `http://<device hostname>:8748` (Tailscale MagicDNS). A raw IP is not an allowed origin in 0.1.0.
+Sign in via `http://umbrel.local:8748` or `http://<device hostname>:8748` (Tailscale MagicDNS). A raw IP is not an allowed origin.
 
 The canonical copy is `umbrel/bitsperity-lunation/` in `Bitsperitybtc/lunation`. This folder has an identical copy, plus `icon.png` rendered from that repo's `icon.svg`.
 
 ### Image pin
 
-Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`) of the `v0.1.0` tag build:
+Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`) of the Lunation tag build:
 
 ```text
-ghcr.io/bitsperitybtc/lunation:0.1.0@sha256:1aad777dbccec2c30b3cece5739808d54cf024dbe0beccb69b3d177ccb0f60bc
+ghcr.io/bitsperitybtc/lunation:<version>@sha256:<index digest>
 ```
 
-The package `ghcr.io/bitsperitybtc/lunation` must be public, or Umbrel cannot pull it.
-
-To bump:
-
-1. Tag `vX.Y.Z` on `lunation` `main` (the Docker workflow publishes the image)
-2. Pin `image: ghcr.io/bitsperitybtc/lunation:<tag>@sha256:<index-digest>`
-3. Set `version` in `umbrel-app.yml` to that tag and fill `releaseNotes`
-
-Do not use `latest`. Do not use compose `build:`. `APP_PORT` stays `8080`.
+The package `ghcr.io/bitsperitybtc/lunation` must be public, or Umbrel cannot pull it. The current pin is in `bitsperity-lunation/docker-compose.yml`. To bump, follow the [release checklist](#release-checklist). Do not use `latest`. Do not use compose `build:`. `APP_PORT` stays `8080`.
 
 ## Notus
 
@@ -142,30 +182,52 @@ The canonical copy is `umbrel/bitsperity-notus/` in `Bitsperitybtc/notus`. This 
 
 ### Image pin
 
-All images are digest-pinned: `ghcr.io/bitsperitybtc/notus:v2.0.1@sha256:5b75a426…`, `postgres:16-alpine@sha256:0cefaabd…`, `ghcr.io/ggml-org/llama.cpp:server-b11946@sha256:d880b2a0…`. The notus package must be public.
+All images are digest-pinned: `ghcr.io/bitsperitybtc/notus:v<version>@sha256:<digest>` (note the `v` in the tag), `postgres:16-alpine@sha256:…`, `ghcr.io/ggml-org/llama.cpp:server-b11946@sha256:…`. The notus package must be public. The current pins are in `bitsperity-notus/docker-compose.yml`.
 
 To bump: tag on `notus` `main`, pin the new digest in notus `umbrel/bitsperity-notus/`, set `version`, then copy the folder here. Do not use `latest` or compose `build:`.
+
+## Release checklist
+
+The same steps for every app. Order of apps: Beacon, then Moonstone, then Horizon and Lunation (Horizon depends on Beacon, and Moonstone's mailbox runs the Beacon image).
+
+1. **Tag.** Tag `vX.Y.Z` on the app repo's `main`. CHANGELOG and, in `umbrel-app.yml`, `version` and `releaseNotes` are already in the release PR. The tag must match `version`.
+2. **Image.** The repo's workflow builds the multi-arch image (`linux/amd64` + `linux/arm64`) from the tag.
+3. **Index digest.** Read the **index** digest of the tag without a login, and check that amd64 and arm64 are both listed (see [Check an image digest](#check-an-image-digest)). Note the digest.
+4. **Pin PR** in the app repo: compose on `image: ghcr.io/bitsperitybtc/<app>:X.Y.Z@sha256:<index digest>`.
+5. **Store PR** here: copy the package folder 1:1 from the app repo (`umbrel/bitsperity-<app>/`, for Moonstone `bitsperity-moonstone/`). `diff -r <app repo folder> bitsperity-<app>` must print nothing (only intentional differences may remain, for example `icon.png` or Notus's `icon` and `submission`; read the diff, do not hide it). Merge to `master`. This repo changes only by pull request.
+6. **Backup** the app's data if it has any: Horizon `mcp/` and the two JSON configs, Moonstone and Lunation `data/`, Beacon the relay database (`data/`, a strfry LMDB).
+7. **Update on the Umbrel through the UI** (refresh the community store, then **Update**; no reinstall, so the update path is tested). `version` must differ from the installed one, and the files listed under "How umbrelOS updates this app" are what changes.
+8. **Smoke test and logs.** Health is green, sign-in works, one core path works (Beacon: a client connects to `ws://<umbrel>:8749`, an event round-trips and survives a restart), `docker logs` is clean. Write the result into the release issue.
+
+A change to the pinned image needs steps 1 to 4 first. A listing-only change (text, icon, gallery) needs only a new `version` in the store copy and in the app repo.
 
 ## Layout
 
 ```text
 umbrel-app-store.yml          Store id + display name
+bitsperity-beacon/
+  umbrel-app.yml              Listing
+  docker-compose.yml          app_proxy + relay (strfry)
+  data/.gitkeep               Bind-mount source for the relay database
+  icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 bitsperity-horizon/
   umbrel-app.yml              Listing
-  docker-compose.yml          app_proxy + web image
+  docker-compose.yml          app_proxy + web + mcp (same image)
+  hooks/pre-start             Refreshes the two JSON configs when they still hold an old default
+  relay-config.json           SPA relay config (served as a file)
+  signer-config.json          SPA signer config (Moonstone UI port)
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
-  gallery/1.png               Landing
-  gallery/2.png               Ideas
-  gallery/3.png               Job detail
-bitsperity-moonstone/
-  umbrel-app.yml              Listing
-  docker-compose.yml          app_proxy + signer + mailbox relay
-  relay-config.toml           Kind 24133 only
-  icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
+  gallery/1.png … 4.png       Store screenshots
 bitsperity-lunation/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + web image
+  hooks/pre-start             Creates data/ with uid 1000
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
+bitsperity-moonstone/
+  umbrel-app.yml              Listing
+  docker-compose.yml          app_proxy + signer + mailbox relay (Beacon image)
+  icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
+  gallery/                    Store screenshots
 bitsperity-notus/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + postgres + restore + web + llama.cpp
