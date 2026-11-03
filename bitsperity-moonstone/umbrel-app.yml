@@ -16,6 +16,12 @@ description: >-
   WebSocket on 8741 (no Umbrel cookie; NIP-46 is the access control). Pages
   opened over https reach the same mailbox at wss://<host>:8740/mailbox. Add a
   public wss:// relay in Settings to pair clients that are not on this node.
+
+
+  Pairing, approving and signing need only the bundled mailbox relay. The
+  Nostr MCP and profile editing read and publish on a local relay, by default
+  the bitsperity Beacon app. Install Beacon for that, or set another relay in
+  Settings. Moonstone does not require Beacon.
 releaseNotes: >-
   Moonstone runs on bitsperity Kit 0.22.0. Your keys, identities and
   existing approvals are not changed.

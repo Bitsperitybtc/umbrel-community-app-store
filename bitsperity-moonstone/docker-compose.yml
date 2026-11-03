@@ -55,6 +55,7 @@ services:
     # strfry runs as uid 1000; a tmpfs without uid/gid is root-owned and strfry
     # exits with "mdb_env_open: Permission denied" (as in Moonstone 0.3.10).
     # Digest: ghcr.io/bitsperitybtc/beacon:0.1.1 multi-arch index (amd64 + arm64).
+    # Stays on 0.1.1: 0.2.0 only adds NIP-50 search, which a kind 24133 mailbox does not use.
     image: ghcr.io/bitsperitybtc/beacon:0.1.1@sha256:58ca033b5669c9c0fe605302235f2315554d213a6047152c5007b1cc774fd7e9
     restart: on-failure
     # Same as the bitsperity Beacon app: an init reaps strfry's children and forwards
