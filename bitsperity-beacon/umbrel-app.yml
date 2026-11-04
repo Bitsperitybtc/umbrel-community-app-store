@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-beacon
 category: social
 name: Beacon
-version: "0.2.0"
+version: "0.2.1"
 tagline: Your own Nostr relay, a steady light at home
 description: >-
   bitsperity Beacon is the Nostr relay on your own node. Horizon, Moonstone
@@ -15,9 +15,9 @@ description: >-
   default; list your keys under RELAY_WRITE_PUBKEYS to accept only your own
   events. Anyone can read.
 releaseNotes: >-
-  Search: Beacon now answers NIP-50 search requests, so apps such as Horizon
-  can find ideas, jobs and profiles by words in their text. The relay info
-  document lists NIP-50. Each connection runs one search at a time.
+  Licence update: Beacon is GPL-3.0-only because it bundles the strfry relay,
+  and the image now ships strfry's licence text and a notice naming the pinned
+  strfry commit. The relay itself is unchanged.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/beacon
 dependencies: []
