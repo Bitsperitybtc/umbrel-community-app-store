@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.0"
+version: "0.14.1"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,14 +22,12 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Level up is more robust: mining keeps going level after level on one worker
-  per spare core, saves your progress to relays, and says why it paused. Level
-  pills show the work and, on this device, the time. You get a quiet
-  notification when others raise your idea. New: Settings → Minimum level hides
-  people and ideas below a level you choose. People you follow always show.
-  Settings now has five sections, the landing page and idea claims are
-  reworked, the header no longer overlaps on narrow screens, and contract
-  cards on a profile show that person's role and link to the contract.
+  Beta release. Local test identities and the reset_test_data tool of the MCP
+  are now off by default; signing goes through Moonstone, and both can still
+  be turned on for testing in App Settings, Environment. Stop now also ends a
+  level-up search while the tab is hidden. The level-up sheet names the levels
+  it holds once ("2 levels found, not yet published"). Built on the Kit beta
+  release.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
