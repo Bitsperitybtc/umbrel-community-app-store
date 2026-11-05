@@ -10,7 +10,7 @@ services:
 
   relay:
     # Multi-arch index digest (linux/amd64 + linux/arm64) of the v0.2.1 tag build.
-    image: ghcr.io/bitsperitybtc/beacon:0.2.1@sha256:f97824ec27177ba412fc04972b4271e44a1fe271e337dbc06c1fcea359bc9b43
+    image: ghcr.io/bitsperitybtc/beacon:0.2.4@sha256:25bfc227f4f4f722add044fb4e8a107b1315c9c6424f7409956d5f78554a055a
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 1m
