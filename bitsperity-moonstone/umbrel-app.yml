@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.8.3"
+version: "0.8.3-patch.1"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -23,7 +23,7 @@ description: >-
   the bitsperity Beacon app. Install Beacon for that, or set another relay in
   Settings. Moonstone does not require Beacon.
 releaseNotes: >-
-  Rebuilt from the monorepo; image now published from Bitsperitybtc/bitsperity. Runs on the latest Node 22 and bitsperity Kit 1.0.0-beta.8; the built-in NIP-46 mailbox relay moves from Beacon 0.1.1 to Beacon 0.2.4. Your keys, identities and approvals are not changed.
+  Fixes the built-in NIP-46 mailbox relay after 0.8.3: Beacon 0.2.4 starts strfry behind its search front, so the relay listened on the wrong port and Moonstone showed it offline. The relay is back on port 8080, kind 24133 only. Your keys, identities and approvals are not changed.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
