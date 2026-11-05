@@ -17,7 +17,7 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health,/mailbox"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.8.0@sha256:3b03695c658a3bd1e637d389892cafa413be0520364cfe60fcb8b71617129cbc
+    image: ghcr.io/bitsperitybtc/moonstone:0.8.3@sha256:f9645a43df2ee7e9547bac8474ce64e4dc032db034a64e1e34cd5d2ec416ecc5
     restart: on-failure
     stop_grace_period: 1m
     volumes:
@@ -54,9 +54,10 @@ services:
     # The database is a tmpfs, so nothing survives a restart (24133 is ephemeral).
     # strfry runs as uid 1000; a tmpfs without uid/gid is root-owned and strfry
     # exits with "mdb_env_open: Permission denied" (as in Moonstone 0.3.10).
-    # Digest: ghcr.io/bitsperitybtc/beacon:0.1.1 multi-arch index (amd64 + arm64).
-    # Stays on 0.1.1: 0.2.0 only adds NIP-50 search, which a kind 24133 mailbox does not use.
-    image: ghcr.io/bitsperitybtc/beacon:0.1.1@sha256:58ca033b5669c9c0fe605302235f2315554d213a6047152c5007b1cc774fd7e9
+    # Digest: ghcr.io/bitsperitybtc/beacon:0.2.4 multi-arch index (amd64 + arm64).
+    # 0.1.1 was deleted with the old GHCR package; 0.2.x only adds NIP-50 search
+    # (unused by a kind 24133 mailbox) and strfry licence files.
+    image: ghcr.io/bitsperitybtc/beacon:0.2.4@sha256:25bfc227f4f4f722add044fb4e8a107b1315c9c6424f7409956d5f78554a055a
     restart: on-failure
     # Same as the bitsperity Beacon app: an init reaps strfry's children and forwards
     # SIGTERM, and strfry gets a minute to close the database before SIGKILL.

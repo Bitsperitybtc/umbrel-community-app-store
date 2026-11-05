@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.1.8"
+version: "3.1.11"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,10 +14,7 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  News labeling against active theses works again on small CPUs: the local
-  relation model gets enough time per request and per run. A one-time
-  database migration (0065) reopens news/thesis pairs that were given up
-  after timeouts, so they are labeled after the update.
+  Rebuilt from the monorepo; image now published from Bitsperitybtc/bitsperity. Two fixes: daily bars, weekly and monthly buckets, the digest and sentiment windows use UTC calendar days; and when the internal API key is enforced but empty, /api/v1 answers 503 instead of running unguarded.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []

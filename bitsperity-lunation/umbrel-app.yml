@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "0.2.4"
+version: "0.2.7"
 tagline: Plan in cycles
 description: >-
   Lunation is the Bitsperity planning server. It keeps a SQLite database and
@@ -18,10 +18,7 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation is now licensed under Apache-2.0. The package texts say why the
-  Umbrel login covers only the MCP token page. The app now runs on bitsperity
-  Kit 1.0.0-beta.7 and its UI 0.13.0, and agents still use the Moonstone app
-  on this Umbrel and its relay by default.
+  Rebuilt from the monorepo; image now published from Bitsperitybtc/bitsperity. Runs on bitsperity Kit 1.0.0-beta.8; no functional changes.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
