@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.8.6"
+version: "0.8.7"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -23,7 +23,7 @@ description: >-
   the bitsperity Beacon app. Install Beacon for that, or set another relay in
   Settings. Moonstone does not require Beacon.
 releaseNotes: >-
-  Pending pairings registered by Horizon MCP with MOONSTONE_PAIRING_TOKEN (at least 32 characters, registration only) show up in an already-open Moonstone UI without opening the link (/pairing-offers, #94). Umbrel: set the same MOONSTONE_PAIRING_TOKEN in App Settings -> Environment of Moonstone and Horizon; unset keeps /pairing-offers off.
+  Pending pairing cards stay stable while the UI polls for new state; an open card no longer flickers or resets (#96).
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
