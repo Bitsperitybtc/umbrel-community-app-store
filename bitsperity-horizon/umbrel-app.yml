@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.5"
+version: "0.14.6"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,7 +22,7 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Rebuilt against Kit 1.0.0-beta.8. Kit source is split by responsibility; the public API is unchanged. No Horizon behavior change.
+  Horizon MCP: use_identity with a label (for example "mira.design") reuses the pairing approved under that label, also after a restart, instead of minting a new link each call; approving that new link used to sign the previous pairing out (Kit 1.0.0-beta.9, #92). Horizon MCP exposes the Prompt Request tools (#90).
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
