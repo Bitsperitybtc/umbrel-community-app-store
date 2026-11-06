@@ -18,7 +18,7 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.14.6@sha256:b50e6da19397835ca3cdb3069e5e7bc7c1188c7c65858693680b966517644d9e
+    image: ghcr.io/bitsperitybtc/horizon:0.14.7@sha256:5fb1f8c1b48a3e1379ffbcca59174b77fbc14c2a86f1314f14f61d1c93f377a9
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -46,7 +46,7 @@ services:
       start_period: 10s
 
   mcp:
-    image: ghcr.io/bitsperitybtc/horizon:0.14.6@sha256:b50e6da19397835ca3cdb3069e5e7bc7c1188c7c65858693680b966517644d9e
+    image: ghcr.io/bitsperitybtc/horizon:0.14.7@sha256:5fb1f8c1b48a3e1379ffbcca59174b77fbc14c2a86f1314f14f61d1c93f377a9
     command: ["node", "/opt/horizon-mcp/horizon-mcp.mjs"]
     restart: on-failure
     stop_grace_period: 30s
@@ -62,8 +62,12 @@ services:
       HORIZON_MCP_DATA_DIR: /data
       # Relays the MCP reads and publishes on: the bitsperity Beacon app.
       NOSTR_LOCAL_RELAYS: ws://bitsperity-beacon_relay_1:7777
-      # Same-node Moonstone: approval links and its mailbox relay container.
-      MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
+      # Same-node Moonstone mailbox relay container. Approval links need
+      # MOONSTONE_PUBLIC_URL (App Settings -> Environment), a browser-reachable
+      # LAN/Tailscale origin; .local and Docker hostnames stop the MCP, so the
+      # package sets no link origin. Optional MOONSTONE_URL
+      # (http://bitsperity-moonstone_signer_1:8740) and MOONSTONE_PAIRING_TOKEN
+      # route pending-pairing notifications inside Docker.
       MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
       # Relay hints in poll, goal and a/e/p tags must be reachable from a browser,
       # not the container names above. Without HORIZON_PUBLIC_RELAYS (App Settings ->

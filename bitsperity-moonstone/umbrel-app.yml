@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.8.5"
+version: "0.8.6"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -23,7 +23,7 @@ description: >-
   the bitsperity Beacon app. Install Beacon for that, or set another relay in
   Settings. Moonstone does not require Beacon.
 releaseNotes: >-
-  Nostr MCP: use_identity with a label (for example "mira.design") reuses the pairing approved under that label, also after a restart, instead of minting a new link each call; approving that new link used to sign the previous pairing out (Kit 1.0.0-beta.9, #92).
+  Pending pairings registered by Horizon MCP with MOONSTONE_PAIRING_TOKEN (at least 32 characters, registration only) show up in an already-open Moonstone UI without opening the link (/pairing-offers, #94). Umbrel: set the same MOONSTONE_PAIRING_TOKEN in App Settings -> Environment of Moonstone and Horizon; unset keeps /pairing-offers off.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
@@ -50,6 +50,11 @@ environment:
       - signer
     default: ws://bitsperity-beacon_relay_1:7777
     note: "Local relays the Nostr MCP may read and publish to, comma-separated ws:// or wss:// URLs. The default is the bitsperity Beacon app (ws://nostr-relay_relay_1:8080 for the Umbrel Nostr Relay app). Every other private host stays blocked."
+  - name: MOONSTONE_PAIRING_TOKEN
+    services:
+      - signer
+    default: ""
+    note: "Optional registration-only secret, at least 32 characters, the same value as in Horizon's MCP. Lets Horizon show pending pairings in an open Moonstone UI. Never grants approval or signing. Empty turns /pairing-offers off."
   - name: LOG_LEVEL
     services:
       - signer

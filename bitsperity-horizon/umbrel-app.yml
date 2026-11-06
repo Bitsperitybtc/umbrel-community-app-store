@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.6"
+version: "0.14.7"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,7 +22,7 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Horizon MCP: use_identity with a label (for example "mira.design") reuses the pairing approved under that label, also after a restart, instead of minting a new link each call; approving that new link used to sign the previous pairing out (Kit 1.0.0-beta.9, #92). Horizon MCP exposes the Prompt Request tools (#90).
+  Horizon MCP: approval links use MOONSTONE_PUBLIC_URL, a browser-reachable origin; loopback, .local and Docker hostnames stop startup instead of producing dead links. With a MOONSTONE_PAIRING_TOKEN shared with Moonstone (registration only, never approval or signing), new pairings appear as pending in an already-open Moonstone UI (#94). Umbrel: set MOONSTONE_PUBLIC_URL (for example http://192.168.1.10:8740) and MOONSTONE_PAIRING_TOKEN in App Settings -> Environment; the package no longer points links at umbrel.local.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
@@ -72,6 +72,18 @@ environment:
       - "0"
       - "1"
     note: "Testing only. 0 is off. 1 adds the MCP tool reset_test_data, which deletes the active local test identity's events on the relays above. Needs NOSTR_LOCAL_KEYS=1; Moonstone identities are refused."
+  - name: MOONSTONE_PUBLIC_URL
+    services:
+      - mcp
+    note: "Browser-facing Moonstone origin for approval links, such as http://192.168.1.10:8740 or a Tailscale address. Not localhost, umbrel.local or a Docker hostname. Empty leaves Moonstone signing unconfigured."
+  - name: MOONSTONE_URL
+    services:
+      - mcp
+    note: "Optional internal Moonstone origin for pairing notifications, such as http://bitsperity-moonstone_signer_1:8740. Only valid together with MOONSTONE_PUBLIC_URL. Empty uses MOONSTONE_PUBLIC_URL."
+  - name: MOONSTONE_PAIRING_TOKEN
+    services:
+      - mcp
+    note: "Optional registration-only secret, at least 32 characters, the same value as in Moonstone. Shows new pairings as pending in an open Moonstone UI. Never grants approval or signing."
   - name: HORIZON_NWC_URI
     services:
       - mcp
