@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "0.2.7"
+version: "0.2.8"
 tagline: Plan in cycles
 description: >-
   Lunation is the Bitsperity planning server. It keeps a SQLite database and
@@ -18,7 +18,7 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Rebuilt from the monorepo; image now published from Bitsperitybtc/bitsperity. Runs on bitsperity Kit 1.0.0-beta.8; no functional changes.
+  Rebuilt against Kit 1.0.0-beta.8. Kit source is split by responsibility; the public API is unchanged. No Lunation behavior change.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store

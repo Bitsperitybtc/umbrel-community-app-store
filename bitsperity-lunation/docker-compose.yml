@@ -12,7 +12,7 @@ services:
 
   web:
     # Multi-arch index digest (linux/amd64 + linux/arm64) of the v0.2.4 tag build.
-    image: ghcr.io/bitsperitybtc/lunation:0.2.7@sha256:95a3680601822000462be8b0b5d082bb6bd4c88433e4ffd97e21d9efe03d80af
+    image: ghcr.io/bitsperitybtc/lunation:0.2.8@sha256:a4a72e57846354ab842b0aeafee2e44fdd942c205094ea39052dffdea4440078
     restart: on-failure
     stop_grace_period: 1m
     init: true
