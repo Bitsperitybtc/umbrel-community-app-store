@@ -14,10 +14,10 @@ services:
       APP_PORT: "8740"
       # Exact paths only. No wildcards, so nothing else under /mcp or /nostr-mcp is open.
       # /mailbox is the WebSocket path to the bundled relay; like 8741 it has no cookie.
-      PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health,/mailbox"
+      PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health,/mailbox,/pairing-offers"
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.8.5@sha256:cc8f0d6d30ed034008fd4a0bd7174cab43f7030954533a81ceffd06fd3c38156
+    image: ghcr.io/bitsperitybtc/moonstone:0.8.6@sha256:3f32209c0c6ca9f31b6c759546ce7f3079dbddb89279a420e212397f892721f8
     restart: on-failure
     stop_grace_period: 1m
     volumes:
@@ -32,6 +32,7 @@ services:
       DEFAULT_SIGNER_DIAL: ws://bitsperity-moonstone_relay_1:8080
       # Local relays /nostr-mcp may open: the bitsperity Beacon app's relay container.
       NOSTR_LOCAL_RELAYS: ws://bitsperity-beacon_relay_1:7777
+      MOONSTONE_PAIRING_TOKEN: "${MOONSTONE_PAIRING_TOKEN:-}"
       LOG_LEVEL: info
     depends_on:
       - relay
