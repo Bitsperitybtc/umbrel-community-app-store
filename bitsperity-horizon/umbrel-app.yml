@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.4"
+version: "0.14.5"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,7 +22,7 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Rebuilt from the monorepo; image now published from Bitsperitybtc/bitsperity. Runs on bitsperity Kit 1.0.0-beta.8. One fix: ideas held back by the level bar no longer open deletion watches, so fewer relay subscriptions stay open.
+  Rebuilt against Kit 1.0.0-beta.8. Kit source is split by responsibility; the public API is unchanged. No Horizon behavior change.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
