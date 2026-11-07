@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.7"
+version: "0.14.8"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,7 +22,7 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Horizon MCP: approval links use MOONSTONE_PUBLIC_URL, a browser-reachable origin; loopback, .local and Docker hostnames stop startup instead of producing dead links. With a MOONSTONE_PAIRING_TOKEN shared with Moonstone (registration only, never approval or signing), new pairings appear as pending in an already-open Moonstone UI (#94). Umbrel: set MOONSTONE_PUBLIC_URL (for example http://192.168.1.10:8740) and MOONSTONE_PAIRING_TOKEN in App Settings -> Environment; the package no longer points links at umbrel.local.
+  Horizon MCP: `list_prompt_requests` takes an optional `status` (open, ready or closed) so agents can ask only for ready Prompt Requests. `create_prompt_request` with `draft: true` saves a private NIP-37 draft, and `publish_draft` publishes it later. The MCP README now documents the Prompt Request tools with examples (#98).
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
