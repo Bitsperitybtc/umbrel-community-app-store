@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.9"
+version: "0.14.10"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,7 +22,13 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Horizon MCP: `list_feed` reads the active identity's Following feed like the SPA Feed page (follow-list authors only, SPA tabs, limit/until paging; no follow list is an empty feed) (#100). `list_notifications` reads the identity's notifications like the SPA bell (offers, contracts, PRs, reviews, payments, comments, replies, mentions, threads, zaps; read-only, nothing marked seen; default window 30 days) (#101).
+  Corrects MCP Following-feed paging across distinct and tied timestamps,
+  applies existing public author mutes, and rejects incomplete mute preferences.
+  Bounded relay windows reread uncertain boundaries instead of silently skipping
+  events. Filtered notification output no longer shrinks the raw relay read;
+  unavailable or capped coverage is reported as incomplete (#104).
+  This narrow corrective patch does not implement ecash-thanks parity or change
+  wallet/payment, Moonstone, sign-in or connector behavior.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
