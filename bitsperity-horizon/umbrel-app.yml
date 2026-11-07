@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.8"
+version: "0.14.9"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,7 +22,7 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Horizon MCP: `list_prompt_requests` takes an optional `status` (open, ready or closed) so agents can ask only for ready Prompt Requests. `create_prompt_request` with `draft: true` saves a private NIP-37 draft, and `publish_draft` publishes it later. The MCP README now documents the Prompt Request tools with examples (#98).
+  Horizon MCP: `list_feed` reads the active identity's Following feed like the SPA Feed page (follow-list authors only, SPA tabs, limit/until paging; no follow list is an empty feed) (#100). `list_notifications` reads the identity's notifications like the SPA bell (offers, contracts, PRs, reviews, payments, comments, replies, mentions, threads, zaps; read-only, nothing marked seen; default window 30 days) (#101).
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
