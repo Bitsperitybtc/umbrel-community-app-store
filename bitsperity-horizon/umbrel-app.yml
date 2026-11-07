@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.10"
+version: "0.14.11"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,13 +22,14 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Corrects MCP Following-feed paging across distinct and tied timestamps,
-  applies existing public author mutes, and rejects incomplete mute preferences.
-  Bounded relay windows reread uncertain boundaries instead of silently skipping
-  events. Filtered notification output no longer shrinks the raw relay read;
-  unavailable or capped coverage is reported as incomplete (#104).
-  This narrow corrective patch does not implement ecash-thanks parity or change
-  wallet/payment, Moonstone, sign-in or connector behavior.
+  Idea Jobs uses the same hiring predicate as job detail for the Open tab and
+  count. Sold/Filled listings with open or still-loading ledger status appear
+  under Completed; JobsExplorer retains its independent filters (#106). MCP
+  update_job preserves an existing Prompt Request link and its frozen revision
+  across job edits, even after the Prompt Request advances (#110). My Offers
+  reliably loads parent project titles, including when job metadata is already
+  cached, while ignoring stale lookup results (#112). No wallet/payment or
+  Moonstone changes; ecash-thanks parity remains unimplemented.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
