@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.12"
+version: "0.14.13"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,11 +22,11 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Contract-chain notification rows show best-effort job titles from already-loaded
-  public contract content, retaining generic text when no title is available
-  (#114). The notifications page explains its existing automatic mark-as-read
-  behavior. The min-level chip includes idle help; filtering and Hidden/Show
-  behavior are unchanged. No MCP notification, wallet/payment or Moonstone
+  Profile editing now asks before you leave with unsaved changes, including
+  text typed while a save is still publishing; a successful save without later
+  edits leaves without asking (#118). Idea/job card menus say "Mute author
+  (hides all their content)" and the mute button's tooltip explains its
+  author-wide scope (#116). No MCP, wallet/payment or Moonstone behavior
   changes; ecash-thanks parity remains unimplemented.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
