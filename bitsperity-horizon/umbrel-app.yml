@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.16"
+version: "0.14.17"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,9 +22,9 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  The My Contracts list heading reads "Contracts (N)" instead of "Active (N)",
-  so finished and settled contracts are not labeled as active (#124). No MCP,
-  wallet or Moonstone changes.
+  An unsent top-level comment draft on an idea or job Discussion stays when
+  you switch tabs and return; it is not shown on a different idea or job
+  (#126). Reply forms are unchanged. No MCP, wallet or Moonstone changes.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
