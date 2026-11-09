@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.15"
+version: "0.14.16"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,12 +22,9 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  While a developer has not sent the settlement invoice yet, the contract
-  payment view shows "Awaiting developer invoice" as a waiting step instead of
-  "Invoice invalid", and the reason Pay is blocked is shown as text below the
-  buttons (#120). Payment validation is unchanged: Pay stays blocked until a
-  valid invoice for the agreed amount is present. No MCP, wallet or Moonstone
-  changes.
+  The My Contracts list heading reads "Contracts (N)" instead of "Active (N)",
+  so finished and settled contracts are not labeled as active (#124). No MCP,
+  wallet or Moonstone changes.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
