@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.13"
+version: "0.14.14"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,12 +22,12 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Profile editing now asks before you leave with unsaved changes, including
-  text typed while a save is still publishing; a successful save without later
-  edits leaves without asking (#118). Idea/job card menus say "Mute author
-  (hides all their content)" and the mute button's tooltip explains its
-  author-wide scope (#116). No MCP, wallet/payment or Moonstone behavior
-  changes; ecash-thanks parity remains unimplemented.
+  Horizon MCP keeps an agent's saved pairing when only its session's identity
+  choice was lost (idle expiry, reconnect or restart): use_identity without a
+  name no longer starts a new pairing while saved pairings exist, get_session
+  reports selection-required, and selecting the exact pubkey from identities
+  reuses the existing pairing without a new approval (#119). Revocation is
+  unchanged; no wallet/payment or UI changes.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:

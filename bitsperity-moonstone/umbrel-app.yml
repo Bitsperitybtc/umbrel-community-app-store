@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.8.8"
+version: "0.8.9"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -23,7 +23,7 @@ description: >-
   the bitsperity Beacon app. Install Beacon for that, or set another relay in
   Settings. Moonstone does not require Beacon.
 releaseNotes: >-
-  An identity's profile no longer goes stale after another client (for example an agent through the Nostr MCP) publishes a new kind 0: opening the identity rereads its relays, the profile cache lasts 30 seconds, and signing a kind 0 for a client clears it. No restart needed (#102).
+  The Nostr MCP keeps an agent's saved pairing when only its session's identity choice was lost (idle expiry, reconnect or restart): get_session reports selection-required, use_identity without a name no longer starts a new pairing while saved pairings exist, and selecting the exact pubkey from identities reuses the pairing without a new approval. Revocation is unchanged (#119).
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/moonstone
 dependencies: []
