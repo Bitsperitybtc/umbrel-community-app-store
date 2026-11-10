@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.19"
+version: "0.14.20"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,11 +22,12 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  The Horizon MCP keeps each session's selected identity across idle expiry
-  and restarts, so bots no longer need to pick it again (#131). Shared tab
-  bars on idea, Prompt Request and profile pages fade the side that hides
-  more tabs and keep focus rings whole (#132). No wallet or Moonstone
-  changes.
+  Relay settings keep every relay you list, including your local relay, and
+  only replace the list they loaded (NIP-65, #134). Settings and the header
+  now explain the extra connections (DM inbox, signer, wallet). DMs find your
+  partner's inbox on the relays you share, so messages via a shared DM relay
+  work (NIP-17, #135). No wallet changes. Moonstone is not released in this
+  version.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
