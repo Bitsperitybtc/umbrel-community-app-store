@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.18"
+version: "0.14.19"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,9 +22,10 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Narrow screens: My Contracts rows wrap so title, status and amount stay
-  readable (#128), and the job status tab bars fade the side that hides more
-  tabs and keep the current tab visible (#129). No MCP, wallet or Moonstone
+  The Horizon MCP keeps each session's selected identity across idle expiry
+  and restarts, so bots no longer need to pick it again (#131). Shared tab
+  bars on idea, Prompt Request and profile pages fade the side that hides
+  more tabs and keep focus rings whole (#132). No wallet or Moonstone
   changes.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
