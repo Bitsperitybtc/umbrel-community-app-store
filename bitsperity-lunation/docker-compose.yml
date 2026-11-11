@@ -11,8 +11,9 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of the v0.2.4 tag build.
-    image: ghcr.io/bitsperitybtc/lunation:0.2.8@sha256:a4a72e57846354ab842b0aeafee2e44fdd942c205094ea39052dffdea4440078
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v1.1.0 tag build.
+    # It never runs ahead of package.json.
+    image: ghcr.io/bitsperitybtc/lunation:1.1.0@sha256:3571111a24c52230d478a1583bb6f5ee6f273498434035769c548526e7ab017e
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -21,13 +22,20 @@ services:
     environment:
       HOST: 0.0.0.0
       PORT: "8080"
-      LUNATION_DB: /data/lunation.sqlite
+      # New file for the v1.1 model. The v0.2.x database stays where it is, untouched.
+      LUNATION_DB: /data/lunation-v1.sqlite
       LUNATION_BACKUP_DIR: /data/backups
       APP_SEED: ${APP_SEED}
       # Same-node Moonstone, as in Horizon: approval links and its mailbox relay
       # container. App Settings -> Environment can point both elsewhere.
       MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
       MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
+      # The same mailbox as a browser reaches it: Moonstone publishes its relay on port 8741.
+      # The container name above does not resolve in a browser.
+      MOONSTONE_BROWSER_RELAYS: ws://${DEVICE_DOMAIN_NAME}:8741
+      # Owner keys (npub or hex, comma-separated): only they name keys, and their statements count
+      # as human. Without an owner nobody can write. App Settings -> Environment can change it.
+      LUNATION_OWNERS: npub1r22hluhx79hymaa3g83lhd43d75lhuyh0pgt3v46vvv5vpsmtvusegap9v
       LUNATION_ORIGINS: http://${DEVICE_DOMAIN_NAME}:8748,http://${DEVICE_HOSTNAME}:8748
       LUNATION_TRUSTED_PROXIES: 10.21.0.0/16
       # umbreld's app gateway connects from the app network gateway. /mcp-token

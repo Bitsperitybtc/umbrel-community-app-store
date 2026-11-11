@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # umbreld runs this on the host before the app's containers start, on install,
 # start and update. The web container runs as the image's node user (uid 1000)
-# and opens /data/lunation.sqlite. Docker creates a missing bind source as
+# and opens /data/lunation-v1.sqlite. Docker creates a missing bind source as
 # root, which the node user cannot write, so SQLite fails with SQLITE_CANTOPEN.
 # Create the data directory and hand it to uid 1000. Existing files stay.
 set -euo pipefail
