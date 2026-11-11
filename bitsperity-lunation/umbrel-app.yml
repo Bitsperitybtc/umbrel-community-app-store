@@ -2,11 +2,13 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "0.2.8"
-tagline: Plan in cycles
+version: "1.1.0"
+tagline: Aussagen, Entscheidungen, Arbeit, Belege
 description: >-
-  Lunation is the Bitsperity planning server. It keeps a SQLite database and
-  serves the plan over HTTP.
+  Lunation keeps the reasoning behind a plan as a graph: Aussagen, Entscheidungen,
+  Arbeit and Belege, linked by signed, append-only events. It shows what needs a
+  decision, what is stale, and which claims are supported. Agents work through five
+  MCP tools; people sign with Moonstone or a NIP-07 extension.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
 dependencies: []
@@ -18,7 +20,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Rebuilt against Kit 1.0.0-beta.8. Kit source is split by responsibility; the public API is unchanged. No Lunation behavior change.
+  Lunation v1.1. New domain model (four object types, four edge kinds, signed append-only
+  events, derived values), a new database file lunation-v1.sqlite, a new UI and five MCP tools.
+  The v0.2.x database is not migrated and not deleted.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
@@ -31,3 +35,11 @@ environment:
     services: [web]
     default: ws://bitsperity-moonstone_relay_1:8080
     note: Comma-separated relay URLs for MCP. The default is the Moonstone app's relay.
+  - name: MOONSTONE_BROWSER_RELAYS
+    services: [web]
+    default: ws://umbrel.local:8741
+    note: Comma-separated relay URLs the browser uses to pair with Moonstone. The default is the Moonstone app's published relay; use the same host you open Lunation on.
+  - name: LUNATION_OWNERS
+    services: [web]
+    default: npub1r22hluhx79hymaa3g83lhd43d75lhuyh0pgt3v46vvv5vpsmtvusegap9v
+    note: Owner keys, npub or hex, comma-separated. Only owners name keys, and their statements count as human. Without an owner nobody can write.
