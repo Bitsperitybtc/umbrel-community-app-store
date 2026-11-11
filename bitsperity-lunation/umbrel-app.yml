@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "1.1.1"
+version: "1.1.2"
 tagline: Aussagen, Entscheidungen, Arbeit, Belege
 description: >-
   Lunation keeps the reasoning behind a plan as a graph: Aussagen, Entscheidungen,
@@ -20,10 +20,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  One MCP token per bot. An owner can give each approved Moonstone pairing its own token
-  (Einstellungen and Akteure). A bot with it is that identity on every session, with no
-  use_identity, and cannot switch to another identity. Replacing or revoking the token cuts it
-  off at once. The shared token and existing connectors are unchanged (#146).
+  Actor names come from Nostr profiles (kind 0, read from wss://relay.annotome.com), with
+  avatars on Akteure and Einstellungen. A key without a profile name shows its npub prefix;
+  equal or look-alike names get a short pubkey suffix. Owners and approved Moonstone pairings
+  write, with no naming step. Handovers store the pubkey. Lunation only reads profiles and
+  publishes nothing to relays. This version starts with a fresh database (#149).
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
@@ -43,4 +44,4 @@ environment:
   - name: LUNATION_OWNERS
     services: [web]
     default: npub1r22hluhx79hymaa3g83lhd43d75lhuyh0pgt3v46vvv5vpsmtvusegap9v
-    note: Owner keys, npub or hex, comma-separated. Only owners name keys, and their statements count as human. Without an owner nobody can write.
+    note: Owner keys, npub or hex, comma-separated. Owners always write and their statements count as human. Bots write once approved in Moonstone.
