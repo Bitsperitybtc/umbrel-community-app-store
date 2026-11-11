@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "1.1.0"
+version: "1.1.1"
 tagline: Aussagen, Entscheidungen, Arbeit, Belege
 description: >-
   Lunation keeps the reasoning behind a plan as a graph: Aussagen, Entscheidungen,
@@ -20,9 +20,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation v1.1. New domain model (four object types, four edge kinds, signed append-only
-  events, derived values), a new database file lunation-v1.sqlite, a new UI and five MCP tools.
-  The v0.2.x database is not migrated and not deleted.
+  One MCP token per bot. An owner can give each approved Moonstone pairing its own token
+  (Einstellungen and Akteure). A bot with it is that identity on every session, with no
+  use_identity, and cannot switch to another identity. Replacing or revoking the token cuts it
+  off at once. The shared token and existing connectors are unchanged (#146).
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store

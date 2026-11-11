@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.23"
+version: "0.14.24"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,10 +22,9 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Settings, Agent access, One token per bot shows each pairing's Nostr
-  profile name and avatar, with the short npub underneath, and falls back
-  to the npub when there is no profile (#142). No NWC changes. Moonstone
-  is not released in this version.
+  The per-bot MCP pairing tokens now come from the shared Kit. Tokens
+  already issued keep working after the update, with no new pairing (#146).
+  No UI change. No NWC changes. Moonstone is not released in this version.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
