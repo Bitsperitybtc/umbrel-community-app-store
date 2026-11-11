@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "1.2.0"
+version: "1.2.1"
 tagline: Claims, decisions, work, evidence
 description: >-
   Lunation keeps the reasoning behind a plan as a graph: claims, decisions,
@@ -20,13 +20,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 1.2: an editable workspace on the signed log. Authors, the holder of a Work and
-  owners can edit, archive and restore objects; edge authors and owners can remove edges.
-  Every change is a signed history step, and archived objects leave lists, signals and search.
-  Requirements form a tree (fulfilled only when every Work and open sub-requirement is done),
-  Fleet signals "needs analysis", and claims, decisions and work carry paths. The UI and the six MCP tools
-  are now in English: status, object, create, link, change, handover. This version starts with
-  a fresh database (#152).
+  Lunation 1.2.1: Area is an explicit field. Every object can carry an `area` (a short name
+  such as `lunation`), set on create and changed like any other field as a signed history step.
+  Objects without one inherit the Area of linked objects, otherwise they are in General. Paths
+  no longer decide the Area; they only scope rules. Existing data stays; objects without an
+  area now inherit or show under General until an area is set (#155).
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
