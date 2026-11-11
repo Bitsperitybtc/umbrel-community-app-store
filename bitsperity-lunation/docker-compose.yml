@@ -6,14 +6,14 @@ services:
       APP_HOST: bitsperity-lunation_web_1
       APP_PORT: "8080"
       # No Umbrel login anywhere except /mcp-token, the MCP token for
-      # Settings -> Agent-Zugang (MCP). Sign-in elsewhere is Nostr.
+      # Settings -> Agent access (MCP). Sign-in elsewhere is Nostr.
       PROXY_AUTH_WHITELIST: "*"
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v1.1.2 tag build.
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v1.2.0 tag build.
     # It never runs ahead of package.json.
-    image: ghcr.io/bitsperitybtc/lunation:1.1.2@sha256:6c15230c06c39166b83df963790e21a4a212fef714e19e119a8ce6363b22d7dd
+    image: ghcr.io/bitsperitybtc/lunation:1.2.0@sha256:e01d7b58421b6525c1fef98191c794d739a434ce3545ee590068b439f5d2cdc0
     restart: on-failure
     stop_grace_period: 1m
     init: true
