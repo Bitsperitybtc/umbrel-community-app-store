@@ -11,9 +11,9 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v1.1.1 tag build.
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v1.1.2 tag build.
     # It never runs ahead of package.json.
-    image: ghcr.io/bitsperitybtc/lunation:1.1.1@sha256:84be1c74cf301742a8e832e78b03c5298a87e4a0ab5d3b50dbb7f5aebe7919ca
+    image: ghcr.io/bitsperitybtc/lunation:1.1.2@sha256:6c15230c06c39166b83df963790e21a4a212fef714e19e119a8ce6363b22d7dd
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -33,8 +33,8 @@ services:
       # The same mailbox as a browser reaches it: Moonstone publishes its relay on port 8741.
       # The container name above does not resolve in a browser.
       MOONSTONE_BROWSER_RELAYS: ws://${DEVICE_DOMAIN_NAME}:8741
-      # Owner keys (npub or hex, comma-separated): only they name keys, and their statements count
-      # as human. Without an owner nobody can write. App Settings -> Environment can change it.
+      # Owner keys (npub or hex, comma-separated): they always write, and their statements count
+      # as human. Bots write once approved in Moonstone. App Settings -> Environment can change it.
       LUNATION_OWNERS: npub1r22hluhx79hymaa3g83lhd43d75lhuyh0pgt3v46vvv5vpsmtvusegap9v
       LUNATION_ORIGINS: http://${DEVICE_DOMAIN_NAME}:8748,http://${DEVICE_HOSTNAME}:8748
       LUNATION_TRUSTED_PROXIES: 10.21.0.0/16
