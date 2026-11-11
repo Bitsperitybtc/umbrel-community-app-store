@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.22"
+version: "0.14.23"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -22,13 +22,10 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Settings, Ecash: if the signer misses some wallet entries at load, the
-  balance shows "At least ₿X" and Try again, not ₿0 (#140). Wallet decrypts
-  go ahead of the inbox burst. Wallet events also use the relays the kind
-  10019 names, and that event lists public relays; Update receive info
-  publishes only when you click. Job status tabs keep the focus ring off
-  the label, count and underline (#139). No NWC changes. Moonstone is not
-  released in this version.
+  Settings, Agent access, One token per bot shows each pairing's Nostr
+  profile name and avatar, with the short npub underneath, and falls back
+  to the npub when there is no profile (#142). No NWC changes. Moonstone
+  is not released in this version.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
