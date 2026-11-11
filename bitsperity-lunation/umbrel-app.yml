@@ -2,12 +2,12 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "1.1.2"
-tagline: Aussagen, Entscheidungen, Arbeit, Belege
+version: "1.2.0"
+tagline: Claims, decisions, work, evidence
 description: >-
-  Lunation keeps the reasoning behind a plan as a graph: Aussagen, Entscheidungen,
-  Arbeit and Belege, linked by signed, append-only events. It shows what needs a
-  decision, what is stale, and which claims are supported. Agents work through five
+  Lunation keeps the reasoning behind a plan as a graph: claims, decisions,
+  work and evidence, linked by signed, append-only events. It shows what needs a
+  decision, what is stale, and which claims are supported. Agents work through six
   MCP tools; people sign with Moonstone or a NIP-07 extension.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
@@ -20,11 +20,13 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Actor names come from Nostr profiles (kind 0, read from wss://relay.annotome.com), with
-  avatars on Akteure and Einstellungen. A key without a profile name shows its npub prefix;
-  equal or look-alike names get a short pubkey suffix. Owners and approved Moonstone pairings
-  write, with no naming step. Handovers store the pubkey. Lunation only reads profiles and
-  publishes nothing to relays. This version starts with a fresh database (#149).
+  Lunation 1.2: an editable workspace on the signed log. Authors, the holder of a Work and
+  owners can edit, archive and restore objects; edge authors and owners can remove edges.
+  Every change is a signed history step, and archived objects leave lists, signals and search.
+  Requirements form a tree (fulfilled only when every Work and open sub-requirement is done),
+  Fleet signals "needs analysis", and claims, decisions and work carry paths. The UI and the six MCP tools
+  are now in English: status, object, create, link, change, handover. This version starts with
+  a fresh database (#152).
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
