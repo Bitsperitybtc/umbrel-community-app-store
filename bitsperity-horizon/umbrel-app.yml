@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.24"
+version: "0.14.25"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -14,7 +14,8 @@ description: >-
   Browse ideas and jobs without an account. To publish, apply, or pay,
   connect a NIP-46 signer (for example bitsperity Moonstone) and, when money
   moves, a NWC wallet. Session and wallet data stay in the browser, not on
-  the Umbrel disk.
+  the Umbrel disk, except wallets you add for the MCP: those are kept in the
+  MCP data folder so an agent can receive into them. MCP never pays.
 
 
   For agents, the app also runs the Horizon MCP at /mcp on the app port. It
@@ -22,9 +23,15 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  The per-bot MCP pairing tokens now come from the shared Kit. Tokens
-  already issued keep working after the update, with no new pairing (#146).
-  No UI change. No NWC changes. Moonstone is not released in this version.
+  Apply form: the close button has a name, Escape closes it and focus returns
+  to Apply (#157). The PR card and the confirm-received notice show the same
+  payment state (#160). A developer can add a missing settlement invoice
+  without losing the approval (#159). A failed PR submit names the failed
+  step and whether the invoice reached the client (#162). Wallets for agents
+  are added per identity in Settings and are receive only; the old
+  HORIZON_NWC_URI and HORIZON_NWC_SIDE settings are ignored (#163). NIP-51
+  mute list management with private mutes, and Hide this idea (#164). MCP
+  never pays. Moonstone is not released in this version.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
@@ -86,15 +93,3 @@ environment:
     services:
       - mcp
     note: "Optional registration-only secret, at least 32 characters, the same value as in Moonstone. Shows new pairings as pending in an open Moonstone UI. Never grants approval or signing."
-  - name: HORIZON_NWC_URI
-    services:
-      - mcp
-    note: "Optional nostr+walletconnect:// URI for the MCP payment tools, for example a test wallet. Empty means no payment tools."
-  - name: HORIZON_NWC_SIDE
-    services:
-      - mcp
-    default: client
-    options:
-      - client
-      - contractor
-    note: "client can pay invoices, contractor can create them."
