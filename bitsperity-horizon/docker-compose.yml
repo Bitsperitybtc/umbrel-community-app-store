@@ -18,7 +18,7 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.14.24@sha256:5a39c085a7f5b191bd05abe1b389f1340ac9dd85131eb62508dadf57c68d4029
+    image: ghcr.io/bitsperitybtc/horizon:0.14.25@sha256:a0b3ce6087b542925a972978a0ac986fccf4b166fd0bbe923ee2f090d4d04650
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -46,13 +46,13 @@ services:
       start_period: 10s
 
   mcp:
-    image: ghcr.io/bitsperitybtc/horizon:0.14.24@sha256:5a39c085a7f5b191bd05abe1b389f1340ac9dd85131eb62508dadf57c68d4029
+    image: ghcr.io/bitsperitybtc/horizon:0.14.25@sha256:a0b3ce6087b542925a972978a0ac986fccf4b166fd0bbe923ee2f090d4d04650
     command: ["node", "/opt/horizon-mcp/horizon-mcp.mjs"]
     restart: on-failure
     stop_grace_period: 30s
     init: true
     volumes:
-      # NIP-46 client key, NWC secret and, when NOSTR_LOCAL_KEYS=1 is set, local test keys.
+      # NIP-46 client key, the NWC wallets added in Settings, Cashu swap records and, when NOSTR_LOCAL_KEYS=1 is set, local test keys.
       - ${APP_DATA_DIR}/mcp:/data
       - ${APP_DATA_DIR}/mcp-run:/run/horizon-mcp
     environment:
@@ -75,8 +75,7 @@ services:
       DEVICE_DOMAIN_NAME: ${DEVICE_DOMAIN_NAME}
       # No test defaults: NOSTR_LOCAL_KEYS and HORIZON_TEST_RESET stay unset (off).
       # They are opt-in through App Settings -> Environment, for testing only.
-      # Payment tools appear once HORIZON_NWC_URI is set (App Settings -> Environment).
-      HORIZON_NWC_SIDE: client
+      # Wallets for the MCP are added per identity in Horizon Settings -> Wallet (MCP).
     healthcheck:
       test:
         [
