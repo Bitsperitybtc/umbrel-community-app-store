@@ -11,34 +11,36 @@ Apps in this store use the `bitsperity-` ID prefix. That prefix is required by u
 | Beacon | `bitsperity-beacon` | `8749` (Nostr relay, `ws://umbrel.local:8749`) | [Bitsperitybtc/beacon](https://github.com/Bitsperitybtc/beacon) | none |
 | Horizon | `bitsperity-horizon` | `3847` (SPA, `/relay` and `/mcp`) | [Bitsperitybtc/horizon](https://github.com/Bitsperitybtc/horizon) | `bitsperity-beacon` |
 | Lunation | `bitsperity-lunation` | `8748` | [Bitsperitybtc/lunation](https://github.com/Bitsperitybtc/lunation) | none |
+| Studio | `bitsperity-studio` | `8750` | [Bitsperitybtc/bitsperity](https://github.com/Bitsperitybtc/bitsperity) `apps/canopy` | none |
 | Moonstone | `bitsperity-moonstone` | `8740` (UI, Umbrel login) and `8741` (mailbox relay, published) | [Bitsperitybtc/moonstone](https://github.com/Bitsperitybtc/moonstone) | none |
 | Notus | `bitsperity-notus` | `8796` (the container listens on `8096`) | [Bitsperitybtc/notus](https://github.com/Bitsperitybtc/notus) | none |
 
-The ports are the `port:` of each `umbrel-app.yml`, plus `8741` published by the Moonstone compose file. Moonstone's mailbox relay runs the Beacon image, but it is not the Beacon app and has no dependency on it. No other compose file in this store publishes a host port.
+The ports are the `port:` of each `umbrel-app.yml`, plus `8741` published by the Moonstone compose file. Moonstone's mailbox relay runs the Beacon image, but it is not the Beacon app and has no dependency on it. No other compose file in this store publishes a host port. Studio listens on container port `3000`; the host port is `8750`.
 
 ## Requirements: umbrelOS, manifest, architectures
 
 Every package declares `manifestVersion: 1`. umbreld normalizes it to `1.0.0` (`tryNormalizeVersion` in `modules/apps/schema.ts`) and, since umbrelOS 2.0.0, marks an app incompatible only when that version is newer than the OS (`manifest-compatibility.ts`), so `1` installs on every umbrelOS release.
 
-The minimum supported umbrelOS is **2.0.0** for every app here. Beacon, Horizon, Lunation and Moonstone declare `environment:` settings (App Settings → Environment); umbrelOS 1.7.4 has no `environment` field in its manifest schema, and 2.0.0 is the first release with it (read from `packages/umbreld/source/modules/apps/schema.ts` at tags `1.7.4` and `2.0.0`). Moonstone also needs the 2.0 app gateway: its session cookie is issued for `MOONSTONE_PROXY_HOST=10.21.0.1`. Notus uses no 2.0-only field, but it is tested only on 2.0.x.
+The minimum supported umbrelOS is **2.0.0** for every app here. Beacon, Horizon, Lunation, Moonstone and Studio declare `environment:` settings (App Settings → Environment); umbrelOS 1.7.4 has no `environment` field in its manifest schema, and 2.0.0 is the first release with it (read from `packages/umbreld/source/modules/apps/schema.ts` at tags `1.7.4` and `2.0.0`). Moonstone also needs the 2.0 app gateway: its session cookie is issued for `MOONSTONE_PROXY_HOST=10.21.0.1`. Notus uses no 2.0-only field, but it is tested only on 2.0.x.
 
-Architectures of the pinned images, read on 3 Nov 2026 from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
+Architectures of the pinned images. Beacon, Moonstone and Notus were read on 3 Nov 2026. Horizon `0.15.0`, Lunation `2.0.0` and Studio `v3.0.0` were read on 13 Nov 2026 from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
 
 | App | Image | linux/amd64 | linux/arm64 |
 |---|---|---|---|
 | Beacon | `ghcr.io/bitsperitybtc/beacon:0.2.0` | yes | yes |
-| Horizon | `ghcr.io/bitsperitybtc/horizon:0.14.0` | yes | yes |
-| Lunation | `ghcr.io/bitsperitybtc/lunation:0.2.3` | yes | yes |
+| Horizon | `ghcr.io/bitsperitybtc/horizon:0.15.0` | yes | yes |
+| Lunation | `ghcr.io/bitsperitybtc/lunation:2.0.0` | yes | yes |
+| Studio | `ghcr.io/bitsperitybtc/canopy-studio:v3.0.0` | yes | yes |
 | Moonstone | `ghcr.io/bitsperitybtc/moonstone:0.7.1`, mailbox `ghcr.io/bitsperitybtc/beacon:0.1.1` | yes | yes |
 | Notus | `ghcr.io/bitsperitybtc/notus:v3.1.7` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |
 | Notus | `postgres:16-alpine`, `ghcr.io/ggml-org/llama.cpp:server-b11946` | yes | yes |
 
-Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Horizon and Moonstone have 1440×900 gallery screenshots. Beacon is a relay without a UI and Notus and Lunation list `gallery: []`; umbrelOS shows such a listing without screenshots.
+Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Studio uses the Starling mark until Canopy has its own icon. Horizon and Moonstone have 1440×900 gallery screenshots. Beacon is a relay without a UI and Notus, Lunation and Studio list `gallery: []`; umbrelOS shows such a listing without screenshots.
 
-Port check (2 Nov 2026, [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps) at `7a94db0`): none of `3847`, `8740`, `8741`, `8748`, `8749` or `8796` is the `port:` of an app there, and none appears in any `.yml`, `.yaml`, `.sh` or `.env*` file of that repo (the only hit for `3847` is a pull-request number in a `submission:` URL). Re-run it with:
+Port check (13 Nov 2026, [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps)): `8750` appears only inside image digests, not as an app `port:`. The earlier check (2 Nov 2026, `7a94db0`) found none of `3847`, `8740`, `8741`, `8748`, `8749` or `8796` as a `port:`. Re-run it with:
 
 ```sh
-grep -rn -w -E '3847|8740|8741|8748|8749|8796' --include='*.yml' --include='*.yaml' --include='*.sh' --include='*.env*' .
+grep -rn -w -E '3847|8740|8741|8748|8749|8750|8796' --include='*.yml' --include='*.yaml' --include='*.sh' --include='*.env*' .
 ```
 
 ## bitsperity Horizon
@@ -185,6 +187,33 @@ ghcr.io/bitsperitybtc/lunation:<version>@sha256:<index digest>
 
 The package `ghcr.io/bitsperitybtc/lunation` must be public, or Umbrel cannot pull it. The current pin is in `bitsperity-lunation/docker-compose.yml`. To bump, follow the [release checklist](#release-checklist). Do not use `latest`. Do not use compose `build:`. `APP_PORT` stays `8080`.
 
+## Studio
+
+| | |
+|---|---|
+| Community app ID | `bitsperity-studio` |
+| UI | `http://umbrel.local:8750` (Umbrel login) |
+| MCP | `http://umbrel.local:8750/mcp` (no Umbrel login; off until a token is set) |
+| Source | [Bitsperitybtc/bitsperity](https://github.com/Bitsperitybtc/bitsperity) `apps/canopy` |
+
+Studio is the window onto one Canopy forest. It stores nothing of its own. App Settings names the forest: `STUDIO_OBSERVE_URL` and `STUDIO_CONTROL_URL` are how the container reaches the forest, and `CANOPY_CONTROL_TOKEN` is that forest's control token. The defaults point at this container, so a new install opens and shows the forest as unreachable until those three are set. Reads work once the observe URL is reachable. Pause, cancel and approve stay refused until the token matches.
+
+The page is behind the Umbrel login. `PROXY_AUTH_WHITELIST` is `/mcp,/mcp/health` only. `/mcp` exists when `CANOPY_STUDIO_MCP_TOKEN` is set, and that bearer can start and cancel work.
+
+On each start the container writes `/tmp/forests.yaml` from those variables and serves it. There is no forest file in the package, because an Umbrel update copies `docker-compose.yml` and not other files.
+
+The canonical copy is `apps/canopy/umbrel/bitsperity-studio/` in `Bitsperitybtc/bitsperity`. This folder is an identical copy. `icon.png` is rendered from `brand/icons/starling.svg`, the mark Studio uses until Canopy has its own.
+
+### Image pin
+
+Compose pins the multi-arch index digest (`linux/amd64` + `linux/arm64`) of the Canopy tag build. The image tag keeps the `v`:
+
+```text
+ghcr.io/bitsperitybtc/canopy-studio:v3.0.0@sha256:<index digest>
+```
+
+The package must be public, or Umbrel cannot pull it. The current pin is in `bitsperity-studio/docker-compose.yml`. To bump, tag `canopy/vX.Y.Z` (that workflow also publishes `canopy:vX.Y.Z`), then follow the [release checklist](#release-checklist). Do not use `latest`. Do not use compose `build:`. `APP_PORT` stays `3000`.
+
 ## Notus
 
 | | |
@@ -241,6 +270,10 @@ bitsperity-lunation/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + web image
   hooks/pre-start             Creates data/ with uid 1000
+  icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
+bitsperity-studio/
+  umbrel-app.yml              Listing
+  docker-compose.yml          app_proxy + Studio image (writes forests.yaml on start)
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 bitsperity-moonstone/
   umbrel-app.yml              Listing

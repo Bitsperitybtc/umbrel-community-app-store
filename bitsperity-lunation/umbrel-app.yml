@@ -2,13 +2,16 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "1.2.2"
-tagline: Claims, decisions, work, evidence
+version: "2.0.0"
+tagline: Plan with your agents, decide in one step
 description: >-
-  Lunation keeps the reasoning behind a plan as a graph: claims, decisions,
-  work and evidence, linked by signed, append-only events. It shows what needs a
-  decision, what is stale, and which claims are supported. Agents work through six
-  MCP tools; people sign with Moonstone or a NIP-07 extension.
+  Lunation is where you and your agents plan, and where you decide. The reasoning
+  behind a plan is a graph of problems, requirements, decisions, work and evidence,
+  every change a signed, append-only event. Agents ask you questions with options,
+  context and a recommendation; you answer in one step, and they see your answer and
+  every change above their work. Three views: Decide, Map (walk the plan with the
+  arrow keys) and Agents (add an agent in one flow). People sign in with Moonstone
+  or a NIP-07 extension.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
 dependencies: []
@@ -20,11 +23,13 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 1.2.2: the constellation is a real canvas. Drag to pan, the wheel zooms around the
-  pointer, Fit or `0` frames the whole neighborhood, selecting a node centres it, and the
-  neighborhood root has an outer ring. Labels stay readable at the default zoom. On wide screens
-  (1440 px and up) the list and the canvas sit side by side and the canvas fills the height.
-  UI only: existing workspace data is unchanged, no database change (#161).
+  Lunation 2.0. Sign-in with Moonstone works again behind the Umbrel gateway, with a
+  one-click "Open in Moonstone"; please pair once more after the update. Agents can ask
+  you questions with options and a recommendation, and see what changed above their work.
+  New views: Decide, Map (cards you walk with the arrow keys, l links two objects) and
+  Agents ("Add agent" sets up an agent with its own token in one flow). Changes appear
+  live. New look: the bitsperity brand, parchment by day and warm ink by night. Needs
+  Moonstone 0.3.4 or later. Your plan data stays; one new table is added.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
@@ -37,10 +42,10 @@ environment:
     services: [web]
     default: ws://bitsperity-moonstone_relay_1:8080
     note: Comma-separated relay URLs for MCP. The default is the Moonstone app's relay.
-  - name: MOONSTONE_BROWSER_RELAYS
+  - name: MOONSTONE_BROWSER_PORT
     services: [web]
-    default: ws://umbrel.local:8741
-    note: Comma-separated relay URLs the browser uses to pair with Moonstone. The default is the Moonstone app's published relay; use the same host you open Lunation on.
+    default: "8740"
+    note: Port of the Moonstone app on this Umbrel. The browser signs in through it on the same host you opened Lunation on (umbrel.local, the IP or a Tailscale name). Leave it empty to use MOONSTONE_BROWSER_RELAYS instead.
   - name: LUNATION_OWNERS
     services: [web]
     default: npub1r22hluhx79hymaa3g83lhd43d75lhuyh0pgt3v46vvv5vpsmtvusegap9v

@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.27"
+version: "0.15.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -23,10 +23,11 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Reverts 0.14.26. The Moonstone integration changes in 0.14.26 broke the MCP
-  startup (502 Bad Gateway on /mcp) and the App Settings page. This release
-  restores the pre-0.14.26 configuration. Moonstone signing still works when
-  you set MOONSTONE_PUBLIC_URL in App Settings to a browser-reachable origin.
+  Horizon 0.15.0. Moonstone sign-in uses the same Kit path as Lunation: the
+  signer and its mailbox are on the host of the page, so umbrel.local, an IP
+  and a Tailscale name all work. Built with SvelteKit 3. MCP wallets and
+  payments are unchanged, and MCP never pays. Approval links still need
+  MOONSTONE_PUBLIC_URL in App Settings, a browser-reachable origin.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
