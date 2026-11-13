@@ -11,9 +11,9 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v1.2.2 tag build.
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v2.0.0 tag build.
     # It never runs ahead of package.json.
-    image: ghcr.io/bitsperitybtc/lunation:1.2.2@sha256:e426c1ff96a3f43a6702ff3918498b8425f199d5fb5736b493bbea66d86f66bb
+    image: ghcr.io/bitsperitybtc/lunation:2.0.0@sha256:5be00ec9724dea9d315772a7b8896e89d5d890edd9106e012b3617e1cfee1a86
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -30,14 +30,17 @@ services:
       # container. App Settings -> Environment can point both elsewhere.
       MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
       MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
-      # The same mailbox as a browser reaches it: Moonstone publishes its relay on port 8741.
-      # The container name above does not resolve in a browser.
+      # The browser reaches the same Moonstone on the host it loaded Lunation from: UI on this
+      # port, mailbox at /mailbox on it (Moonstone 0.3.4 or later). So umbrel.local, the IP and a
+      # Tailscale name all work; the container name above does not resolve in a browser.
+      MOONSTONE_BROWSER_PORT: "8740"
+      # Fallback for images before MOONSTONE_BROWSER_PORT (1.2.2 and older); newer ones ignore it.
       MOONSTONE_BROWSER_RELAYS: ws://${DEVICE_DOMAIN_NAME}:8741
       # Owner keys (npub or hex, comma-separated): they always write, and their statements count
       # as human. Bots write once approved in Moonstone. App Settings -> Environment can change it.
       LUNATION_OWNERS: npub1r22hluhx79hymaa3g83lhd43d75lhuyh0pgt3v46vvv5vpsmtvusegap9v
+      # Read only by images up to 1.2.2, which required it; newer ones ignore it.
       LUNATION_ORIGINS: http://${DEVICE_DOMAIN_NAME}:8748,http://${DEVICE_HOSTNAME}:8748
-      LUNATION_TRUSTED_PROXIES: 10.21.0.0/16
       # umbreld's app gateway connects from the app network gateway. /mcp-token
       # is answered only for that socket address, so the Umbrel login applies.
       LUNATION_PROXY_PEER: "10.21.0.1"

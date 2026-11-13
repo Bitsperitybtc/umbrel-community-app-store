@@ -1,0 +1,57 @@
+manifestVersion: 1
+id: bitsperity-studio
+category: developer
+name: Studio
+version: "3.0.0"
+tagline: See what a Canopy forest is doing
+description: >-
+  Studio is the window onto a Canopy forest. It shows what each agent is doing,
+  what happened, what a call cost, and what is waiting for a person. It keeps no
+  copy of the forest: every value comes from that forest's observe API.
+
+
+  Point it at a forest in App Settings. Observe and control URLs are how this
+  container reaches the forest, not how a browser does. The control token is the
+  forest's CANOPY_CONTROL_TOKEN. Until those match, Studio opens and the forest
+  shows as unreachable; control stays refused.
+
+
+  The page is behind the Umbrel login. Agents can use /mcp on this port when
+  CANOPY_STUDIO_MCP_TOKEN is set. That token can start and cancel work.
+developer: Bitsperity
+website: https://github.com/Bitsperitybtc/bitsperity
+dependencies: []
+repo: https://github.com/Bitsperitybtc/bitsperity
+support: https://github.com/Bitsperitybtc/bitsperity/issues
+port: 8750
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+releaseNotes: >-
+  First release. Studio 3.0.0, built from Canopy 3. One forest, set in App
+  Settings. The page is behind the Umbrel login. /mcp stays off until
+  CANOPY_STUDIO_MCP_TOKEN is set.
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-studio/icon.png
+submitter: Bitsperity
+submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
+environment:
+  - name: STUDIO_FOREST_NAME
+    services: [web]
+    default: forest
+    note: "Name of the one forest Studio shows. Lowercase letters, digits and dashes, starting with a letter."
+  - name: STUDIO_OBSERVE_URL
+    services: [web]
+    default: http://127.0.0.1:8787
+    note: "Observe API of the forest, as this container dials it, for example http://bitsperity-spero_observe_1:8787. The default is this container itself, so the forest shows as unreachable until you change it."
+  - name: STUDIO_CONTROL_URL
+    services: [web]
+    default: http://127.0.0.1:8788
+    note: "Control API of the forest, as this container dials it, for example http://bitsperity-spero_runner_1:8788."
+  - name: CANOPY_CONTROL_TOKEN
+    services: [web]
+    default: change-me
+    note: "The forest's control token. Reads work without it. Control (pause, cancel, approve) is refused until this matches the forest."
+  - name: CANOPY_STUDIO_MCP_TOKEN
+    services: [web]
+    note: "Bearer token for /mcp. Empty leaves the endpoint off. Whoever has it can start and cancel work in the forest."

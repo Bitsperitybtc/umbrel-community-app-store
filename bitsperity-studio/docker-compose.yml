@@ -1,0 +1,59 @@
+# Umbrel package. Canonical copy: Bitsperitybtc/bitsperity apps/canopy/umbrel/bitsperity-studio/;
+# Bitsperitybtc/umbrel-community-app-store carries an identical copy, plus icon.png.
+# Umbrel pulls the image by digest. The Canopy release workflow builds it from a canopy/v* tag.
+#
+# Port 8750 (app gateway -> Studio on 3000) is the read-only window onto one Canopy forest.
+# The UI is behind the Umbrel login. /mcp is not: it exists only when
+# CANOPY_STUDIO_MCP_TOKEN is set, and then only answers that bearer.
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: bitsperity-studio_web_1
+      APP_PORT: "3000"
+      PROXY_AUTH_WHITELIST: "/mcp,/mcp/health"
+
+  web:
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of canopy-studio:v3.0.0.
+    image: ghcr.io/bitsperitybtc/canopy-studio:v3.0.0@sha256:7191ab7b78ec0b030cc920945d3a8034a52fcc84d2bf301ccb8ddbbdcb202c8c
+    restart: on-failure
+    stop_grace_period: 1m
+    init: true
+    environment:
+      HOST: 0.0.0.0
+      PORT: "3000"
+      # The control proxy allows a POST only when Origin equals this page's origin.
+      # Behind the app gateway those come from the forwarded host and scheme.
+      PROTOCOL_HEADER: x-forwarded-proto
+      HOST_HEADER: x-forwarded-host
+      STUDIO_FOREST_NAME: forest
+      # 127.0.0.1 is this container, so the default forest stays unreachable until
+      # App Settings names the observe and control URLs Studio can dial.
+      STUDIO_OBSERVE_URL: http://127.0.0.1:8787
+      STUDIO_CONTROL_URL: http://127.0.0.1:8788
+      CANOPY_CONTROL_TOKEN: change-me
+    # Writes the forest list from the environment, then serves. The list is not a
+    # mounted file: an update only copies this compose file, so the writer has to live here.
+    command:
+      - sh
+      - -c
+      - |
+        set -eu
+        name="$$STUDIO_FOREST_NAME"
+        observe="$$STUDIO_OBSERVE_URL"
+        control="$$STUDIO_CONTROL_URL"
+        token="$$CANOPY_CONTROL_TOKEN"
+        printf '%s\n' "$$name" | grep -Eq '^[a-z][a-z0-9-]*$$'
+        printf '%s\n' "$$observe" | grep -Eq '^https?://[^[:space:]'\''"]+$$'
+        printf '%s\n' "$$control" | grep -Eq '^https?://[^[:space:]'\''"]+$$'
+        test -n "$$token"
+        printf 'forests:\n  %s:\n    observeUrl: %s\n    controlUrl: %s\n    controlToken: CANOPY_CONTROL_TOKEN\n' "$$name" "$$observe" "$$control" > /tmp/forests.yaml
+        export CANOPY_STUDIO_FORESTS=/tmp/forests.yaml
+        exec node build
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1),()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
