@@ -62,12 +62,14 @@ services:
       HORIZON_MCP_DATA_DIR: /data
       # Relays the MCP reads and publishes on: the bitsperity Beacon app.
       NOSTR_LOCAL_RELAYS: ws://bitsperity-beacon_relay_1:7777
-      # Same-node Moonstone mailbox relay container. Approval links need
-      # MOONSTONE_PUBLIC_URL (App Settings -> Environment), a browser-reachable
-      # LAN/Tailscale origin; .local and Docker hostnames stop the MCP, so the
-      # package sets no link origin. Optional MOONSTONE_URL
-      # (http://bitsperity-moonstone_signer_1:8740) and MOONSTONE_PAIRING_TOKEN
-      # route pending-pairing notifications inside Docker.
+      # Same-node Moonstone: the MCP signs through NIP-46 over the bundled
+      # mailbox relay. MOONSTONE_URL points to the signer container for pairing;
+      # MOONSTONE_RELAYS carries the NIP-46 traffic. Both use Docker-internal
+      # hostnames so they work on any Umbrel regardless of how the user reaches
+      # it. MOONSTONE_PUBLIC_URL (App Settings) is the browser-facing origin
+      # for approval links; empty means the MCP omits the link and the user
+      # approves in Moonstone's UI manually.
+      MOONSTONE_URL: http://bitsperity-moonstone_signer_1:8740
       MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
       # Relay hints in poll, goal and a/e/p tags must be reachable from a browser,
       # not the container names above. Without HORIZON_PUBLIC_RELAYS (App Settings ->
