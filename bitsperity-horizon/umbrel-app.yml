@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.14.26"
+version: "0.14.27"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -23,17 +23,14 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  The MCP now connects to Moonstone out of the box. MOONSTONE_URL and
-  MOONSTONE_RELAYS point to the signer and mailbox relay via Docker-internal
-  hostnames, so signing works on any Umbrel regardless of how the user
-  reaches it (LAN IP, Tailscale, umbrel.local, etc.). Browser-facing approval
-  links still need MOONSTONE_PUBLIC_URL in App Settings when Moonstone is
-  accessed via Tailscale or a non-default hostname.
+  Reverts 0.14.26. The Moonstone integration changes in 0.14.26 broke the MCP
+  startup (502 Bad Gateway on /mcp) and the App Settings page. This release
+  restores the pre-0.14.26 configuration. Moonstone signing still works when
+  you set MOONSTONE_PUBLIC_URL in App Settings to a browser-reachable origin.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
   - bitsperity-beacon
-  - bitsperity-moonstone
 repo: https://github.com/Bitsperitybtc/horizon
 support: https://github.com/Bitsperitybtc/horizon/issues
 port: 3847
@@ -82,17 +79,11 @@ environment:
   - name: MOONSTONE_PUBLIC_URL
     services:
       - mcp
-    note: "Browser-facing Moonstone origin for approval links, such as http://192.168.1.10:8740 or a Tailscale address. Set this if you access Moonstone via Tailscale or a non-default hostname. Empty omits approval links; approve in Moonstone's UI instead."
+    note: "Browser-facing Moonstone origin for approval links, such as http://192.168.1.10:8740 or a Tailscale address. Not localhost, umbrel.local or a Docker hostname. Empty leaves Moonstone signing unconfigured."
   - name: MOONSTONE_URL
     services:
       - mcp
-    default: http://bitsperity-moonstone_signer_1:8740
-    note: "Internal Moonstone origin for pairing. The default is the Docker-internal hostname, which works on any Umbrel. Only change this for advanced setups."
-  - name: MOONSTONE_RELAYS
-    services:
-      - mcp
-    default: ws://bitsperity-moonstone_relay_1:8080
-    note: "Moonstone mailbox relay for NIP-46 signing. The default is Moonstone's bundled relay via Docker-internal hostname. Only change this for advanced setups."
+    note: "Optional internal Moonstone origin for pairing notifications, such as http://bitsperity-moonstone_signer_1:8740. Only valid together with MOONSTONE_PUBLIC_URL. Empty uses MOONSTONE_PUBLIC_URL."
   - name: MOONSTONE_PAIRING_TOKEN
     services:
       - mcp
