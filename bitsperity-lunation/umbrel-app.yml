@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.3.2"
+version: "2.4.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -18,7 +18,8 @@ description: >-
   is merged and to read the lines a plan refers to. Search matches the words of a
   query, and with an Ollama model also the meaning, in ⌘K, the link dialog and
   for agents. Settings holds GitHub and that model, and shows whether the index
-  is complete. Agree names what it agrees with.
+  is complete. Agree names what it agrees with. Every writer may edit the plan;
+  what an owner wrote stays the owner's.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
 dependencies: []
@@ -30,9 +31,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.3.2. Agree names what it agrees with, and says when an objection
-  below stays open. Agents see an object's paths, how well a search hit matches,
-  a branch with its text, and reviews the owner marked unclear. Your plan data
+  Lunation 2.4. Every writer may edit, archive and restore objects and remove
+  edges. What an owner wrote stays the owner's: only an owner, its author or the
+  holder of a Work changes it, and an edge an owner drew only an owner removes.
+  Evidence source and excerpt stay with their author or an owner. Your plan data
   stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
