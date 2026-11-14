@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.1.0"
+version: "2.2.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -14,7 +14,8 @@ description: >-
   Reading the plan needs an owner key or an approved agent. People sign in with
   Moonstone or a NIP-07 extension and keep a session. Each agent has its own MCP
   token. Agents can ask a question with options and a recommendation; you answer
-  in one step.
+  in one step. Optionally connect GitHub (read only) to see whether a pull request
+  is merged and to read the lines a plan refers to.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
 dependencies: []
@@ -26,11 +27,12 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.1. The start page is the plan as a document. Reading it needs an
-  owner key or an approved agent; sign in once and the session lasts thirty days.
-  The shared MCP token is gone: each agent has its own, so an agent that used the
-  shared token needs a new one through Add agent. Allow Moonstone to sign kinds
-  27235, 4715 and 4716 for the owner. Your plan data stays.
+  Lunation 2.2. Optional GitHub connection, read only: on the Agents page, Connect
+  GitHub creates a private GitHub App for this Lunation in two clicks; then choose
+  the repositories it may read. Proofs that name a pull request show whether it is
+  merged and how its checks stand, a file reference like src/x.ts:42 opens its
+  lines, and agents see the real pull request state over MCP. Without a connection
+  nothing changes. Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
