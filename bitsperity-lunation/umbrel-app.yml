@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.2.3"
+version: "2.2.4"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -27,10 +27,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.2.3. A file reference is the full path from the repository root again,
-  the same way GitHub writes it. The object's paths only name the repository.
-  When GitHub is connected, create and change still report a file that does not
-  open or a line past its end. Your plan data stays.
+  Lunation 2.2.4. On the Map, a two-finger swipe pans in Safari even when the
+  pointer is over the empty background, instead of going back a page. Your plan
+  data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
