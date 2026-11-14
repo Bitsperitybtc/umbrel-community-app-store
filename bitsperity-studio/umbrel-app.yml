@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Studio
-version: "3.0.0"
+version: "3.0.1"
 tagline: See what a Canopy forest is doing
 description: >-
   Studio is the window onto a Canopy forest. It shows what each agent is doing,
@@ -29,9 +29,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  First release. Studio 3.0.0, built from Canopy 3. One forest, set in App
-  Settings. The page is behind the Umbrel login. /mcp stays off until
-  CANOPY_STUDIO_MCP_TOKEN is set.
+  Listing only: the store icon is the Canopy mark. The container image is
+  unchanged. One forest, set in App Settings. The page is behind the Umbrel
+  login. /mcp stays off until CANOPY_STUDIO_MCP_TOKEN is set.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
