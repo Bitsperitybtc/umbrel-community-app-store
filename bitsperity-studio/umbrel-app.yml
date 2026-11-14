@@ -32,7 +32,7 @@ releaseNotes: >-
   Listing only: the store icon is the Canopy mark. The container image is
   unchanged. One forest, set in App Settings. The page is behind the Umbrel
   login. /mcp stays off until CANOPY_STUDIO_MCP_TOKEN is set.
-icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-studio/icon.png
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
 environment:
