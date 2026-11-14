@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.2.4"
+version: "2.3.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -15,7 +15,8 @@ description: >-
   Moonstone or a NIP-07 extension and keep a session. Each agent has its own MCP
   token. Agents can ask a question with options and a recommendation; you answer
   in one step. Optionally connect GitHub (read only) to see whether a pull request
-  is merged and to read the lines a plan refers to.
+  is merged and to read the lines a plan refers to. Search matches the words of a
+  query. Settings holds GitHub and, if you set an Ollama model, semantic search.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
 dependencies: []
@@ -27,9 +28,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.2.4. On the Map, a two-finger swipe pans in Safari even when the
-  pointer is over the empty background, instead of going back a page. Your plan
-  data stays.
+  Lunation 2.3. Search matches the words of a query in the title, the text and
+  the source. Settings is a new page: GitHub lives there, and an owner can point
+  semantic search at an Ollama model. Without that, search stays by words. Your
+  plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
