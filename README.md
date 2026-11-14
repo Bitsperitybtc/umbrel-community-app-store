@@ -35,7 +35,7 @@ Architectures of the pinned images. Beacon, Moonstone and Notus were read on 3 N
 | Notus | `ghcr.io/bitsperitybtc/notus:v3.1.7` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |
 | Notus | `postgres:16-alpine`, `ghcr.io/ggml-org/llama.cpp:server-b11946` | yes | yes |
 
-Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Studio uses the Starling mark until Canopy has its own icon. Horizon and Moonstone have 1440×900 gallery screenshots. Beacon is a relay without a UI and Notus, Lunation and Studio list `gallery: []`; umbrelOS shows such a listing without screenshots.
+Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Studio's icon is `brand/icons/canopy.png`. Horizon and Moonstone have 1440×900 gallery screenshots. Beacon is a relay without a UI and Notus, Lunation and Studio list `gallery: []`; umbrelOS shows such a listing without screenshots.
 
 Port check (13 Nov 2026, [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps)): `8750` appears only inside image digests, not as an app `port:`. The earlier check (2 Nov 2026, `7a94db0`) found none of `3847`, `8740`, `8741`, `8748`, `8749` or `8796` as a `port:`. Re-run it with:
 
@@ -202,7 +202,7 @@ The page is behind the Umbrel login. `PROXY_AUTH_WHITELIST` is `/mcp,/mcp/health
 
 On each start the container writes `/tmp/forests.yaml` from those variables and serves it. There is no forest file in the package, because an Umbrel update copies `docker-compose.yml` and not other files.
 
-The canonical copy is `apps/canopy/umbrel/bitsperity-studio/` in `Bitsperitybtc/bitsperity`. This folder is an identical copy. `icon.png` is rendered from `brand/icons/starling.svg`, the mark Studio uses until Canopy has its own.
+The canonical copy is `apps/canopy/umbrel/bitsperity-studio/` in `Bitsperitybtc/bitsperity`. This folder is an identical copy. `icon.png` is `brand/icons/canopy.png` (512×512, square, opaque corners).
 
 ### Image pin
 
