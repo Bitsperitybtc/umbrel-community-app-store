@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.3.0"
+version: "2.3.1"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -16,7 +16,9 @@ description: >-
   token. Agents can ask a question with options and a recommendation; you answer
   in one step. Optionally connect GitHub (read only) to see whether a pull request
   is merged and to read the lines a plan refers to. Search matches the words of a
-  query. Settings holds GitHub and, if you set an Ollama model, semantic search.
+  query, and with an Ollama model also the meaning, in ⌘K, the link dialog and
+  for agents. Settings holds GitHub and that model, and shows whether the index
+  is complete.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
 dependencies: []
@@ -28,10 +30,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.3. Search matches the words of a query in the title, the text and
-  the source. Settings is a new page: GitHub lives there, and an owner can point
-  semantic search at an Ollama model. Without that, search stays by words. Your
-  plan data stays.
+  Lunation 2.3.1. ⌘K and the link dialog search by meaning when an Ollama model
+  is set, and show the word hits at once. Settings shows how much of the index
+  is filled and the last problem if the model did not answer. Your plan data
+  stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
