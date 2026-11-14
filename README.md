@@ -23,13 +23,13 @@ Every package declares `manifestVersion: 1`. umbreld normalizes it to `1.0.0` (`
 
 The minimum supported umbrelOS is **2.0.0** for every app here. Beacon, Horizon, Lunation, Moonstone and Studio declare `environment:` settings (App Settings → Environment); umbrelOS 1.7.4 has no `environment` field in its manifest schema, and 2.0.0 is the first release with it (read from `packages/umbreld/source/modules/apps/schema.ts` at tags `1.7.4` and `2.0.0`). Moonstone also needs the 2.0 app gateway: its session cookie is issued for `MOONSTONE_PROXY_HOST=10.21.0.1`. Notus uses no 2.0-only field, but it is tested only on 2.0.x.
 
-Architectures of the pinned images. Beacon, Moonstone and Notus were read on 3 Nov 2026. Horizon `0.15.0`, Lunation `2.0.0` and Studio `v3.0.0` were read on 13 Nov 2026 from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
+Architectures of the pinned images. Beacon, Moonstone and Notus were read on 3 Nov 2026. Horizon `0.15.0` and Studio `v3.0.0` were read on 13 Nov 2026, Lunation `2.1.0` on 14 Nov 2026, from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
 
 | App | Image | linux/amd64 | linux/arm64 |
 |---|---|---|---|
 | Beacon | `ghcr.io/bitsperitybtc/beacon:0.2.0` | yes | yes |
 | Horizon | `ghcr.io/bitsperitybtc/horizon:0.15.0` | yes | yes |
-| Lunation | `ghcr.io/bitsperitybtc/lunation:2.0.0` | yes | yes |
+| Lunation | `ghcr.io/bitsperitybtc/lunation:2.1.0` | yes | yes |
 | Studio | `ghcr.io/bitsperitybtc/canopy-studio:v3.0.0` | yes | yes |
 | Moonstone | `ghcr.io/bitsperitybtc/moonstone:0.7.1`, mailbox `ghcr.io/bitsperitybtc/beacon:0.1.1` | yes | yes |
 | Notus | `ghcr.io/bitsperitybtc/notus:v3.1.7` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |

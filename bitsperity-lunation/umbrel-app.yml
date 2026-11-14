@@ -2,16 +2,19 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.0.0"
-tagline: Plan with your agents, decide in one step
+version: "2.1.0"
+tagline: The plan as a document you and your agents share
 description: >-
-  Lunation is where you and your agents plan, and where you decide. The reasoning
-  behind a plan is a graph of problems, requirements, decisions, work and evidence,
-  every change a signed, append-only event. Agents ask you questions with options,
-  context and a recommendation; you answer in one step, and they see your answer and
-  every change above their work. Three views: Decide, Map (walk the plan with the
-  arrow keys) and Agents (add an agent in one flow). People sign in with Moonstone
-  or a NIP-07 extension.
+  Lunation is where you and your agents plan, and where you decide. The start
+  page is the plan as a document: each section is one object, in reading order,
+  with its state in the margin. Map, Decide and Agents are the other views.
+  Every change is a signed, append-only event.
+
+
+  Reading the plan needs an owner key or an approved agent. People sign in with
+  Moonstone or a NIP-07 extension and keep a session. Each agent has its own MCP
+  token. Agents can ask a question with options and a recommendation; you answer
+  in one step.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
 dependencies: []
@@ -23,13 +26,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.0. Sign-in with Moonstone works again behind the Umbrel gateway, with a
-  one-click "Open in Moonstone"; please pair once more after the update. Agents can ask
-  you questions with options and a recommendation, and see what changed above their work.
-  New views: Decide, Map (cards you walk with the arrow keys, l links two objects) and
-  Agents ("Add agent" sets up an agent with its own token in one flow). Changes appear
-  live. New look: the bitsperity brand, parchment by day and warm ink by night. Needs
-  Moonstone 0.3.4 or later. Your plan data stays; one new table is added.
+  Lunation 2.1. The start page is the plan as a document. Reading it needs an
+  owner key or an approved agent; sign in once and the session lasts thirty days.
+  The shared MCP token is gone: each agent has its own, so an agent that used the
+  shared token needs a new one through Add agent. Allow Moonstone to sign kinds
+  27235, 4715 and 4716 for the owner. Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
