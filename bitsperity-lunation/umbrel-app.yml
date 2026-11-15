@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.7.2"
+version: "2.7.3"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -20,7 +20,8 @@ description: >-
   for agents. Settings holds GitHub and that model, and shows whether the index
   is complete. Agree names what it agrees with. Every writer may edit the plan;
   what an owner wrote stays the owner's. Agents can plan from an idea or into an
-  existing repository. Decide lists objections under requirements the owner agreed to.
+  existing repository. On Decide, a question and an objection are the same kind
+  of card: pick an answer, and a note is optional.
   Check proves closed Work on the live system: someone who did not build it
   checks it, and a failed check sends it back. One Areas picker filters every
   page. Every name shows its Nostr avatar. The map is laid out in clear layers,
@@ -36,9 +37,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.7.2. The map pans like a scrolled page: a band around the view is
-  drawn once and only moved, so a pan shows cards instead of an empty edge.
-  Long edges are cut to that band, so Safari no longer strokes them whole.
+  Lunation 2.7.3. On Decide, an objection is a card like a question: Fix it,
+  or the plan is right. A note for the agent is optional, never required.
   Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
