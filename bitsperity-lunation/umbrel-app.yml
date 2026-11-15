@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.5.0"
+version: "2.5.1"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -21,6 +21,7 @@ description: >-
   is complete. Agree names what it agrees with. Every writer may edit the plan;
   what an owner wrote stays the owner's. Agents can plan from an idea or into an
   existing repository. Decide lists objections under requirements the owner agreed to.
+  The map fits the whole plan.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/lunation
 dependencies: []
@@ -32,10 +33,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.5. Agents get a skill family: plan from an idea, into an existing
-  repository, and for every change. A claim at the top with its own Area reads
-  as a problem. Decide lists objections under requirements the owner agreed to,
-  and an agreed requirement stays marked until it changes. Your plan data stays.
+  Lunation 2.5.1. The map lays each tree in blocks so Fit shows the whole plan,
+  and it draws only the cards near the camera. Far out, a card is its frame and
+  a coloured dot. On Decide, Confirm shows only when an objection has evidence.
+  Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
