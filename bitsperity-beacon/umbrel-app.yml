@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-beacon
 category: social
 name: Beacon
-version: "0.4.2"
+version: "0.4.3"
 tagline: Your own Nostr relay, a steady light at home
 description: >-
   bitsperity Beacon is the Nostr relay on your own node, with an app to see
@@ -14,7 +14,8 @@ description: >-
   Open Beacon to query any set of relays, see where each event lives, and
   read an event in full. Walk what it points to and what points to it, save
   a canvas and share it by link. Events you select appear on the canvas, and
-  you can send, download or import them. Signed in, you can delete your own events.
+  you can send, download or import them. A card says a relay lacks an event
+  only when that relay answered. Signed in, you can delete your own events.
 
   Other apps on this Umbrel reach it at ws://bitsperity-beacon_relay_1:7777.
   Clients on your network use ws://umbrel.local:8749. Anyone can write by
@@ -22,9 +23,8 @@ description: >-
   events (signed in with one of them, you can still store others' events).
   Anyone can read.
 releaseNotes: >-
-  Beacon 0.4.2. Every event you select appears on the canvas, highlighted.
-  Unticking leaves the card there. Sending stays one click, and the "Sent to"
-  panel sits above the bar so Clear and Download stay reachable.
+  Beacon 0.4.3. A card says a relay lacks its event only when that relay
+  answered. A relay that was not asked stays unknown.
   Your relay data stays.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/beacon
