@@ -2,20 +2,31 @@ manifestVersion: 1
 id: bitsperity-beacon
 category: social
 name: Beacon
-version: "0.2.4"
+version: "0.3.0"
 tagline: Your own Nostr relay, a steady light at home
 description: >-
-  bitsperity Beacon is the Nostr relay on your own node. Horizon, Moonstone
-  and Lunation publish to it and read from it, and any Nostr client on your
-  network can too. It keeps every addressable event (jobs, offers, profiles,
-  lists), honours deletes, and runs on amd64 and arm64. Built on strfry.
+  bitsperity Beacon is the Nostr relay on your own node, with an app to see
+  and move what is on your relays. Horizon, Moonstone and Lunation publish to
+  it and read from it, and any Nostr client on your network can too. It keeps
+  every addressable event (jobs, offers, profiles, lists), honours deletes,
+  and runs on amd64 and arm64. Built on strfry.
+
+  Open Beacon to query any set of relays, see where each event lives, walk
+  what it points to and what points to it, and send the events you select to
+  any relay.
 
   Other apps on this Umbrel reach it at ws://bitsperity-beacon_relay_1:7777.
   Clients on your network use ws://umbrel.local:8749. Anyone can write by
   default; list your keys under RELAY_WRITE_PUBKEYS to accept only your own
-  events. Anyone can read.
+  events (signed in with one of them, you can still store others' events).
+  Anyone can read.
 releaseNotes: >-
-  Rebuilt from the monorepo; image now published from Bitsperitybtc/bitsperity. No functional changes.
+  Beacon now has an app. Open it to query any relays at once, see on which
+  relays each event lives, walk what an event points to and what points to it
+  on a canvas, and send the events you select to any relay with one click.
+  With RELAY_WRITE_PUBKEYS set, you can sign in with your key (Moonstone) to
+  store other people's events on your Beacon, for example to back up a
+  friend's idea.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/beacon
 dependencies: []

@@ -23,11 +23,11 @@ Every package declares `manifestVersion: 1`. umbreld normalizes it to `1.0.0` (`
 
 The minimum supported umbrelOS is **2.0.0** for every app here. Beacon, Horizon, Lunation, Moonstone and Studio declare `environment:` settings (App Settings → Environment); umbrelOS 1.7.4 has no `environment` field in its manifest schema, and 2.0.0 is the first release with it (read from `packages/umbreld/source/modules/apps/schema.ts` at tags `1.7.4` and `2.0.0`). Moonstone also needs the 2.0 app gateway: its session cookie is issued for `MOONSTONE_PROXY_HOST=10.21.0.1`. Notus uses no 2.0-only field, but it is tested only on 2.0.x.
 
-Architectures of the pinned images. Beacon, Moonstone and Notus were read on 3 Nov 2026. Horizon `0.15.0` and Studio `v3.0.0` were read on 13 Nov 2026, Lunation `2.5.0` on 14 Nov 2026, from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
+Architectures of the pinned images. Moonstone and Notus were read on 3 Nov 2026. Horizon `0.15.0` and Studio `v3.0.0` were read on 13 Nov 2026, Lunation `2.5.0` on 14 Nov 2026, Beacon `0.3.0` on 15 Nov 2026, from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
 
 | App | Image | linux/amd64 | linux/arm64 |
 |---|---|---|---|
-| Beacon | `ghcr.io/bitsperitybtc/beacon:0.2.0` | yes | yes |
+| Beacon | `ghcr.io/bitsperitybtc/beacon:0.3.0` | yes | yes |
 | Horizon | `ghcr.io/bitsperitybtc/horizon:0.15.0` | yes | yes |
 | Lunation | `ghcr.io/bitsperitybtc/lunation:2.5.0` | yes | yes |
 | Studio | `ghcr.io/bitsperitybtc/canopy-studio:v3.0.0` | yes | yes |
@@ -35,7 +35,7 @@ Architectures of the pinned images. Beacon, Moonstone and Notus were read on 3 N
 | Notus | `ghcr.io/bitsperitybtc/notus:v3.1.7` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |
 | Notus | `postgres:16-alpine`, `ghcr.io/ggml-org/llama.cpp:server-b11946` | yes | yes |
 
-Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Studio's icon is `brand/icons/canopy.png`. Horizon and Moonstone have 1440×900 gallery screenshots. Beacon is a relay without a UI and Notus, Lunation and Studio list `gallery: []`; umbrelOS shows such a listing without screenshots.
+Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Studio's icon is `brand/icons/canopy.png`. Horizon and Moonstone have 1440×900 gallery screenshots. Beacon's app is served on the relay port and Notus, Lunation and Studio list `gallery: []`; umbrelOS shows such a listing without screenshots.
 
 Port check (13 Nov 2026, [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps)): `8750` appears only inside image digests, not as an app `port:`. The earlier check (2 Nov 2026, `7a94db0`) found none of `3847`, `8740`, `8741`, `8748`, `8749` or `8796` as a `port:`. Re-run it with:
 
@@ -149,7 +149,7 @@ Both packages are public. The current pins are in `bitsperity-moonstone/docker-c
 | Relay for other apps on this Umbrel | `ws://bitsperity-beacon_relay_1:7777` |
 | Source | [Bitsperitybtc/beacon](https://github.com/Bitsperitybtc/beacon) |
 
-Nostr relay (strfry) for the apps on this Umbrel. The Umbrel login is not put in front of the app (`PROXY_AUTH_ADD: "false"`) because Nostr clients cannot do it; the relay gates writes itself: empty `RELAY_WRITE_PUBKEYS` (the default) accepts every author, a list accepts only those keys. The database is the strfry LMDB in `${APP_DATA_DIR}/data`. The healthcheck reads the NIP-11 document on `127.0.0.1:7777`.
+Nostr relay (strfry) for the apps on this Umbrel, and an app on the same port: query relays, see where each event lives, walk what it points to, and send a selection in one click. The Umbrel login is not put in front of the app (`PROXY_AUTH_ADD: "false"`) because Nostr clients cannot do it; the relay gates writes itself: empty `RELAY_WRITE_PUBKEYS` (the default) accepts every author, a list accepts only those keys. The database is the strfry LMDB in `${APP_DATA_DIR}/data`. The healthcheck reads the NIP-11 document on `127.0.0.1:7777`.
 
 Horizon declares `dependencies: [bitsperity-beacon]`, so install Beacon first.
 
