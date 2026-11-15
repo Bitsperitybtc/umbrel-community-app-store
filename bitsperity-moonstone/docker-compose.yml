@@ -1,6 +1,6 @@
-# Umbrel package. Canonical copy: Bitsperitybtc/moonstone bitsperity-moonstone/;
+# Umbrel package. Canonical copy: Bitsperitybtc/bitsperity apps/moonstone/bitsperity-moonstone/;
 # Bitsperitybtc/umbrel-community-app-store carries an identical copy.
-# Umbrel pulls the image by digest; ghcr.yml builds it from a `v*` tag.
+# Umbrel pulls the image by digest; release-moonstone.yml builds it from a `moonstone/v*` tag.
 #
 # UI 8740 = app_proxy (Umbrel login). Mailbox 8741 = published WebSocket, no
 # cookie (NIP-46 is the access control). The same relay is wss://<host>:8740/mailbox
@@ -16,8 +16,19 @@ services:
       # /mailbox is the WebSocket path to the bundled relay; like 8741 it has no cookie.
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health,/nostr-mcp,/nostr-mcp/health,/mailbox,/pairing-offers"
 
+  # One-shot step before the signer: earlier images ran as root and left root-owned
+  # 0600 files in /data. The signer now runs as uid 1000 (USER node), so the data must be
+  # its own. A no-op once it is. Uses the signer image, so nothing extra is pulled.
+  data_owner:
+    image: ghcr.io/bitsperitybtc/moonstone:0.9.0@sha256:e8da1a758e653c3d492b16289508c58ff5c86fa08ff8cbfeb8e1092f052b8e7b
+    user: "0:0"
+    restart: "no"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    entrypoint: ["chown", "-R", "1000:1000", "/data"]
+
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.8.9@sha256:1748e721283241788793706bd92744702c514848d6508d14eaa92094e7f25d2a
+    image: ghcr.io/bitsperitybtc/moonstone:0.9.0@sha256:e8da1a758e653c3d492b16289508c58ff5c86fa08ff8cbfeb8e1092f052b8e7b
     restart: on-failure
     stop_grace_period: 1m
     volumes:
@@ -35,7 +46,10 @@ services:
       MOONSTONE_PAIRING_TOKEN: "${MOONSTONE_PAIRING_TOKEN:-}"
       LOG_LEVEL: info
     depends_on:
-      - relay
+      data_owner:
+        condition: service_completed_successfully
+      relay:
+        condition: service_started
     healthcheck:
       test:
         [
