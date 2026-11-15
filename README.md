@@ -12,7 +12,7 @@ Apps in this store use the `bitsperity-` ID prefix. That prefix is required by u
 | Horizon | `bitsperity-horizon` | `3847` (SPA, `/relay` and `/mcp`) | [Bitsperitybtc/horizon](https://github.com/Bitsperitybtc/horizon) | `bitsperity-beacon` |
 | Lunation | `bitsperity-lunation` | `8748` | [Bitsperitybtc/lunation](https://github.com/Bitsperitybtc/lunation) | none |
 | Studio | `bitsperity-studio` | `8750` | [Bitsperitybtc/bitsperity](https://github.com/Bitsperitybtc/bitsperity) `apps/canopy` | none |
-| Moonstone | `bitsperity-moonstone` | `8740` (UI, Umbrel login) and `8741` (mailbox relay, published) | [Bitsperitybtc/moonstone](https://github.com/Bitsperitybtc/moonstone) | none |
+| Moonstone | `bitsperity-moonstone` | `8740` (UI, Umbrel login) and `8741` (mailbox relay, published) | [Bitsperitybtc/bitsperity](https://github.com/Bitsperitybtc/bitsperity/tree/main/apps/moonstone) | none |
 | Notus | `bitsperity-notus` | `8796` (the container listens on `8096`) | [Bitsperitybtc/notus](https://github.com/Bitsperitybtc/notus) | none |
 
 The ports are the `port:` of each `umbrel-app.yml`, plus `8741` published by the Moonstone compose file. Moonstone's mailbox relay runs the Beacon image, but it is not the Beacon app and has no dependency on it. No other compose file in this store publishes a host port. Studio listens on container port `3000`; the host port is `8750`.
@@ -23,7 +23,7 @@ Every package declares `manifestVersion: 1`. umbreld normalizes it to `1.0.0` (`
 
 The minimum supported umbrelOS is **2.0.0** for every app here. Beacon, Horizon, Lunation, Moonstone and Studio declare `environment:` settings (App Settings → Environment); umbrelOS 1.7.4 has no `environment` field in its manifest schema, and 2.0.0 is the first release with it (read from `packages/umbreld/source/modules/apps/schema.ts` at tags `1.7.4` and `2.0.0`). Moonstone also needs the 2.0 app gateway: its session cookie is issued for `MOONSTONE_PROXY_HOST=10.21.0.1`. Notus uses no 2.0-only field, but it is tested only on 2.0.x.
 
-Architectures of the pinned images. Moonstone and Notus were read on 3 Nov 2026. Horizon `0.15.0` and Studio `v3.0.0` were read on 13 Nov 2026, Lunation `2.7.5` and Beacon `0.4.3` on 15 Nov 2026, from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
+Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.0` and Studio `v3.0.0` were read on 13 Nov 2026, Lunation `2.7.5`, Beacon `0.4.3` and Moonstone `0.9.0` on 15 Nov 2026, from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
 
 | App | Image | linux/amd64 | linux/arm64 |
 |---|---|---|---|
@@ -31,7 +31,7 @@ Architectures of the pinned images. Moonstone and Notus were read on 3 Nov 2026.
 | Horizon | `ghcr.io/bitsperitybtc/horizon:0.15.0` | yes | yes |
 | Lunation | `ghcr.io/bitsperitybtc/lunation:2.7.5` | yes | yes |
 | Studio | `ghcr.io/bitsperitybtc/canopy-studio:v3.0.0` | yes | yes |
-| Moonstone | `ghcr.io/bitsperitybtc/moonstone:0.7.1`, mailbox `ghcr.io/bitsperitybtc/beacon:0.1.1` | yes | yes |
+| Moonstone | `ghcr.io/bitsperitybtc/moonstone:0.9.0`, mailbox `ghcr.io/bitsperitybtc/beacon:0.2.4` | yes | yes |
 | Notus | `ghcr.io/bitsperitybtc/notus:v3.1.7` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |
 | Notus | `postgres:16-alpine`, `ghcr.io/ggml-org/llama.cpp:server-b11946` | yes | yes |
 

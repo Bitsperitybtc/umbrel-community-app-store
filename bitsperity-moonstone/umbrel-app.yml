@@ -2,13 +2,14 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.8.9"
+version: "0.9.0"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
   any compliant NIP-46 client, including the other bitsperity apps. Keys are
   encrypted at rest (NIP-49). You approve, deny, and revoke each app per
-  identity in this UI. Signing happens over a bundled mailbox relay — never
+  identity in this UI. Each identity signs all kinds, or only the kinds you
+  allow, and its page shows recent activity. Signing happens over a bundled mailbox relay — never
   over HTTP. Moonstone is never hosted publicly.
 
 
@@ -23,12 +24,15 @@ description: >-
   the bitsperity Beacon app. Install Beacon for that, or set another relay in
   Settings. Moonstone does not require Beacon.
 releaseNotes: >-
-  The Nostr MCP keeps an agent's saved pairing when only its session's identity choice was lost (idle expiry, reconnect or restart): get_session reports selection-required, use_identity without a name no longer starts a new pairing while saved pairings exist, and selecting the exact pubkey from identities reuses the pairing without a new approval. Revocation is unchanged (#119).
+  Moonstone 0.9.0. There is one kind of identity. Each identity signs all
+  kinds, or only the kinds you check, and another kind is refused at once.
+  Its page lists recent activity. The signer runs as uid 1000, and an update
+  keeps the identities you already have. Your keys stay on this node.
 developer: Bitsperity
-website: https://github.com/Bitsperitybtc/moonstone
+website: https://github.com/Bitsperitybtc/bitsperity/tree/main/apps/moonstone
 dependencies: []
-repo: https://github.com/Bitsperitybtc/moonstone
-support: https://github.com/Bitsperitybtc/moonstone/issues
+repo: https://github.com/Bitsperitybtc/bitsperity
+support: https://github.com/Bitsperitybtc/bitsperity/issues
 port: 8740
 gallery:
   - https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-moonstone/gallery/1.png
