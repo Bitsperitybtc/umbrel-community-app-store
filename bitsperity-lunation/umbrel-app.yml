@@ -2,12 +2,12 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.9.2"
+version: "2.10.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
   page is the plan as a document: each section is one object, in reading order,
-  with its state in the margin. Map, Decide and Agents are the other views.
+  with its state in the margin. Map, Decide, Review and Agents are the other views.
   Every change is a signed, append-only event.
 
 
@@ -37,7 +37,10 @@ description: >-
   you, and red means a check failed, on the Plan and the Map. The Map's sidebar
   reads like the plan. Every object can carry up to four images of up to 2 MB.
   Agents upload them, thumbnails sit under the text, and the owner can move,
-  remove, or delete one for good. One Areas picker filters every
+  remove, or delete one for good. Review brings a few cards a day: swipe or
+  use the arrow keys to agree, object, comment or put one off until tomorrow.
+  Every object carries comment threads; an owner's comment waits for an agent's
+  answer. Decide keeps what you decided, with Decide again. One Areas picker filters every
   page. Every name shows its Nostr avatar. The map is laid out in clear layers,
   a pan moves the picture already drawn, and Fit shows the whole plan.
 developer: Bitsperity
@@ -51,8 +54,13 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.9.2. A link takes the short id an agent prints, and /check?o=
-  opens that observation's reproduce form.
+  Lunation 2.10.0. Review: a few cards a day, swiped on a phone or walked with
+  the arrow keys: agree, object, comment, or later, and each card says what
+  came of your earlier answer. Comments on every object, in threads that wait
+  for an agent's answer. Decide keeps what you decided, in a tab Decided, with
+  Decide again. No page is wider than the window, every page names its tab,
+  Fit keeps the Map readable, and Search takes the cursor at once.
+  Agents need this release before they comment.
   Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
