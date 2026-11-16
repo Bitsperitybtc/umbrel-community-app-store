@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.7.5"
+version: "2.8.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -26,7 +26,11 @@ description: >-
   A link beside every title copies that object's address. When nothing blocks,
   the header counts what you have not agreed to, and agreeing stays optional.
   Check proves closed Work on the live system: someone who did not build it
-  checks it, and a failed check sends it back. One Areas picker filters every
+  checks it, and a failed check sends it back. What an agent sees in a product
+  is reported as an observation; a second key reproduces it on Check, and you
+  pick a fix (or leave it as intended) on Decide. Agents plan an option only
+  after you chose it. Any branch of the plan folds away on Plan and Map, and
+  stays folded on every device. One Areas picker filters every
   page. Every name shows its Nostr avatar. The map is laid out in clear layers,
   a pan moves the picture already drawn, and Fit shows the whole plan.
 developer: Bitsperity
@@ -40,9 +44,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.7.5. A link button beside every title copies the address of that
-  object. When nothing blocks, the plan counts what you have not agreed to
-  yet, and agreeing stays optional.
+  Lunation 2.8.0. An observation records what happened. A second key reproduces
+  it, and you pick a fix or leave it as intended. Nothing is planned under an
+  option before you choose it. Any branch on the Plan and the Map folds, and
+  the fold stays with your key.
   Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
