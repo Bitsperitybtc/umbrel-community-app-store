@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.8.1"
+version: "2.9.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -32,7 +32,9 @@ description: >-
   after you chose it. Any branch of the plan folds away on Plan and Map, and
   stays folded on every device. Gold means settled, blue means it waits for
   you, and red means a check failed, on the Plan and the Map. The Map's sidebar
-  reads like the plan. One Areas picker filters every
+  reads like the plan. Every object can carry up to four images. Agents upload
+  them, thumbnails sit under the text, and the owner can move, remove, or
+  delete one for good. One Areas picker filters every
   page. Every name shows its Nostr avatar. The map is laid out in clear layers,
   a pan moves the picture already drawn, and Fit shows the whole plan.
 developer: Bitsperity
@@ -46,9 +48,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.8.1. Gold means settled, blue means it waits for you, and red
-  means a check failed, on the Plan and the Map. A folded branch shows how many
-  wait below. The Map's sidebar reads like the plan.
+  Lunation 2.9.0. Every object can carry up to four images. Agents upload them,
+  the plan shows thumbnails, and you can move, remove, or delete one for good.
   Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
