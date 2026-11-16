@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.9.0"
+version: "2.9.1"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -18,7 +18,8 @@ description: >-
   is merged and to read the lines a plan refers to. Search matches the words of a
   query, and with an Ollama model also the meaning, in ⌘K, the link dialog and
   for agents. Settings holds GitHub and that model, and shows whether the index
-  is complete. Agree names what it agrees with. Every writer may edit the plan;
+  is complete. Agree names what it agrees with, and it settles an object again
+  when only something above it changed. Every writer may edit the plan;
   what an owner wrote stays the owner's. Agents can plan from an idea or into an
   existing repository. On Decide, a question and an objection are the same kind
   of card: pick an answer, and a note is optional. "N places need you" opens
@@ -32,9 +33,9 @@ description: >-
   after you chose it. Any branch of the plan folds away on Plan and Map, and
   stays folded on every device. Gold means settled, blue means it waits for
   you, and red means a check failed, on the Plan and the Map. The Map's sidebar
-  reads like the plan. Every object can carry up to four images. Agents upload
-  them, thumbnails sit under the text, and the owner can move, remove, or
-  delete one for good. One Areas picker filters every
+  reads like the plan. Every object can carry up to four images of up to 2 MB.
+  Agents upload them, thumbnails sit under the text, and the owner can move,
+  remove, or delete one for good. One Areas picker filters every
   page. Every name shows its Nostr avatar. The map is laid out in clear layers,
   a pan moves the picture already drawn, and Fit shows the whole plan.
 developer: Bitsperity
@@ -48,8 +49,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.9.0. Every object can carry up to four images. Agents upload them,
-  the plan shows thumbnails, and you can move, remove, or delete one for good.
+  Lunation 2.9.1. An image up to 2 MB uploads, and a larger one says it is over
+  the limit. Agree settles an object again when only something above it changed.
   Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
