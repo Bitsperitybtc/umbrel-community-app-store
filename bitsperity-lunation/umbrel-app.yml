@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.9.1"
+version: "2.9.2"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -24,7 +24,9 @@ description: >-
   existing repository. On Decide, a question and an objection are the same kind
   of card: pick an answer, and a note is optional. "N places need you" opens
   the objection itself, and Agree, No and ? show where your word is still needed.
-  A link beside every title copies that object's address. When nothing blocks,
+  A link beside every title copies that object's address, and it opens from the
+  short id an agent prints. /check?o= opens that observation's reproduce form.
+  When nothing blocks,
   the header counts what you have not agreed to, and agreeing stays optional.
   Check proves closed Work on the live system: someone who did not build it
   checks it, and a failed check sends it back. What an agent sees in a product
@@ -49,8 +51,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.9.1. An image up to 2 MB uploads, and a larger one says it is over
-  the limit. Agree settles an object again when only something above it changed.
+  Lunation 2.9.2. A link takes the short id an agent prints, and /check?o=
+  opens that observation's reproduce form.
   Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
