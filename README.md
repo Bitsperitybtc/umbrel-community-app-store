@@ -244,7 +244,7 @@ To bump: tag on `notus` `main`, pin the new digest in notus `umbrel/bitsperity-n
 | Source | [Bitsperitybtc/bitsperity](https://github.com/Bitsperitybtc/bitsperity) `apps/spero` |
 | Depends on | `bitsperity-notus` |
 
-Spero is a paper-and-research trading desk forest on the Canopy runtime. It places no orders. The image holds the runtime and the forest, so the package copies nothing onto the Umbrel. The keys are App Settings: `NOTUS_INTERNAL_API_KEY`, the credential of the model driver, and `CANOPY_CONTROL_TOKEN`. Until they are set the runner stops, says which one is missing, and Docker starts it again.
+Spero is a paper-and-research trading desk forest on the Canopy runtime. It places no orders. The image holds the runtime and the forest, so the package copies nothing onto the Umbrel. The vault is the folder `data/vault` of the Notus app: Spero writes it and Notus shows it, so Notus must not sync that folder from git. The keys are App Settings: `NOTUS_INTERNAL_API_KEY`, the credential of the model driver, and `CANOPY_CONTROL_TOKEN`. Until they are set the runner stops, says which one is missing, and Docker starts it again.
 
 Two containers: `bitsperity-spero_runner_1` (control API on `8788`) and `bitsperity-spero_observe_1` (observe API on `8787`). Point Studio at both and give it the same `CANOPY_CONTROL_TOKEN`. Steer, notify, Nostr and vault push are off in this package.
 
@@ -307,7 +307,7 @@ bitsperity-moonstone/
 bitsperity-spero/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + runner + observe (one image: Canopy runtime and the forest)
-  hooks/pre-start             Creates data/logs, data/workspaces and data/vault with uid 1000
+  hooks/pre-start             Creates data/logs and data/workspaces with uid 1000
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 bitsperity-notus/
   umbrel-app.yml              Listing
