@@ -8,8 +8,10 @@ d="${APP_DATA_DIR:?APP_DATA_DIR is not set}"
 uid=1000
 gid=1000
 
-mkdir -p "$d/data/workspaces" "$d/data/logs"
-chown "$uid:$gid" "$d/data/workspaces" "$d/data/logs"
+# data/workspaces/cash is the forest's shared work folder, and the vault is mounted inside it. Docker would
+# create a missing mount point as root, and then the runner could not write next to it.
+mkdir -p "$d/data/workspaces/cash/vault" "$d/data/logs"
+chown "$uid:$gid" "$d/data/workspaces" "$d/data/workspaces/cash" "$d/data/logs"
 # The vault is the Notus app's folder; Notus creates it (uid 1000) and is installed first.
 if [[ ! -d "$d/../bitsperity-notus/data/vault" ]]; then
   echo "spero: the Notus vault folder is missing; install and start Notus first" >&2
