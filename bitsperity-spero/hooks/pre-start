@@ -8,6 +8,10 @@ d="${APP_DATA_DIR:?APP_DATA_DIR is not set}"
 uid=1000
 gid=1000
 
-mkdir -p "$d/data/workspaces" "$d/data/logs" "$d/data/vault"
-chown "$uid:$gid" "$d/data/workspaces" "$d/data/logs" "$d/data/vault"
+mkdir -p "$d/data/workspaces" "$d/data/logs"
+chown "$uid:$gid" "$d/data/workspaces" "$d/data/logs"
+# The vault is the Notus app's folder; Notus creates it (uid 1000) and is installed first.
+if [[ ! -d "$d/../bitsperity-notus/data/vault" ]]; then
+  echo "spero: the Notus vault folder is missing; install and start Notus first" >&2
+fi
 chmod 700 "$d/data/logs"

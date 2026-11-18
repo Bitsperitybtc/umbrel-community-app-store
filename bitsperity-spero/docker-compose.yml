@@ -12,6 +12,7 @@
 # http://bitsperity-notus_web_1:8096.
 # Studio is its own app (bitsperity-studio): it reads http://bitsperity-spero_observe_1:8787 and controls
 # http://bitsperity-spero_runner_1:8788 with the same CANOPY_CONTROL_TOKEN.
+# The vault is the folder of the Notus app (data/vault), so what Spero writes shows in Notus at once.
 # Steer, notify and vault push are off. Nostr is off: MOONSTONE_URL is unset.
 version: "3.7"
 
@@ -48,8 +49,9 @@ services:
     volumes:
       - ${APP_DATA_DIR}/data/workspaces:/work
       - ${APP_DATA_DIR}/data/logs:/state
-      - ${APP_DATA_DIR}/data/vault:/vault
-      - ${APP_DATA_DIR}/data/vault:/work/cash/vault:ro
+      # One vault on the Umbrel: the folder Notus reads and shows. Spero writes it; Notus only indexes it.
+      - ${APP_DATA_DIR}/../bitsperity-notus/data/vault:/vault
+      - ${APP_DATA_DIR}/../bitsperity-notus/data/vault:/work/cash/vault:ro
     # Image HEALTHCHECK stays on: it polls the serve control port on this container's loopback.
     mem_limit: 4g
 
