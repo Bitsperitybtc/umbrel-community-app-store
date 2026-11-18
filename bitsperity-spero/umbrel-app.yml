@@ -1,0 +1,45 @@
+manifestVersion: 1
+id: bitsperity-spero
+category: finance
+name: Spero
+version: "1.0.0"
+tagline: Research desk forest on Canopy
+description: >-
+  Spero is a paper-and-research trading desk forest on the Canopy runtime. It
+  places no orders. It reads Notus at http://bitsperity-notus_web_1:8096.
+
+
+  The keys are App Settings: the Notus internal key, the token the model driver
+  asks for, and the control token Studio uses. Until they are set the runner
+  stops and says which one is missing.
+
+
+  Steer, notify, Nostr and vault push are off in this package. Studio is its own app.
+releaseNotes: >-
+  First release on Canopy 3. The image holds the forest; the keys are App
+  Settings. Steer, notify, Nostr and vault push are off.
+developer: Bitsperity
+website: https://github.com/Bitsperitybtc/bitsperity
+dependencies:
+  - bitsperity-notus
+repo: https://github.com/Bitsperitybtc/bitsperity
+support: https://github.com/Bitsperitybtc/bitsperity/issues
+# Observe UI. Check the host port is free on the Umbrel before install.
+port: 8787
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-spero/icon.png
+submitter: Bitsperity
+submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
+environment:
+  - name: NOTUS_INTERNAL_API_KEY
+    services: [runner]
+    note: "The internal API key of Notus on this Umbrel. Spero sends it with every read."
+  - name: CLAUDE_CODE_OAUTH_TOKEN
+    services: [runner]
+    note: "The credential of the model driver that canopy.yaml names."
+  - name: CANOPY_CONTROL_TOKEN
+    services: [runner]
+    note: "Token of the control API. Choose one and give Studio the same value; without it the runner does not start."

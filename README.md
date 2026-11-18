@@ -14,6 +14,7 @@ Apps in this store use the `bitsperity-` ID prefix. That prefix is required by u
 | Studio | `bitsperity-studio` | `8750` | [Bitsperitybtc/bitsperity](https://github.com/Bitsperitybtc/bitsperity) `apps/canopy` | none |
 | Moonstone | `bitsperity-moonstone` | `8740` (UI, Umbrel login) and `8741` (mailbox relay, published) | [Bitsperitybtc/bitsperity](https://github.com/Bitsperitybtc/bitsperity/tree/main/apps/moonstone) | none |
 | Notus | `bitsperity-notus` | `8796` (the container listens on `8096`) | [Bitsperitybtc/notus](https://github.com/Bitsperitybtc/notus) | none |
+| Spero | `bitsperity-spero` | `8787` (observe API of the forest) | [Bitsperitybtc/bitsperity](https://github.com/Bitsperitybtc/bitsperity) `apps/spero` | `bitsperity-notus` |
 
 The ports are the `port:` of each `umbrel-app.yml`, plus `8741` published by the Moonstone compose file. Moonstone's mailbox relay runs the Beacon image, but it is not the Beacon app and has no dependency on it. No other compose file in this store publishes a host port. Studio listens on container port `3000`; the host port is `8750`.
 
@@ -21,9 +22,9 @@ The ports are the `port:` of each `umbrel-app.yml`, plus `8741` published by the
 
 Every package declares `manifestVersion: 1`. umbreld normalizes it to `1.0.0` (`tryNormalizeVersion` in `modules/apps/schema.ts`) and, since umbrelOS 2.0.0, marks an app incompatible only when that version is newer than the OS (`manifest-compatibility.ts`), so `1` installs on every umbrelOS release.
 
-The minimum supported umbrelOS is **2.0.0** for every app here. Beacon, Horizon, Lunation, Moonstone and Studio declare `environment:` settings (App Settings → Environment); umbrelOS 1.7.4 has no `environment` field in its manifest schema, and 2.0.0 is the first release with it (read from `packages/umbreld/source/modules/apps/schema.ts` at tags `1.7.4` and `2.0.0`). Moonstone also needs the 2.0 app gateway: its session cookie is issued for `MOONSTONE_PROXY_HOST=10.21.0.1`. Notus uses no 2.0-only field, but it is tested only on 2.0.x.
+The minimum supported umbrelOS is **2.0.0** for every app here. Beacon, Horizon, Lunation, Moonstone, Studio and Spero declare `environment:` settings (App Settings → Environment); umbrelOS 1.7.4 has no `environment` field in its manifest schema, and 2.0.0 is the first release with it (read from `packages/umbreld/source/modules/apps/schema.ts` at tags `1.7.4` and `2.0.0`). Moonstone also needs the 2.0 app gateway: its session cookie is issued for `MOONSTONE_PROXY_HOST=10.21.0.1`. Notus uses no 2.0-only field, but it is tested only on 2.0.x.
 
-Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.0` and Studio `v3.0.0` were read on 13 Nov 2026, Beacon `0.4.3` and Moonstone `0.9.0` on 15 Nov 2026, Lunation `2.11.0` on 16 Nov 2026, from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
+Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.0` and Studio `v3.0.0` were read on 13 Nov 2026, Beacon `0.4.3` and Moonstone `0.9.0` on 15 Nov 2026, Lunation `2.11.0` on 16 Nov 2026, Spero `v1.0.0` on 18 Nov 2026 (from the build log; the package was not public yet), from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
 
 | App | Image | linux/amd64 | linux/arm64 |
 |---|---|---|---|
@@ -34,8 +35,9 @@ Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.
 | Moonstone | `ghcr.io/bitsperitybtc/moonstone:0.9.0`, mailbox `ghcr.io/bitsperitybtc/beacon:0.2.4` | yes | yes |
 | Notus | `ghcr.io/bitsperitybtc/notus:v3.1.7` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |
 | Notus | `postgres:16-alpine`, `ghcr.io/ggml-org/llama.cpp:server-b11946` | yes | yes |
+| Spero | `ghcr.io/bitsperitybtc/spero:v1.0.0` | yes | yes |
 
-Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Studio's icon is `brand/icons/canopy.png`. Horizon and Moonstone have 1440×900 gallery screenshots. Beacon's app is served on the relay port and Notus, Lunation and Studio list `gallery: []`; umbrelOS shows such a listing without screenshots.
+Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Studio's icon is `brand/icons/canopy.png`. Horizon and Moonstone have 1440×900 gallery screenshots. Beacon's app is served on the relay port and Notus, Lunation, Studio and Spero list `gallery: []`; umbrelOS shows such a listing without screenshots.
 
 Port check (13 Nov 2026, [getumbrel/umbrel-apps](https://github.com/getumbrel/umbrel-apps)): `8750` appears only inside image digests, not as an app `port:`. The earlier check (2 Nov 2026, `7a94db0`) found none of `3847`, `8740`, `8741`, `8748`, `8749` or `8796` as a `port:`. Re-run it with:
 
@@ -233,6 +235,28 @@ The canonical copy is `umbrel/bitsperity-notus/` in `Bitsperitybtc/notus`. This 
 All images are digest-pinned: `ghcr.io/bitsperitybtc/notus:v<version>@sha256:<digest>` (note the `v` in the tag), `postgres:16-alpine@sha256:…`, `ghcr.io/ggml-org/llama.cpp:server-b11946@sha256:…`. The notus package must be public. The current pins are in `bitsperity-notus/docker-compose.yml`.
 
 To bump: tag on `notus` `main`, pin the new digest in notus `umbrel/bitsperity-notus/`, set `version`, then copy the folder here. Do not use `latest` or compose `build:`.
+## Spero
+
+| | |
+|---|---|
+| Community app ID | `bitsperity-spero` |
+| UI | `http://umbrel.local:8787` (observe API, Umbrel login); the window is Studio |
+| Source | [Bitsperitybtc/bitsperity](https://github.com/Bitsperitybtc/bitsperity) `apps/spero` |
+| Depends on | `bitsperity-notus` |
+
+Spero is a paper-and-research trading desk forest on the Canopy runtime. It places no orders. The image holds the runtime and the forest, so the package copies nothing onto the Umbrel. The keys are App Settings: `NOTUS_INTERNAL_API_KEY`, the credential of the model driver, and `CANOPY_CONTROL_TOKEN`. Until they are set the runner stops, says which one is missing, and Docker starts it again.
+
+Two containers: `bitsperity-spero_runner_1` (control API on `8788`) and `bitsperity-spero_observe_1` (observe API on `8787`). Point Studio at both and give it the same `CANOPY_CONTROL_TOKEN`. Steer, notify, Nostr and vault push are off in this package.
+
+The canonical copy is `apps/spero/umbrel/bitsperity-spero/` in `Bitsperitybtc/bitsperity`. This folder is an identical copy.
+
+### Image pin
+
+```text
+ghcr.io/bitsperitybtc/spero:v1.0.0@sha256:<index digest>
+```
+
+The package must be public, or Umbrel cannot pull it. To bump, tag `spero/vX.Y.Z` (after `canopy/vX.Y.Z` when the runtime changes), then follow the [release checklist](#release-checklist). Do not use `latest`. Do not use compose `build:`.
 
 ## Release checklist
 
@@ -280,6 +304,11 @@ bitsperity-moonstone/
   docker-compose.yml          app_proxy + signer + mailbox relay (Beacon image)
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
   gallery/                    Store screenshots
+bitsperity-spero/
+  umbrel-app.yml              Listing
+  docker-compose.yml          app_proxy + runner + observe (one image: Canopy runtime and the forest)
+  hooks/pre-start             Creates data/logs, data/workspaces and data/vault with uid 1000
+  icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 bitsperity-notus/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + postgres + restore + web + llama.cpp

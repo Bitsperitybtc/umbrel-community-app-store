@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# umbreld runs this on the host before the containers start (install, start, update).
+# It only creates what is missing and fixes owners. It never touches runtime data.
+set -euo pipefail
+
+d="${APP_DATA_DIR:?APP_DATA_DIR is not set}"
+# The image runs as `node` (node:22-bookworm-slim, uid 1000).
+uid=1000
+gid=1000
+
+mkdir -p "$d/data/workspaces" "$d/data/logs" "$d/data/vault"
+chown "$uid:$gid" "$d/data/workspaces" "$d/data/logs" "$d/data/vault"
+chmod 700 "$d/data/logs"
