@@ -15,8 +15,8 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of canopy-studio:v3.0.0.
-    image: ghcr.io/bitsperitybtc/canopy-studio:v3.0.0@sha256:7191ab7b78ec0b030cc920945d3a8034a52fcc84d2bf301ccb8ddbbdcb202c8c
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of canopy-studio:v3.0.3.
+    image: ghcr.io/bitsperitybtc/canopy-studio:v3.0.3@sha256:eb0ff612b9824058092bc6723d72b0083d139c7b8bdae744f4174ed4c837e067
     restart: on-failure
     stop_grace_period: 1m
     init: true
