@@ -11,9 +11,9 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v2.11.0 tag build.
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v2.12.0 tag build.
     # It never runs ahead of package.json.
-    image: ghcr.io/bitsperitybtc/lunation:2.11.0@sha256:1dd6c6c7f9209fb943eedc1a8c50798f6a0e7b04b7ea127fb1961118709af78b
+    image: ghcr.io/bitsperitybtc/lunation:2.12.0@sha256:ec1ca43aa975dd52dfed3dbee57cf74e6e3eb5de20451206ab210ce16f0f34e7
     restart: on-failure
     stop_grace_period: 1m
     init: true
