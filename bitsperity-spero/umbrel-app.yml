@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-spero
 category: finance
 name: Spero
-version: "1.0.5"
+version: "1.0.6"
 tagline: Research desk forest on Canopy
 description: >-
   Spero is a paper-and-research trading desk forest on the Canopy runtime. It
@@ -17,8 +17,9 @@ description: >-
   The vault is the folder of the Notus app: Spero writes it, Notus shows it.
   Steer, notify, Nostr and vault push are off in this package. Studio is its own app.
 releaseNotes: >-
-  The leaves are told where their report templates and the last book are,
-  where they had searched the file system for them.
+  Every script step is in the event store, where a fast step such as writing
+  a note could be missing. A leaf's steer proposal is empty or names what it
+  proposes.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitsperity
 dependencies:
