@@ -307,7 +307,7 @@ bitsperity-moonstone/
 bitsperity-spero/
   umbrel-app.yml              Listing
   docker-compose.yml          app_proxy + runner + observe (one image: Canopy runtime and the forest)
-  hooks/pre-start             Creates data/logs and data/workspaces with uid 1000
+  hooks/pre-start             Creates data/logs and the work folder data/workspaces/cash with uid 1000
   icon.png                    512×512 square PNG, no rounded corners (umbrelOS masks)
 bitsperity-notus/
   umbrel-app.yml              Listing
