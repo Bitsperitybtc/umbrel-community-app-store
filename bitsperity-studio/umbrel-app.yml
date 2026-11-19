@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Studio
-version: "3.1.0"
+version: "3.2.0"
 tagline: See what a Canopy forest is doing
 description: >-
   Studio is the window onto a Canopy forest. It shows what each agent is doing,
@@ -29,10 +29,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  New view Identities, per forest: every Nostr identity of the forest with the
-  agents that speak as it. Pair opens Moonstone on its approval screen; after
-  the approval the forest speaks and hears as the identity at once. The forest
-  has to run Canopy 3.1.0 or later. Settings are unchanged.
+  Identities shows each identity with its agents and npub; its profile is the
+  one Moonstone keeps for the key. Needs a forest on Canopy 3.2.0 or later.
+  Settings are unchanged.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store

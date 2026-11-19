@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-spero
 category: finance
 name: Spero
-version: "1.0.12"
+version: "1.0.13"
 tagline: Research desk forest on Canopy
 description: >-
   Spero is a paper-and-research trading desk forest on the Canopy runtime. It
@@ -20,10 +20,9 @@ description: >-
   Moonstone app; pair the identities once in Studio (Identities). The vault push
   is off in this package. Studio is its own app.
 releaseNotes: >-
-  Nostr is on. The wire tells the owners by direct message when the regime
-  changes, a thesis breaks, an order fills or a proposal is committed or
-  refused. Pair the identities notify, scorecard and floor once in Studio
-  (Identities, needs Studio 3.1.0) and approve each in Moonstone.
+  Every agent is a Nostr identity whose key and profile live in Moonstone
+  (Spero <Name>, with its own avatar). Pair them in Studio (Identities, needs
+  Studio 3.2.0). The start no longer warns for every unpaired identity.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitsperity
 dependencies:
