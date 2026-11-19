@@ -13,7 +13,8 @@
 # Studio is its own app (bitsperity-studio): it reads http://bitsperity-spero_observe_1:8787 and controls
 # http://bitsperity-spero_runner_1:8788 with the same CANOPY_CONTROL_TOKEN.
 # The vault is the folder of the Notus app (data/vault), so what Spero writes shows in Notus at once.
-# Steer, notify and vault push are off. Nostr is off: MOONSTONE_URL is unset.
+# Steer and notify are on. Nostr signs through the Moonstone app; pair the identities in Studio (Identities).
+# The vault push is off.
 version: "3.7"
 
 services:
@@ -23,8 +24,8 @@ services:
       APP_PORT: "8787"
 
   runner:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of spero:v1.0.11, which runs on canopy:v3.0.4.
-    image: ghcr.io/bitsperitybtc/spero:v1.0.11@sha256:adef7471c584cb29bbade49109f2f6fb02b76addfbfac41a01c4b5f5c7aa567e
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of spero:v1.0.12, which runs on canopy:v3.1.0.
+    image: ghcr.io/bitsperitybtc/spero:v1.0.12@sha256:a21199a169f18da9b79066b8deb121f1e6cc906cfc14e7f5c68ff79167f93aa4
     restart: unless-stopped
     stop_grace_period: 1m
     init: true
@@ -32,8 +33,9 @@ services:
       NOTUS_URL: http://bitsperity-notus_web_1:8096
       # Studio dials the control port from its own container; serve refuses this bind without CANOPY_CONTROL_TOKEN.
       CANOPY_CONTROL_HOST: 0.0.0.0
-      # Nostr off: without Moonstone no identity can sign, and the forest runs without them.
-      MOONSTONE_URL: ""
+      # The Moonstone app on this Umbrel signs for the identities; each is paired once in Studio (Identities).
+      MOONSTONE_URL: http://bitsperity-moonstone_signer_1:8740
+      MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
       VAULT_DIR: /vault
       VAULT_GIT_PUSH: "0"
       # Named because the forest's env list is closed; neither is read while the push is off.
@@ -43,7 +45,7 @@ services:
       CASH_WORK_DIR: /work
       CASH_LIVE_KINDS: hunt,depth
       CASH_STEER_LIVE: "1"
-      CASH_NOTIFY_SEND: "0"
+      CASH_NOTIFY_SEND: "1"
       CASH_HUNT_MAX_RUNS: "5"
       CASH_HYGIENE_MAX_RUNS: "5"
     volumes:
@@ -56,7 +58,7 @@ services:
     mem_limit: 4g
 
   observe:
-    image: ghcr.io/bitsperitybtc/spero:v1.0.11@sha256:adef7471c584cb29bbade49109f2f6fb02b76addfbfac41a01c4b5f5c7aa567e
+    image: ghcr.io/bitsperitybtc/spero:v1.0.12@sha256:a21199a169f18da9b79066b8deb121f1e6cc906cfc14e7f5c68ff79167f93aa4
     restart: unless-stopped
     init: true
     # observe-http binds loopback by default; app_proxy needs 0.0.0.0.
