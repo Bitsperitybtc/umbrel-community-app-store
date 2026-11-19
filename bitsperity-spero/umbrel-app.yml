@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-spero
 category: finance
 name: Spero
-version: "1.0.8"
+version: "1.0.9"
 tagline: Research desk forest on Canopy
 description: >-
   Spero is a paper-and-research trading desk forest on the Canopy runtime. It
@@ -17,8 +17,9 @@ description: >-
   The vault is the folder of the Notus app: Spero writes it, Notus shows it.
   Steer, notify, Nostr and vault push are off in this package. Studio is its own app.
 releaseNotes: >-
-  Tape keeps the price levels of every valid thesis current, where it had only
-  looked at the held book. Plan sees those levels in its packet.
+  Tape keeps the price levels of every valid thesis current and Plan sees them
+  in its packet. Shares held under a thesis that is off are decided by Tape:
+  kept under a stop, or sold.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitsperity
 dependencies:
