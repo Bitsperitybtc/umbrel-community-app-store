@@ -24,8 +24,8 @@ services:
       APP_PORT: "8787"
 
   runner:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of spero:v1.0.15, which runs on canopy:v3.2.0.
-    image: ghcr.io/bitsperitybtc/spero:v1.0.15@sha256:b94ab8bc1d95f4d702fec53858a680ef1a7c38ff375d778657e360805c62fcd8
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of spero:v1.0.16, which runs on canopy:v3.3.0.
+    image: ghcr.io/bitsperitybtc/spero:v1.0.16@sha256:8cf31fcddcb0780f16135e2ca87fc727933e5f981ef0c214fe1a74ce938dd9d1
     restart: unless-stopped
     stop_grace_period: 1m
     init: true
@@ -58,7 +58,7 @@ services:
     mem_limit: 4g
 
   observe:
-    image: ghcr.io/bitsperitybtc/spero:v1.0.15@sha256:b94ab8bc1d95f4d702fec53858a680ef1a7c38ff375d778657e360805c62fcd8
+    image: ghcr.io/bitsperitybtc/spero:v1.0.16@sha256:8cf31fcddcb0780f16135e2ca87fc727933e5f981ef0c214fe1a74ce938dd9d1
     restart: unless-stopped
     init: true
     # observe-http binds loopback by default; app_proxy needs 0.0.0.0.
