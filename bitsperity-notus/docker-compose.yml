@@ -4,7 +4,7 @@
 #
 # Networking: bridge, not host. All containers sit on umbrel_main_network, so other apps
 # (Spero) reach Notus as http://bitsperity-notus_web_1:8096. Inside this app, services address each
-# other by container name too (bitsperity-notus_postgres_1, bitsperity-notus_relation-d1_1, ...): bare service
+# other by container name too (bitsperity-notus_postgres_1, ...): bare service
 # names like `postgres` are shared by every app on that network.
 #
 # Secrets: ${APP_DATA_DIR}/notus.env (mode 600, filled by scp from the laptop .env).
@@ -57,7 +57,7 @@ services:
 
   web:
     # Tag from .github/workflows/release.yml. Pin @sha256 from the release run summary before install.
-    image: ghcr.io/bitsperitybtc/notus:v3.1.12@sha256:650b486b0fc9f83e33cba22b28b34dd722e10645c332abf226de36a488c715af
+    image: ghcr.io/bitsperitybtc/notus:v3.2.0@sha256:a1fd0e51946bdba5a2db077e4a25b114f5b93cf1242e6fe1a52c91a49d5c122d
     restart: unless-stopped
     stop_grace_period: 30s
     init: true
@@ -77,8 +77,11 @@ services:
       # No Notus login on Umbrel: the Umbrel app_proxy already guards the UI (Sascha, 2026-10-30).
       # Wins over notus.env. /api/v1 stays behind NOTUS_INTERNAL_API_KEY.
       NOTUS_UI_BASIC_AUTH_ENABLED: "false"
-      RELATION_D1_URL: http://bitsperity-notus_relation-d1_1:8080
-      RELATION_EMBED_URL: http://bitsperity-notus_relation-embed_1:8080
+      # d1 and EmbeddingGemma-2 run in Ollama on Sascha's laptop (RTX 4070), the same Ollama Lunation
+      # uses. While the laptop is off, the relation job stops with "d1 unreachable" and the pairs stay
+      # open for the 14-day lookback; it carries on by itself once the laptop is back.
+      RELATION_D1_URL: http://192.168.178.67:11434
+      RELATION_EMBED_URL: http://192.168.178.67:11434
       NOTUS_VAULT_DIR: /data/vault
       NOTUS_VAULT_DEPLOY_KEY_FILE: /run/secrets/notus-vault-deploy-key
     # Gate: wait until restore opened data/restore-state/done, then apply pending migrations
@@ -96,54 +99,3 @@ services:
         condition: service_healthy
       restore:
         condition: service_completed_successfully
-
-  # One-shot: pinned GGUFs into data/models, SHA256-checked, no token. Same script as
-  # scripts/relation/fetch-models.sh (CI checks they are identical).
-  relation-models:
-    image: ghcr.io/ggml-org/llama.cpp:server-b11946@sha256:d880b2a0e478795ce99d0a275732f5a50e579cb234ae7d2d3815afc909fd02f2
-    entrypoint: ["sh", "/fetch-models.sh"]
-    environment:
-      MODEL_DIR: /models
-    volumes:
-      - ${APP_DATA_DIR}/data/models:/models
-      - ${APP_DATA_DIR}/hooks/fetch-models.sh:/fetch-models.sh:ro
-    restart: "no"
-
-  # Sizing as docker-compose.relation.yml (#21): N100, 4 threads, 1 slot, ctx/batch 1024.
-  relation-d1:
-    image: ghcr.io/ggml-org/llama.cpp:server-b11946@sha256:d880b2a0e478795ce99d0a275732f5a50e579cb234ae7d2d3815afc909fd02f2
-    command: ["-m", "/models/d1-2B-Q4_K_M.gguf", "--host", "0.0.0.0", "--port", "8080", "--threads", "4", "--parallel", "1", "--ctx-size", "1024", "--batch-size", "1024", "--ubatch-size", "1024", "--no-repack"]
-    env_file:
-      - ${APP_DATA_DIR}/relation.env
-    volumes:
-      - ${APP_DATA_DIR}/data/models:/models:ro
-    mem_limit: 1600m
-    depends_on:
-      relation-models:
-        condition: service_completed_successfully
-    healthcheck:
-      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 60s
-    restart: unless-stopped
-
-  relation-embed:
-    image: ghcr.io/ggml-org/llama.cpp:server-b11946@sha256:d880b2a0e478795ce99d0a275732f5a50e579cb234ae7d2d3815afc909fd02f2
-    command: ["-m", "/models/embeddinggemma-2-Q8_0.gguf", "--embeddings", "--host", "0.0.0.0", "--port", "8080", "--threads", "4", "--parallel", "1", "--ctx-size", "1024", "--batch-size", "1024", "--ubatch-size", "1024", "--no-repack"]
-    env_file:
-      - ${APP_DATA_DIR}/relation.env
-    volumes:
-      - ${APP_DATA_DIR}/data/models:/models:ro
-    mem_limit: 640m
-    depends_on:
-      relation-models:
-        condition: service_completed_successfully
-    healthcheck:
-      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 60s
-    restart: unless-stopped
