@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Studio
-version: "3.3.1"
+version: "3.3.2"
 tagline: See what a Canopy forest is doing
 description: >-
   Studio is the window onto a Canopy forest. It shows what each agent is doing,
@@ -29,10 +29,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  New view Chats: every model call as a conversation, for every driver. A
-  person's talk with an agent is one thread, with search, filters, the answer
-  of each call and Copy as Markdown. Studio now works on a phone: every view
-  fits the screen. Settings are unchanged.
+  Built the same way as before with stable layers: later updates download
+  only what changed. No change to what Studio does. Settings are unchanged.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
