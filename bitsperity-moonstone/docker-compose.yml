@@ -20,7 +20,7 @@ services:
   # 0600 files in /data. The signer now runs as uid 1000 (USER node), so the data must be
   # its own. A no-op once it is. Uses the signer image, so nothing extra is pulled.
   data_owner:
-    image: ghcr.io/bitsperitybtc/moonstone:0.9.0@sha256:e8da1a758e653c3d492b16289508c58ff5c86fa08ff8cbfeb8e1092f052b8e7b
+    image: ghcr.io/bitsperitybtc/moonstone:0.9.1@sha256:f1aa7cee3fae00d0f74900121d15c598338fbafb77751a81c5c24788edbea768
     user: "0:0"
     restart: "no"
     volumes:
@@ -28,7 +28,7 @@ services:
     entrypoint: ["chown", "-R", "1000:1000", "/data"]
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.9.0@sha256:e8da1a758e653c3d492b16289508c58ff5c86fa08ff8cbfeb8e1092f052b8e7b
+    image: ghcr.io/bitsperitybtc/moonstone:0.9.1@sha256:f1aa7cee3fae00d0f74900121d15c598338fbafb77751a81c5c24788edbea768
     restart: on-failure
     stop_grace_period: 1m
     volumes:
