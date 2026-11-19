@@ -23,8 +23,8 @@ services:
       APP_PORT: "8787"
 
   runner:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of spero:v1.0.10, which runs on canopy:v3.0.4.
-    image: ghcr.io/bitsperitybtc/spero:v1.0.10@sha256:efca09a59e1b042bfd0e6d45f1a48c5447d51e9cc3f3c7e018247d15b091fc2a
+    # Multi-arch index digest (linux/amd64 + linux/arm64) of spero:v1.0.11, which runs on canopy:v3.0.4.
+    image: ghcr.io/bitsperitybtc/spero:v1.0.11@sha256:adef7471c584cb29bbade49109f2f6fb02b76addfbfac41a01c4b5f5c7aa567e
     restart: unless-stopped
     stop_grace_period: 1m
     init: true
@@ -42,7 +42,7 @@ services:
       CASH_STATE_DIR: /state
       CASH_WORK_DIR: /work
       CASH_LIVE_KINDS: hunt,depth
-      CASH_STEER_LIVE: "0"
+      CASH_STEER_LIVE: "1"
       CASH_NOTIFY_SEND: "0"
       CASH_HUNT_MAX_RUNS: "5"
       CASH_HYGIENE_MAX_RUNS: "5"
@@ -56,7 +56,7 @@ services:
     mem_limit: 4g
 
   observe:
-    image: ghcr.io/bitsperitybtc/spero:v1.0.10@sha256:efca09a59e1b042bfd0e6d45f1a48c5447d51e9cc3f3c7e018247d15b091fc2a
+    image: ghcr.io/bitsperitybtc/spero:v1.0.11@sha256:adef7471c584cb29bbade49109f2f6fb02b76addfbfac41a01c4b5f5c7aa567e
     restart: unless-stopped
     init: true
     # observe-http binds loopback by default; app_proxy needs 0.0.0.0.
