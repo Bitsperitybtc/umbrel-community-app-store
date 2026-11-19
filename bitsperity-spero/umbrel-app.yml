@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-spero
 category: finance
 name: Spero
-version: "1.0.9"
+version: "1.0.10"
 tagline: Research desk forest on Canopy
 description: >-
   Spero is a paper-and-research trading desk forest on the Canopy runtime. It
