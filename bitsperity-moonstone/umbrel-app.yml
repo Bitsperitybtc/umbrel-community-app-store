@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.9.0"
+version: "0.9.1"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -24,10 +24,9 @@ description: >-
   the bitsperity Beacon app. Install Beacon for that, or set another relay in
   Settings. Moonstone does not require Beacon.
 releaseNotes: >-
-  Moonstone 0.9.0. There is one kind of identity. Each identity signs all
-  kinds, or only the kinds you check, and another kind is refused at once.
-  Its page lists recent activity. The signer runs as uid 1000, and an update
-  keeps the identities you already have. Your keys stay on this node.
+  Moonstone 0.9.1. Agents with the admin MCP can now set an identity's
+  profile (name, text, picture) the way Edit profile does, within the kinds
+  the identity may sign. Your keys stay on this node.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitsperity/tree/main/apps/moonstone
 dependencies: []
