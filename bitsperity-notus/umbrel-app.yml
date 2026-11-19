@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.2.0"
+version: "3.2.1"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,10 +14,7 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  Thesis relations are scored by d1 and EmbeddingGemma-2 in Ollama on the laptop
-  (192.168.178.67:11434) instead of three model containers on the Umbrel. The
-  1.6 GB of model files on the Umbrel are removed. While the laptop is off, news
-  relations wait and are scored once it is back.
+  The app icon is back. Nothing else changed.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []
@@ -30,5 +27,6 @@ gallery: []
 path: ""
 defaultUsername: ""
 defaultPassword: ""
+icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-notus/icon.png
 submitter: Bitsperity
-submission: https://github.com/Bitsperitybtc/notus
+submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
