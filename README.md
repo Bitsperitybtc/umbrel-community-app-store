@@ -24,7 +24,7 @@ Every package declares `manifestVersion: 1`. umbreld normalizes it to `1.0.0` (`
 
 The minimum supported umbrelOS is **2.0.0** for every app here. Beacon, Horizon, Lunation, Moonstone, Studio and Spero declare `environment:` settings (App Settings → Environment); umbrelOS 1.7.4 has no `environment` field in its manifest schema, and 2.0.0 is the first release with it (read from `packages/umbreld/source/modules/apps/schema.ts` at tags `1.7.4` and `2.0.0`). Moonstone also needs the 2.0 app gateway: its session cookie is issued for `MOONSTONE_PROXY_HOST=10.21.0.1`. Notus uses no 2.0-only field, but it is tested only on 2.0.x.
 
-Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.0` was read on 13 Nov 2026, Beacon `0.4.3` and Moonstone `0.9.2` on 15 Nov 2026, Lunation `2.12.0` on 18 Nov 2026, Spero `v1.0.18` and Studio `v3.4.0` on 19 Nov 2026, from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
+Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.0` was read on 13 Nov 2026, Beacon `0.4.3` and Moonstone `0.9.2` on 15 Nov 2026, Lunation `2.12.0` on 18 Nov 2026, Spero `v1.0.19` and Studio `v3.4.0` on 19 Nov 2026, from the registry API without a login (the platforms of each pinned index digest, see [Check an image digest](#check-an-image-digest)):
 
 | App | Image | linux/amd64 | linux/arm64 |
 |---|---|---|---|
@@ -35,7 +35,7 @@ Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.
 | Moonstone | `ghcr.io/bitsperitybtc/moonstone:0.9.2`, mailbox `ghcr.io/bitsperitybtc/beacon:0.2.4` | yes | yes |
 | Notus | `ghcr.io/bitsperitybtc/notus:v3.1.7` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |
 | Notus | `postgres:16-alpine`, `ghcr.io/ggml-org/llama.cpp:server-b11946` | yes | yes |
-| Spero | `ghcr.io/bitsperitybtc/spero:v1.0.18` | yes | yes |
+| Spero | `ghcr.io/bitsperitybtc/spero:v1.0.19` | yes | yes |
 
 Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Studio's icon is `brand/icons/canopy.png`. Horizon and Moonstone have 1440×900 gallery screenshots. Beacon's app is served on the relay port and Notus, Lunation, Studio and Spero list `gallery: []`; umbrelOS shows such a listing without screenshots.
 
@@ -253,7 +253,7 @@ The canonical copy is `apps/spero/umbrel/bitsperity-spero/` in `Bitsperitybtc/bi
 ### Image pin
 
 ```text
-ghcr.io/bitsperitybtc/spero:v1.0.18@sha256:<index digest>
+ghcr.io/bitsperitybtc/spero:v1.0.19@sha256:<index digest>
 ```
 
 The package must be public, or Umbrel cannot pull it. To bump, tag `spero/vX.Y.Z` (after `canopy/vX.Y.Z` when the runtime changes), then follow the [release checklist](#release-checklist). Do not use `latest`. Do not use compose `build:`.
