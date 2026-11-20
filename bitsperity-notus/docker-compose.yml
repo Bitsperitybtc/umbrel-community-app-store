@@ -57,7 +57,7 @@ services:
 
   web:
     # Tag from .github/workflows/release.yml. Pin @sha256 from the release run summary before install.
-    image: ghcr.io/bitsperitybtc/notus:v3.2.0@sha256:a1fd0e51946bdba5a2db077e4a25b114f5b93cf1242e6fe1a52c91a49d5c122d
+    image: ghcr.io/bitsperitybtc/notus:v3.2.2@sha256:253cde45f8c87a71146a0701337269d1ee36b6506fa8592ccfbc35122c38be22
     restart: unless-stopped
     stop_grace_period: 30s
     init: true
@@ -82,6 +82,8 @@ services:
       # open for the 14-day lookback; it carries on by itself once the laptop is back.
       RELATION_D1_URL: http://192.168.178.67:11434
       RELATION_EMBED_URL: http://192.168.178.67:11434
+      # d1 with a batch of 1024 (scripts/relation/ollama/notus-d1.Modelfile); Ollama's 512 refuses long news.
+      RELATION_D1_MODEL: notus-d1
       NOTUS_VAULT_DIR: /data/vault
       NOTUS_VAULT_DEPLOY_KEY_FILE: /run/secrets/notus-vault-deploy-key
     # Gate: wait until restore opened data/restore-state/done, then apply pending migrations
