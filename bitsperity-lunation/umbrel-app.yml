@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.12.0"
+version: "2.12.1"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -56,10 +56,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.12.0. Select a card on the Map and its way up to every root
-  stands out, with what follows right from it. Only the way (or the key p)
-  hides everything else in place; p, Esc or a click on the empty map brings it
-  back. The arrows next to Agree are gone.
+  Lunation 2.12.1. Dependency updates only: lucide-svelte 1, vite 8,
+  @sveltejs/kit 3.2.1, better-sqlite3 13.2 and its types. Nothing changes in use.
   Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
