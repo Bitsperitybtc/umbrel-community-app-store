@@ -56,8 +56,8 @@ services:
     restart: "no"
 
   web:
-    # Tag from .github/workflows/release.yml. Pin @sha256 from the release run summary before install.
-    image: ghcr.io/bitsperitybtc/notus:v3.2.7@sha256:61cabb56b7432a0bbcb6d0eef68c9832e072ee5821d0b9a44c62c0ced6570f1a
+    # Tag from .github/workflows/release-notus.yml. Pin @sha256 from the release run summary before install.
+    image: ghcr.io/bitsperitybtc/notus:v3.3.0@sha256:84a9cbcfafdd54f53dcc7f817808590ddfcc50dfb558d557b61fe09ff38514e2
     restart: unless-stopped
     stop_grace_period: 30s
     init: true
