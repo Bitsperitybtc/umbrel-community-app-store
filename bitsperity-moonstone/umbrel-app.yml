@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-moonstone
 category: social
 name: Moonstone
-version: "0.9.2"
+version: "0.9.3"
 tagline: Hold Nostr keys on your node and sign for any NIP-46 client
 description: >-
   bitsperity Moonstone holds your Nostr identities on this node and signs for
@@ -24,8 +24,8 @@ description: >-
   the bitsperity Beacon app. Install Beacon for that, or set another relay in
   Settings. Moonstone does not require Beacon.
 releaseNotes: >-
-  Moonstone 0.9.2. An identity can be renamed on its page; only the label on
-  the keyring changes, its key, profile and apps stay. Your keys stay on this node.
+  Moonstone 0.9.3. Dependency updates only: vite 8 and SvelteKit 3.2.1.
+  Your keys stay on this node.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitsperity/tree/main/apps/moonstone
 dependencies: []
