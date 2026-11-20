@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Studio
-version: "3.4.0"
+version: "3.4.2"
 tagline: See what a Canopy forest is doing
 description: >-
   Studio is the window onto a Canopy forest. It shows what each agent is doing,
@@ -29,9 +29,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  New view Forest: the models with driver and model id, every agent and
-  capability, and every file of the forest as text. Chats show the driver and
-  model of each call and open the skills a model read. Settings are unchanged.
+  Cost is per agent: each agent with the drivers and models it ran on, and its
+  runs, the most expensive first, each saying what it was about and opening its
+  chat. Scripts are no longer listed as unknown.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
