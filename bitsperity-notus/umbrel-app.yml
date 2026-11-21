@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.4.0"
+version: "3.4.1"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,9 +14,8 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  Notus 3.4.0. You sign in to Notus with your own identity through Moonstone; the Umbrel login no longer
-  sits in front. Under System, Agents you pair your agents and tick what each may change. Every change now
-  names who made it. Your agents keep working as before. Your data stays.
+  Notus 3.4.1. Notus shows you and your agents with picture and name from your Nostr profiles, in the top
+  bar, on System, Agents and as the author of a change, instead of an npub. Your data stays.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []
