@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-horizon
 category: finance
 name: Horizon
-version: "0.15.1"
+version: "0.16.0"
 tagline: Ideas and paid work on Nostr
 description: >-
   bitsperity Horizon is a client-side market for ideas and paid work on
@@ -23,9 +23,10 @@ description: >-
   after the Umbrel login, and where you can also regenerate it. The MCP signs
   through Moonstone.
 releaseNotes: >-
-  Horizon 0.15.1. Dependency updates only: zod 4, vite 8, lucide-svelte 1,
-  happy-dom 21 and @sveltejs/kit 3.2.1. Nothing changes in use; MCP still
-  never pays.
+  Horizon 0.16.0. Horizon runs as one Node process: the app, the relay
+  connection at /relay and the MCP are served by the same container, without
+  nginx. Nothing changes in use: the address, the MCP token and the settings
+  stay as they are. MCP still never pays.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/horizon
 dependencies:
@@ -47,12 +48,12 @@ submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
 environment:
   - name: NOSTR_LOCAL_RELAYS
     services:
-      - mcp
+      - web
     default: ws://bitsperity-beacon_relay_1:7777
     note: "Relays the MCP reads and publishes on, comma-separated ws:// or wss:// URLs. The default is the bitsperity Beacon app."
   - name: HORIZON_PUBLIC_RELAYS
     services:
-      - mcp
+      - web
     note: "Relays the MCP names in poll and goal relay tags and in relay hints, comma-separated ws:// or wss:// URLs a browser can reach. Empty means this app's /relay, ws://<device>:3847/relay."
   - name: HORIZON_LOCAL_RELAY_UPSTREAM
     services:
@@ -61,7 +62,7 @@ environment:
     note: "Relay this app serves as /relay on its port, one ws://host:port[/path] URL. The default is the bitsperity Beacon app."
   - name: NOSTR_LOCAL_KEYS
     services:
-      - mcp
+      - web
     default: "0"
     options:
       - "0"
@@ -69,7 +70,7 @@ environment:
     note: "Testing only. 0 (off) means signing goes through Moonstone. 1 lets the MCP create local test identities, with keys stored in this app's data."
   - name: HORIZON_TEST_RESET
     services:
-      - mcp
+      - web
     default: "0"
     options:
       - "0"
@@ -77,13 +78,13 @@ environment:
     note: "Testing only. 0 is off. 1 adds the MCP tool reset_test_data, which deletes the active local test identity's events on the relays above. Needs NOSTR_LOCAL_KEYS=1; Moonstone identities are refused."
   - name: MOONSTONE_PUBLIC_URL
     services:
-      - mcp
+      - web
     note: "Browser-facing Moonstone origin for approval links, such as http://192.168.1.10:8740 or a Tailscale address. Not localhost, umbrel.local or a Docker hostname. Empty leaves Moonstone signing unconfigured."
   - name: MOONSTONE_URL
     services:
-      - mcp
+      - web
     note: "Optional internal Moonstone origin for pairing notifications, such as http://bitsperity-moonstone_signer_1:8740. Only valid together with MOONSTONE_PUBLIC_URL. Empty uses MOONSTONE_PUBLIC_URL."
   - name: MOONSTONE_PAIRING_TOKEN
     services:
-      - mcp
+      - web
     note: "Optional registration-only secret, at least 32 characters, the same value as in Moonstone. Shows new pairings as pending in an open Moonstone UI. Never grants approval or signing."

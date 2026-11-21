@@ -1,62 +1,48 @@
-# Umbrel package. Canonical copy: Bitsperitybtc/horizon umbrel/bitsperity-horizon/;
-# Bitsperitybtc/umbrel-community-app-store carries an identical copy.
-# Umbrel pulls the image by digest; the Docker workflow builds it from a `v*` tag.
+# Umbrel package. Bitsperitybtc/umbrel-community-app-store carries a copy with the digest.
+# Tag only here; the community-store copy adds the digest. release-horizon.yml builds the image from a `horizon/v*` tag.
 #
-# Port 3847 (app gateway -> web nginx) serves the SPA, /relay and the MCP:
-# /mcp needs the bearer from /mcp-token; /mcp-token itself needs the Umbrel login.
-# The mcp service runs the same image and listens only on a Unix socket in
-# ${APP_DATA_DIR}/mcp-run, which only web and mcp mount.
+# Port 3847 (app gateway -> web on 8080) serves the app, /relay and the MCP, all from
+# one Node process: /mcp needs the bearer from /mcp-token; /mcp-token itself needs the
+# Umbrel login. Before 0.16 nginx served web and a second container ran the MCP.
 version: "3.7"
 
 services:
   app_proxy:
     environment:
       APP_HOST: bitsperity-horizon_web_1
-      APP_PORT: "80"
+      APP_PORT: "8080"
       # No Umbrel login anywhere except the MCP token endpoint (JSON + regenerate).
       PROXY_AUTH_WHITELIST: "*"
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
+  # The MCP container of earlier versions ran as root, so its files in
+  # ${APP_DATA_DIR}/mcp are root-owned. This hands them to uid 1000 (node) before web starts.
+  data_owner:
+    image: ghcr.io/bitsperitybtc/horizon:0.16.0@sha256:27b9e6eee23959380b357e1d070abdaf7ccd11589169af17fad493a2f7604dce
+    user: "0:0"
+    restart: "no"
+    volumes:
+      - ${APP_DATA_DIR}/mcp:/data
+    entrypoint: ["chown", "-R", "1000:1000", "/data"]
+
   web:
-    image: ghcr.io/bitsperitybtc/horizon:0.15.1@sha256:ce8eefddaed1fd00bfc84d61cd33e33519d460e11929f4663d7391de0378928b
+    image: ghcr.io/bitsperitybtc/horizon:0.16.0@sha256:27b9e6eee23959380b357e1d070abdaf7ccd11589169af17fad493a2f7604dce
     restart: on-failure
     stop_grace_period: 1m
     init: true
+    depends_on:
+      data_owner:
+        condition: service_completed_successfully
     environment:
       # Served as /relay on this app's port (ws:// on http, wss:// on https).
       # The bitsperity Beacon app's relay container on umbrel_main_network, which
       # umbreld's common fragment makes every app's default network.
       # App Settings -> Environment can point it at another ws:// relay.
       HORIZON_LOCAL_RELAY_UPSTREAM: ws://bitsperity-beacon_relay_1:7777
-      # umbreld's app gateway connects from the app network gateway. nginx
-      # serves /mcp-token only to it, so the Umbrel login above applies.
+      # umbreld's app gateway connects from the app network gateway. /mcp-token
+      # is answered only to it, so the Umbrel login above applies.
       HORIZON_PROXY_PEER: "10.21.0.1"
-    volumes:
-      # umbreld's common fragment is the first compose file, so a relative
-      # ./signer-config.json resolves outside this app and nginx never serves
-      # it. APP_DATA_DIR is absolute and holds both files.
-      - ${APP_DATA_DIR}/signer-config.json:/usr/share/nginx/html/signer-config.json:ro
-      - ${APP_DATA_DIR}/relay-config.json:/usr/share/nginx/html/relay-config.json:ro
-      - ${APP_DATA_DIR}/mcp-run:/run/horizon-mcp
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-
-  mcp:
-    image: ghcr.io/bitsperitybtc/horizon:0.15.1@sha256:ce8eefddaed1fd00bfc84d61cd33e33519d460e11929f4663d7391de0378928b
-    command: ["node", "/opt/horizon-mcp/horizon-mcp.mjs"]
-    restart: on-failure
-    stop_grace_period: 30s
-    init: true
-    volumes:
-      # NIP-46 client key, the NWC wallets added in Settings, Cashu swap records and, when NOSTR_LOCAL_KEYS=1 is set, local test keys.
-      - ${APP_DATA_DIR}/mcp:/data
-      - ${APP_DATA_DIR}/mcp-run:/run/horizon-mcp
-    environment:
-      # Seeds the first bearer: deriveMcpToken(APP_SEED, "bitsperity-horizon"), written to
+      # Seeds the first MCP bearer: deriveMcpToken(APP_SEED, "bitsperity-horizon"), written to
       # /data/mcp-token (0600) on first start; Regenerate replaces it there. Never logged.
       APP_SEED: ${APP_SEED}
       HORIZON_MCP_DATA_DIR: /data
@@ -76,15 +62,17 @@ services:
       # No test defaults: NOSTR_LOCAL_KEYS and HORIZON_TEST_RESET stay unset (off).
       # They are opt-in through App Settings -> Environment, for testing only.
       # Wallets for the MCP are added per identity in Horizon Settings -> Wallet (MCP).
+    volumes:
+      # umbreld's common fragment is the first compose file, so a relative
+      # ./signer-config.json resolves outside this app and is never served.
+      # APP_DATA_DIR is absolute and holds both files.
+      - ${APP_DATA_DIR}/signer-config.json:/app/build/signer-config.json:ro
+      - ${APP_DATA_DIR}/relay-config.json:/app/build/relay-config.json:ro
+      # NIP-46 client key, the NWC wallets added in Settings, Cashu swap records and, when NOSTR_LOCAL_KEYS=1 is set, local test keys.
+      - ${APP_DATA_DIR}/mcp:/data
     healthcheck:
-      test:
-        [
-          "CMD",
-          "node",
-          "-e",
-          "require('http').get({socketPath:'/run/horizon-mcp/mcp.sock',path:'/mcp/health'},(r)=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))",
-        ]
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/healthz').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
       interval: 30s
       timeout: 5s
       retries: 3
-      start_period: 20s
+      start_period: 10s

@@ -29,7 +29,7 @@ Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.
 | App | Image | linux/amd64 | linux/arm64 |
 |---|---|---|---|
 | Beacon | `ghcr.io/bitsperitybtc/beacon:0.4.3` | yes | yes |
-| Horizon | `ghcr.io/bitsperitybtc/horizon:0.15.0` | yes | yes |
+| Horizon | `ghcr.io/bitsperitybtc/horizon:0.16.0` | yes | yes |
 | Lunation | `ghcr.io/bitsperitybtc/lunation:2.12.0` | yes | yes |
 | Studio | `ghcr.io/bitsperitybtc/canopy-studio:v3.4.3` | yes | yes |
 | Moonstone | `ghcr.io/bitsperitybtc/moonstone:0.9.2`, mailbox `ghcr.io/bitsperitybtc/beacon:0.2.4` | yes | yes |
