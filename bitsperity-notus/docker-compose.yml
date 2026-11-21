@@ -15,6 +15,9 @@ services:
     environment:
       APP_HOST: bitsperity-notus_web_1
       APP_PORT: "8096"
+      # No Umbrel login: the owner signs in to Notus with Moonstone (NOTUS_OWNERS below), as in
+      # Lunation and Horizon. One login only.
+      PROXY_AUTH_WHITELIST: "*"
 
   postgres:
     image: postgres:16-alpine@sha256:0cefaabd882e42bcb2a2f3dc56d3ce4770560ba62fd7f197f1a2e008fd5731ab
@@ -57,7 +60,7 @@ services:
 
   web:
     # Tag from .github/workflows/release.yml. Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/notus:3.3.3@sha256:83de24c65de28ddb249c26f71877905f5b83c56fcc530699c71802cafc2c9f17
+    image: ghcr.io/bitsperitybtc/notus:3.4.0@sha256:c962797ced507780d47ea11d5a3ec46c2a2992a16b47e5959b946036fc145375
     restart: unless-stopped
     stop_grace_period: 30s
     init: true
@@ -74,12 +77,25 @@ services:
       # Paper only: paperHost.ts refuses any host but paper-api.alpaca.markets.
       # This line wins over notus.env. Rollback = "off" in a PR and update the app.
       NOTUS_PAPER_WRITER: "on"
-      # No Notus login on Umbrel: the Umbrel login guards the screens (Sascha, 2026-10-30).
-      # Wins over notus.env. /api/v1 stays behind NOTUS_INTERNAL_API_KEY.
+      # No Basic Auth on Umbrel: the owner's Moonstone sign-in guards the screens and /api/ui.
+      # Wins over notus.env. /api/v1 stays behind NOTUS_INTERNAL_API_KEY and signed writes.
       NOTUS_UI_BASIC_AUTH_ENABLED: "false"
+      # The owner (rafiki71): only this key gets a session on the screens, and it holds every grant
+      # for signed writes. A public key, not a secret. App Settings -> Environment can change it.
+      NOTUS_OWNERS: npub1r22hluhx79hymaa3g83lhd43d75lhuyh0pgt3v46vvv5vpsmtvusegap9v
+      # The sign-in reaches the same-node Moonstone on the host Notus was loaded from: its pairing
+      # page on this port and its mailbox at /mailbox on it, as in Lunation.
+      MOONSTONE_BROWSER_PORT: "8740"
+      # System -> Agents -> Add agent: the server pairs an agent through the same-node Moonstone, as
+      # in Lunation: its approval links (the page moves them to the port above) and its mailbox relay
+      # container. Notus keeps only the approved pubkey. App Settings -> Environment can change both.
+      MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
+      MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
       # The screens and /api/ui answer only umbreld's app gateway (the network's default gateway), so
       # another app on the Umbrel cannot use them past the Umbrel login. Agents keep /api/v1.
       NOTUS_UI_GATEWAY_ONLY: "true"
+      # Reads keep the shared key (NOTUS_INTERNAL_API_KEY in notus.env); writes are signed by identities.
+      NOTUS_ENFORCE_INTERNAL_API_KEY: "true"
       # d1 and EmbeddingGemma-2 run in Ollama on Sascha's laptop (RTX 4070), the same Ollama Lunation
       # uses. While the laptop is off, the relation job stops with "d1 unreachable" and the pairs stay
       # open for the 14-day lookback; it carries on by itself once the laptop is back.
