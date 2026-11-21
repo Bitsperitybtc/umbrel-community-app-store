@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-spero
 category: finance
 name: Spero
-version: "1.0.25"
+version: "1.1.0"
 tagline: Research forest on Canopy
 description: >-
   Spero is a paper-and-research trading forest on the Canopy runtime. It
@@ -20,7 +20,8 @@ description: >-
   Moonstone app; pair the identities once in Studio (Identities). The vault push
   is off in this package. Studio is its own app.
 releaseNotes: >-
-  Spero 1.0.25. The observe view starts again: it had run out of memory reading the grown event store. The forest works as before.
+  Spero 1.1.0. Each agent signs what it writes to Notus with its own identity, so Notus knows who
+  changed what and checks what each agent may do. The shared key still goes along during the switch.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitsperity
 dependencies:
