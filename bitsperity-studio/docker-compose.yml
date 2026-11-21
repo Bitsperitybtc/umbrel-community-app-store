@@ -16,7 +16,7 @@ services:
 
   web:
     # Multi-arch (linux/amd64 + linux/arm64) canopy-studio:v3.4.3. Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/canopy-studio:3.4.4@sha256:31873381b3b67f0a73f8d3a45b946d29e117080539afa0bf57be7390060f503a
+    image: ghcr.io/bitsperitybtc/canopy-studio:3.5.0@sha256:8289e5cb9df0993b712da9132b3ae3928f7fc7efbe97f6af235e8f0037aa7fca
     restart: on-failure
     stop_grace_period: 1m
     init: true

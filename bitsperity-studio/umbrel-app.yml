@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Studio
-version: "3.4.4"
+version: "3.5.0"
 tagline: See what a Canopy forest is doing
 description: >-
   Studio is the window onto a Canopy forest. It shows what each agent is doing,
@@ -29,7 +29,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Studio 3.4.4. Built from the shared image file on Node 22 bookworm; Studio works as before.
+  Studio 3.5.0. The Canopy runtime lets a script have a request signed as the agent that runs it, so
+  apps can tell your agents apart. Studio works as before.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
