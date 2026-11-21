@@ -35,7 +35,7 @@ Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.
 | Moonstone | `ghcr.io/bitsperitybtc/moonstone:0.9.4`, mailbox `ghcr.io/bitsperitybtc/beacon:0.2.4` | yes | yes |
 | Notus | `ghcr.io/bitsperitybtc/notus:3.4.3` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |
 | Notus | `postgres:16-alpine`, `ghcr.io/ggml-org/llama.cpp:server-b11946` | yes | yes |
-| Spero | `ghcr.io/bitsperitybtc/spero:1.1.0` | yes | yes |
+| Spero | `ghcr.io/bitsperitybtc/spero:1.1.1` | yes | yes |
 
 Icons and screenshots: every package has an `icon.png` (square, no rounded corners; Beacon 256×256, the others 512×512) drawn from the bitsperity brand artwork (CC BY-SA 4.0). Studio's icon is `brand/icons/canopy.png`. Horizon and Moonstone have 1440×900 gallery screenshots. Beacon's app is served on the relay port and Notus, Lunation, Studio and Spero list `gallery: []`; umbrelOS shows such a listing without screenshots.
 
