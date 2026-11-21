@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.4.4"
+version: "3.5.0"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,9 +14,10 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  Notus 3.4.4. A new Discussions page in the menu gathers every comment thread in one place, with
-  unread counts, filters and search, and lets you answer right there. Threads read like a conversation,
-  and a thesis opened from a discussion no longer hides the top bar. Your data stays.
+  Notus 3.5.0. You can now comment on everything that matters: theses, levels, fills, symbols,
+  news, reports and proposals, and talk to an agent directly. A small speech bubble next to each one
+  shows how many comments it has and opens them beside the page; name someone with @, and comments
+  can use bold, lists, links and $SYMBOL links. Your data stays.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []
