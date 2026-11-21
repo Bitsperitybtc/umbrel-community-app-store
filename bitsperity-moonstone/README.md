@@ -8,9 +8,9 @@ This folder is the installable Umbrel app. It ships through the bitsperity Commu
    `https://github.com/Bitsperitybtc/umbrel-community-app-store`
 2. Install **Moonstone** (app id `bitsperity-moonstone`, directory `bitsperity-moonstone/`).
 
-The compose file pulls `ghcr.io/bitsperitybtc/moonstone:<version>`, pinned by digest (published, amd64 + arm64).
+The compose file pulls `ghcr.io/bitsperitybtc/moonstone:<version>` (published, amd64 + arm64). Here it is pinned by tag only; the copy in the store adds the digest.
 
-This folder is the canonical package. `Bitsperitybtc/umbrel-community-app-store` holds an identical copy of `umbrel-app.yml`, `docker-compose.yml`, `icon.png` and `gallery/`; change it here first, then copy it there.
+This folder (`apps/moonstone/umbrel/bitsperity-moonstone/`) is the canonical package. `Bitsperitybtc/umbrel-community-app-store` holds a copy of `umbrel-app.yml`, `docker-compose.yml`, `icon.png` and `gallery/`; change it here first, then copy it there.
 
 ## Requirements
 
@@ -20,12 +20,12 @@ This folder is the canonical package. `Bitsperitybtc/umbrel-community-app-store`
 
 ## Release
 
-`version` in `umbrel-app.yml` always names the image that `docker-compose.yml` pins: `test/umbrelCompose.test.ts` fails when they differ. A release goes in this order:
+`version` in `umbrel-app.yml` always names the image tag that `docker-compose.yml` pins: `scripts/ci/umbrel-packages.test.mjs` at the monorepo root fails when they differ or when an image carries a digest here. A release goes in this order:
 
 1. Release PR: `CHANGELOG.md` and the `version` in `package.json` and `web/package.json`. `umbrel-app.yml` and `docker-compose.yml` stay on the old release.
 2. After merge, tag it in the monorepo: `git tag moonstone/v<version> && git push origin moonstone/v<version>`. `.github/workflows/release-moonstone.yml` builds `linux/amd64` and `linux/arm64`, pushes `<version>`, `<major>.<minor>` and `latest`, and smokes the image (healthy, uid 1000, no tsx).
-3. Pin PR: read the index digest of `ghcr.io/bitsperitybtc/moonstone:<version>` and set, in one commit, the `signer` and `data_owner` image to `<version>@sha256:<digest>`, and `version` and `releaseNotes` in `umbrel-app.yml`.
-4. Copy `umbrel-app.yml` and `docker-compose.yml` into `Bitsperitybtc/umbrel-community-app-store`, so both copies are byte-equal.
+3. Pin PR: set, in one commit, the `signer` and `data_owner` image to `ghcr.io/bitsperitybtc/moonstone:<version>` (tag only), and `version` and `releaseNotes` in `umbrel-app.yml`.
+4. Copy `umbrel-app.yml` and `docker-compose.yml` into `Bitsperitybtc/umbrel-community-app-store`; the store copy adds the index digest of each image (`docker buildx imagetools inspect`).
 
 | Ref | Tags on GHCR |
 | --- | --- |

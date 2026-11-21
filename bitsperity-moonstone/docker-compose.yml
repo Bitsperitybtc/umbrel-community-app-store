@@ -1,6 +1,6 @@
-# Umbrel package. Canonical copy: Bitsperitybtc/bitsperity apps/moonstone/bitsperity-moonstone/;
+# Umbrel package. Canonical copy: Bitsperitybtc/bitsperity apps/moonstone/umbrel/bitsperity-moonstone/;
 # Bitsperitybtc/umbrel-community-app-store carries an identical copy.
-# Umbrel pulls the image by digest; release-moonstone.yml builds it from a `moonstone/v*` tag.
+# Tag only here; the community-store copy adds the digest. release-moonstone.yml builds the image from a `moonstone/v*` tag.
 #
 # UI 8740 = app_proxy (Umbrel login). Mailbox 8741 = published WebSocket, no
 # cookie (NIP-46 is the access control). The same relay is wss://<host>:8740/mailbox
@@ -20,7 +20,7 @@ services:
   # 0600 files in /data. The signer now runs as uid 1000 (USER node), so the data must be
   # its own. A no-op once it is. Uses the signer image, so nothing extra is pulled.
   data_owner:
-    image: ghcr.io/bitsperitybtc/moonstone:0.9.3@sha256:eaf14c5ce5ec77dab99db4ecf29a9310d79e4204f5bdebde4532f6de37c97a79
+    image: ghcr.io/bitsperitybtc/moonstone:0.9.4@sha256:163771c6e2a7b48770e1b1dd87488a7dd5f81e3ffbb8ec662dd649494f306c49
     user: "0:0"
     restart: "no"
     volumes:
@@ -28,7 +28,7 @@ services:
     entrypoint: ["chown", "-R", "1000:1000", "/data"]
 
   signer:
-    image: ghcr.io/bitsperitybtc/moonstone:0.9.3@sha256:eaf14c5ce5ec77dab99db4ecf29a9310d79e4204f5bdebde4532f6de37c97a79
+    image: ghcr.io/bitsperitybtc/moonstone:0.9.4@sha256:163771c6e2a7b48770e1b1dd87488a7dd5f81e3ffbb8ec662dd649494f306c49
     restart: on-failure
     stop_grace_period: 1m
     volumes:
@@ -69,14 +69,14 @@ services:
     # The database is a tmpfs, so nothing survives a restart (24133 is ephemeral).
     # strfry runs as uid 1000; a tmpfs without uid/gid is root-owned and strfry
     # exits with "mdb_env_open: Permission denied" (as in Moonstone 0.3.10).
-    # Digest: ghcr.io/bitsperitybtc/beacon:0.2.4 multi-arch index (amd64 + arm64).
+    # ghcr.io/bitsperitybtc/beacon:0.4.4, the image the Beacon app ships (multi-arch, amd64 + arm64).
     # 0.1.1 was deleted with the old GHCR package. From 0.2.0 the image entrypoint is
     # the NIP-50 search front (node /app/search/server.mjs), which listens on
     # BEACON_PORT and starts strfry on 127.0.0.1:7778 from the args after `--`.
     # So the front gets port 8080, strfry stays on 7778, and the entrypoint is
     # restated without its trailing `relay` so the --set overrides reach strfry
     # before the subcommand.
-    image: ghcr.io/bitsperitybtc/beacon:0.2.4@sha256:25bfc227f4f4f722add044fb4e8a107b1315c9c6424f7409956d5f78554a055a
+    image: ghcr.io/bitsperitybtc/beacon:0.4.4@sha256:f86feeb46d95192dafbefce6f2fc3c25ce485a9977bb11b1a12ba5c5eb622a4a
     restart: on-failure
     # Same as the bitsperity Beacon app: an init reaps strfry's children and forwards
     # SIGTERM, and strfry gets a minute to close the database before SIGKILL.
