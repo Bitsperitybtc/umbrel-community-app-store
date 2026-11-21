@@ -11,9 +11,9 @@ services:
       PROXY_AUTH_BLACKLIST: "/mcp-token"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of the lunation/v2.12.1 tag build.
+    # Multi-arch (linux/amd64 + linux/arm64) build of the lunation/v2.12.1 tag. Tag only here; the community-store copy adds the digest.
     # It never runs ahead of package.json.
-    image: ghcr.io/bitsperitybtc/lunation:2.12.1@sha256:b90db7c38781c11e24aa8aa82efb18dfce65374b4309bdb840110d6ceada1e25
+    image: ghcr.io/bitsperitybtc/lunation:2.12.2@sha256:1c3b22a6fe70431f2c420daae1c8dec82fc27436ed82132b904dbc1d68ad694d
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -41,7 +41,8 @@ services:
       # is answered only for that socket address, so the Umbrel login applies.
       LUNATION_PROXY_PEER: "10.21.0.1"
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/v1/health"]
+      # The image has no wget (bookworm-slim); node is always there.
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/v1/health').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
       interval: 30s
       timeout: 5s
       retries: 5
