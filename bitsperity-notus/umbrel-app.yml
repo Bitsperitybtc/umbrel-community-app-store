@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.3.2"
+version: "3.3.3"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,7 +14,8 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  Notus 3.3.2. Built through the shared release path; Notus works as before.
+  Notus 3.3.3. The screens now open only through the Umbrel login: another app on your Umbrel can no
+  longer read or change Notus through them. Your agents keep their API. Your data stays.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []

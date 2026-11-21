@@ -56,8 +56,8 @@ services:
     restart: "no"
 
   web:
-    # Tag from .github/workflows/release-notus.yml. Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/notus:3.3.2@sha256:3ef781e5cf43717da004d55154c2886b4fd08193c7903d42dec973b8e1fe4dff
+    # Tag from .github/workflows/release.yml. Tag only here; the community-store copy adds the digest.
+    image: ghcr.io/bitsperitybtc/notus:3.3.3@sha256:83de24c65de28ddb249c26f71877905f5b83c56fcc530699c71802cafc2c9f17
     restart: unless-stopped
     stop_grace_period: 30s
     init: true
@@ -74,9 +74,12 @@ services:
       # Paper only: paperHost.ts refuses any host but paper-api.alpaca.markets.
       # This line wins over notus.env. Rollback = "off" in a PR and update the app.
       NOTUS_PAPER_WRITER: "on"
-      # No Notus login on Umbrel: the Umbrel app_proxy already guards the UI (Sascha, 2026-10-30).
+      # No Notus login on Umbrel: the Umbrel login guards the screens (Sascha, 2026-10-30).
       # Wins over notus.env. /api/v1 stays behind NOTUS_INTERNAL_API_KEY.
       NOTUS_UI_BASIC_AUTH_ENABLED: "false"
+      # The screens and /api/ui answer only umbreld's app gateway (the network's default gateway), so
+      # another app on the Umbrel cannot use them past the Umbrel login. Agents keep /api/v1.
+      NOTUS_UI_GATEWAY_ONLY: "true"
       # d1 and EmbeddingGemma-2 run in Ollama on Sascha's laptop (RTX 4070), the same Ollama Lunation
       # uses. While the laptop is off, the relation job stops with "d1 unreachable" and the pairs stay
       # open for the 14-day lookback; it carries on by itself once the laptop is back.
