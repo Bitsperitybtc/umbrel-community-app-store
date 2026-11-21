@@ -24,13 +24,15 @@ services:
       APP_PORT: "8787"
 
   runner:
-    # Multi-arch (linux/amd64 + linux/arm64) spero:1.1.1, which runs on canopy:3.5.1. Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/spero:1.1.1@sha256:97a43708442018fb97e6f48ae5e6a5a711c1544a93a9e7a776fb7d7b91c2303d
+    # Multi-arch (linux/amd64 + linux/arm64) spero:1.2.0, which runs on canopy:3.5.1. Tag only here; the community-store copy adds the digest.
+    image: ghcr.io/bitsperitybtc/spero:1.2.0@sha256:4da7f23d44118355b17342987038fa4dd5c7697fc25defe9c593a622ec253a71
     restart: unless-stopped
     stop_grace_period: 1m
     init: true
     environment:
       NOTUS_URL: http://bitsperity-notus_web_1:8096
+      # The Notus address the owner opens; the comment links in the owner's direct messages point there.
+      NOTUS_PUBLIC_URL: http://umbrel.local:8796
       # Studio dials the control port from its own container; serve refuses this bind without CANOPY_CONTROL_TOKEN.
       CANOPY_CONTROL_HOST: 0.0.0.0
       # The Moonstone app on this Umbrel signs for the identities; each is paired once in Studio (Identities).
@@ -58,7 +60,7 @@ services:
     mem_limit: 4g
 
   observe:
-    image: ghcr.io/bitsperitybtc/spero:1.1.1@sha256:97a43708442018fb97e6f48ae5e6a5a711c1544a93a9e7a776fb7d7b91c2303d
+    image: ghcr.io/bitsperitybtc/spero:1.2.0@sha256:4da7f23d44118355b17342987038fa4dd5c7697fc25defe9c593a622ec253a71
     restart: unless-stopped
     init: true
     # observe-http binds loopback by default; app_proxy needs 0.0.0.0.
