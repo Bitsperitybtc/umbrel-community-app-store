@@ -1,6 +1,6 @@
 # Umbrel package. Canonical copy: Bitsperitybtc/bitsperity apps/canopy/umbrel/bitsperity-studio/;
 # Bitsperitybtc/umbrel-community-app-store carries an identical copy, plus icon.png.
-# Umbrel pulls the image by digest. The Canopy release workflow builds it from a canopy/v* tag.
+# Tag only here; the community-store copy adds the digest. The Canopy release workflow builds the image from a canopy/v* tag.
 #
 # Port 8750 (app gateway -> Studio on 3000) is the read-only window onto one Canopy forest.
 # The UI is behind the Umbrel login. /mcp is not: it exists only when
@@ -15,8 +15,8 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health"
 
   web:
-    # Multi-arch index digest (linux/amd64 + linux/arm64) of canopy-studio:v3.4.3.
-    image: ghcr.io/bitsperitybtc/canopy-studio:v3.4.3@sha256:a9925f74d8848327e740f596d2f0e60bcb1f7ca9d515836c9fa82246cd1ee309
+    # Multi-arch (linux/amd64 + linux/arm64) canopy-studio:v3.4.3. Tag only here; the community-store copy adds the digest.
+    image: ghcr.io/bitsperitybtc/canopy-studio:3.4.4@sha256:31873381b3b67f0a73f8d3a45b946d29e117080539afa0bf57be7390060f503a
     restart: on-failure
     stop_grace_period: 1m
     init: true
