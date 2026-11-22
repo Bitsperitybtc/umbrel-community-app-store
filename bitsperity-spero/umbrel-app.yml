@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-spero
 category: finance
 name: Spero
-version: "1.2.0"
+version: "1.2.1"
 tagline: Research forest on Canopy
 description: >-
   Spero is a paper-and-research trading forest on the Canopy runtime. It
@@ -10,19 +10,18 @@ description: >-
 
 
   The keys are App Settings: the Notus internal key, the token the model driver
-  asks for, and the control token Studio uses. Until they are set the runner
+  asks for, and the control token Forester uses. Until they are set the runner
   stops and says which one is missing.
 
 
   The vault is the folder of the Notus app: Spero writes it, Notus shows it.
   Steer is on: the forest changes its own universe, watch queue and sync slots.
   The wire sends its lines to the owners as Nostr direct messages, signed by the
-  Moonstone app; pair the identities once in Studio (Identities). The vault push
-  is off in this package. Studio is its own app.
+  Moonstone app; pair the identities once in Forester (Identities). The vault push
+  is off in this package. Forester is its own app.
 releaseNotes: >-
-  Spero 1.2.0. Agents now answer comments on every kind of Notus object and on your direct threads, only
-  when they add something, and may start up to three threads a run to ask the agent or person who must act.
-  When an agent answers you or writes to you, you get one direct message about it within about 15 minutes.
+  Spero 1.2.1 runs on Canopy 3.6.1: the observation API reads bounded windows, so Forester's Now view and
+  metrics no longer run out of memory on a long run. The agents work as before.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitsperity
 dependencies:
@@ -47,4 +46,4 @@ environment:
     note: "The credential of the model driver that canopy.yaml names."
   - name: CANOPY_CONTROL_TOKEN
     services: [runner]
-    note: "Token of the control API. Choose one and give Studio the same value; without it the runner does not start."
+    note: "Token of the control API. Choose one and give Forester the same value; without it the runner does not start."
