@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Forester
-version: "3.6.1"
+version: "3.6.2"
 tagline: See what a Canopy forest is doing
 description: >-
   Forester is the window onto a Canopy forest. It shows what each agent is doing,
@@ -29,8 +29,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Forester 3.6.1. Now and the forests home no longer run out of memory on long runs: every view reads
-  only what it shows. Metrics counters count from the first scrape after a restart.
+  Forester 3.6.2. A long chat opens fast: the newest answers show at once, and older ones load several at a
+  time instead of one after the other.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
