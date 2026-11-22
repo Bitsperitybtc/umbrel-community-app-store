@@ -6,19 +6,22 @@
 #                     password it was initialised with, so this file must never be replaced.
 # - restore/, data/restore-state/: dump drop zone and restore gate (hooks/restore.sh).
 # - secrets/spero-vault-deploy: placeholder until the real read-only deploy key is copied in.
+# - data/agents (700): the agents' MCP token digests and the client key of their Moonstone pairings.
 set -euo pipefail
 
 data_dir="${APP_DATA_DIR:?APP_DATA_DIR is not set}"
 uid=1000
 gid=1000
 
-mkdir -p "${data_dir}/data/postgres" "${data_dir}/data/vault" \
+mkdir -p "${data_dir}/data/postgres" "${data_dir}/data/vault" "${data_dir}/data/agents" \
   "${data_dir}/secrets" "${data_dir}/restore" "${data_dir}/data/restore-state"
 # restore/: drop zone for notus.dump(.sha256), written by user umbrel (uid 1000) via scp.
 # Only the directories are chowned, never their content.
 chown "${uid}:${gid}" "${data_dir}/data/vault" "${data_dir}/restore" \
   "${data_dir}/data/restore-state"
 chmod 700 "${data_dir}/secrets"
+chown "${uid}:${gid}" "${data_dir}/data/agents"
+chmod 700 "${data_dir}/data/agents"
 # Files below are created private.
 umask 077
 

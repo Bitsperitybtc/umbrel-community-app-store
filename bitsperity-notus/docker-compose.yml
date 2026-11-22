@@ -60,7 +60,7 @@ services:
 
   web:
     # Tag from .github/workflows/release.yml. Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/notus:3.6.3@sha256:74cc5ba572b7984e9d0c18104cd0e3479c55b17288b5dd4b639ee2a4ea621d67
+    image: ghcr.io/bitsperitybtc/notus:3.7.0@sha256:0e39fa6c09b2e5fb46a283dd88c56349e9d8748734d29d870407d08bd2e7b55e
     restart: unless-stopped
     stop_grace_period: 30s
     init: true
@@ -88,11 +88,14 @@ services:
       MOONSTONE_BROWSER_PORT: "8740"
       # System -> Agents -> Add agent: the server pairs an agent through the same-node Moonstone, as
       # in Lunation: its approval links (the page moves them to the port above) and its mailbox relay
-      # container. Notus keeps only the approved pubkey. App Settings -> Environment can change both.
+      # container. Notus keeps the pairing, so the agent's MCP writes are signed as it. App Settings ->
+      # Environment can change both.
       MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
       MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
+      # The agents' MCP access (/mcp): their token digests and the client key of their pairings.
+      NOTUS_AGENT_DIR: /data/agents
       # The screens and /api/ui answer only umbreld's app gateway (the network's default gateway), so
-      # another app on the Umbrel cannot use them past the Umbrel login. Agents keep /api/v1.
+      # another app on the Umbrel cannot use them past the Umbrel login. Agents keep /api/v1 and /mcp.
       NOTUS_UI_GATEWAY_ONLY: "true"
       # Reads keep the shared key (NOTUS_INTERNAL_API_KEY in notus.env); writes are signed by identities.
       NOTUS_ENFORCE_INTERNAL_API_KEY: "true"
@@ -113,6 +116,7 @@ services:
     volumes:
       # Own read-only spero-vault clone (vault-mount-contract.md). The process clones and fetches it.
       - ${APP_DATA_DIR}/data/vault:/data/vault
+      - ${APP_DATA_DIR}/data/agents:/data/agents
       - ${APP_DATA_DIR}/secrets/spero-vault-deploy:/run/secrets/notus-vault-deploy-key:ro
       - ${APP_DATA_DIR}/data/restore-state:/restore-state:ro
     depends_on:
