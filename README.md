@@ -33,7 +33,7 @@ Architectures of the pinned images. Notus was read on 3 Nov 2026. Horizon `0.15.
 | Lunation | `ghcr.io/bitsperitybtc/lunation:2.12.2` | yes | yes |
 | Studio | `ghcr.io/bitsperitybtc/canopy-studio:3.5.1` | yes | yes |
 | Moonstone | `ghcr.io/bitsperitybtc/moonstone:0.9.4`, mailbox `ghcr.io/bitsperitybtc/beacon:0.2.4` | yes | yes |
-| Notus | `ghcr.io/bitsperitybtc/notus:3.5.3` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |
+| Notus | `ghcr.io/bitsperitybtc/notus:3.5.4` | yes | **no** (single-arch manifest; the listing says "Runs on amd64 only") |
 | Notus | `postgres:16-alpine`, `ghcr.io/ggml-org/llama.cpp:server-b11946` | yes | yes |
 | Spero | `ghcr.io/bitsperitybtc/spero:1.2.0` | yes | yes |
 
