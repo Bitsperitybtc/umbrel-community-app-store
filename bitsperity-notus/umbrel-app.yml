@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.5.1"
+version: "3.5.2"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,9 +14,9 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  Notus 3.5.1. A thesis now shows every leaf below it, at any depth: the shares the account holds in
-  each symbol, the open orders, the result and the open comments, with a total on top. Click a leaf
-  to open it. Your data stays.
+  Notus 3.5.2. A new stop or take-profit no longer overwrites the fill of an earlier one, the paper
+  writer no longer places a second entry while the first still waits for the market to open, and a
+  thesis's result counts each round from its own buy price. Your data stays.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []
