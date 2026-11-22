@@ -60,7 +60,7 @@ services:
 
   web:
     # Tag from .github/workflows/release.yml. Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/notus:3.6.0@sha256:7c5ca77ca4e030b5d3957c0465469a1c378b5a59cce573bbe6b80616e8681bf6
+    image: ghcr.io/bitsperitybtc/notus:3.6.1@sha256:cf709bb6e96cea0293f69caf167873daaa0bac3b6029461721ae35a4c8b63ee8
     restart: unless-stopped
     stop_grace_period: 30s
     init: true
