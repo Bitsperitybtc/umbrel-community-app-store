@@ -1,8 +1,9 @@
-# Umbrel package. Canonical copy: Bitsperitybtc/bitsperity apps/canopy/umbrel/bitsperity-studio/;
+# Umbrel package. Canonical copy: Bitsperitybtc/bitsperity apps/forester/umbrel/bitsperity-studio/;
 # Bitsperitybtc/umbrel-community-app-store carries an identical copy, plus icon.png.
-# Tag only here; the community-store copy adds the digest. The Canopy release workflow builds the image from a canopy/v* tag.
+# Tag only here; the community-store copy adds the digest. The release workflow builds the image from a forester/v* tag.
+# The app id stays bitsperity-studio from before the rename to Forester, so an installed app updates in place.
 #
-# Port 8750 (app gateway -> Studio on 3000) is the read-only window onto one Canopy forest.
+# Port 8750 (app gateway -> Forester on 3000) is the read-only window onto one Canopy forest.
 # The UI is behind the Umbrel login. /mcp is not: it exists only when
 # CANOPY_STUDIO_MCP_TOKEN is set, and then only answers that bearer.
 version: "3.7"
@@ -15,8 +16,8 @@ services:
       PROXY_AUTH_WHITELIST: "/mcp,/mcp/health"
 
   web:
-    # Multi-arch (linux/amd64 + linux/arm64) canopy-studio:v3.4.3. Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/canopy-studio:3.5.1@sha256:f83168e2655829b941e97019b1812707e5e8410c8c97c40359b17e43f7ed6431
+    # Multi-arch (linux/amd64 + linux/arm64). Tag only here; the community-store copy adds the digest.
+    image: ghcr.io/bitsperitybtc/forester:3.6.0@sha256:74022c3ad2576e765eb1583d88ccb3f826fc6a4d48c8a5d62a51eb7f3f77edcd
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -29,7 +30,7 @@ services:
       HOST_HEADER: x-forwarded-host
       STUDIO_FOREST_NAME: forest
       # 127.0.0.1 is this container, so the default forest stays unreachable until
-      # App Settings names the observe and control URLs Studio can dial.
+      # App Settings names the observe and control URLs Forester can dial.
       STUDIO_OBSERVE_URL: http://127.0.0.1:8787
       STUDIO_CONTROL_URL: http://127.0.0.1:8788
       CANOPY_CONTROL_TOKEN: change-me

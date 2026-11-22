@@ -1,18 +1,18 @@
 manifestVersion: 1
 id: bitsperity-studio
 category: developer
-name: Studio
-version: "3.5.1"
+name: Forester
+version: "3.6.0"
 tagline: See what a Canopy forest is doing
 description: >-
-  Studio is the window onto a Canopy forest. It shows what each agent is doing,
+  Forester is the window onto a Canopy forest. It shows what each agent is doing,
   what happened, what a call cost, and what is waiting for a person. It keeps no
   copy of the forest: every value comes from that forest's observe API.
 
 
   Point it at a forest in App Settings. Observe and control URLs are how this
   container reaches the forest, not how a browser does. The control token is the
-  forest's CANOPY_CONTROL_TOKEN. Until those match, Studio opens and the forest
+  forest's CANOPY_CONTROL_TOKEN. Until those match, Forester opens and the forest
   shows as unreachable; control stays refused.
 
 
@@ -29,8 +29,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Studio 3.5.1. A script run learns the npub of the agent that runs it (CANOPY_AGENT_NPUB) while
-  its identity is paired. Studio works as before.
+  Studio is now called Forester (3.6.0). Only the name changes: your App Settings, the port and
+  the forests you set up stay as they are.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
@@ -38,7 +38,7 @@ environment:
   - name: STUDIO_FOREST_NAME
     services: [web]
     default: forest
-    note: "Name of the one forest Studio shows. Lowercase letters, digits and dashes, starting with a letter."
+    note: "Name of the one forest Forester shows. Lowercase letters, digits and dashes, starting with a letter."
   - name: STUDIO_OBSERVE_URL
     services: [web]
     default: http://127.0.0.1:8787
