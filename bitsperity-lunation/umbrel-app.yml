@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.12.2"
+version: "2.13.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -56,7 +56,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.12.2. The image moves from alpine to Debian bookworm, built from the shared image file. Nothing changes in use. Your plan data stays.
+  Lunation 2.13.0. The plan tells requirements (what must hold) from designs (how): designs are marked,
+  and Work stands only under a design. Every card shows its kind in a colored header and its state as a
+  badge. Agents attach images through a one-time upload link. Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
