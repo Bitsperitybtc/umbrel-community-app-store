@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Forester
-version: "3.6.2"
+version: "3.7.0"
 tagline: See what a Canopy forest is doing
 description: >-
   Forester is the window onto a Canopy forest. It shows what each agent is doing,
@@ -16,8 +16,10 @@ description: >-
   shows as unreachable; control stays refused.
 
 
-  The page is behind the Umbrel login. Agents can use /mcp on this port when
-  CANOPY_STUDIO_MCP_TOKEN is set. That token can start and cancel work.
+  The page is behind the Umbrel login. Agents use /mcp on this port, each with its
+  own token: under Agents, add an agent (approve it in Moonstone), copy its MCP
+  configuration once, and tick per forest whether it may read and hand tasks.
+  Every call an agent makes is listed there. Removing an agent stops its token.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitsperity
 dependencies: []
@@ -29,8 +31,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Forester 3.6.2. A long chat opens fast: the newest answers show at once, and older ones load several at a
-  time instead of one after the other.
+  Forester 3.7.0. Agents you add under Agents (approved in Moonstone) read your forests and hand them
+  tasks through Forester's MCP, each only where you tick Read or Hand tasks; every call is logged. A forest
+  takes only the tasks its canopy.yaml declares, each under a time and cost limit. Chats load in one request.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
@@ -51,6 +54,3 @@ environment:
     services: [web]
     default: change-me
     note: "The forest's control token. Reads work without it. Control (pause, cancel, approve) is refused until this matches the forest."
-  - name: CANOPY_STUDIO_MCP_TOKEN
-    services: [web]
-    note: "Bearer token for /mcp. Empty leaves the endpoint off. Whoever has it can start and cancel work in the forest."

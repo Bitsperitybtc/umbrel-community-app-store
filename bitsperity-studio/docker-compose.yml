@@ -4,8 +4,10 @@
 # The app id stays bitsperity-studio from before the rename to Forester, so an installed app updates in place.
 #
 # Port 8750 (app gateway -> Forester on 3000) is the read-only window onto one Canopy forest.
-# The UI is behind the Umbrel login. /mcp is not: it exists only when
-# CANOPY_STUDIO_MCP_TOKEN is set, and then only answers that bearer.
+# The UI (with Agents, where the owner adds agents and grants them forests) is behind the
+# Umbrel login. /mcp is not: it answers only an added agent's own token.
+# ${APP_DATA_DIR}/data (mode 700, hooks/pre-start) holds Forester's agents, their token digests,
+# its Moonstone client key and the access log.
 version: "3.7"
 
 services:
@@ -17,7 +19,7 @@ services:
 
   web:
     # Multi-arch (linux/amd64 + linux/arm64). Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/forester:3.6.2@sha256:6eb85b80b37ba061a4bf7d9334cbc1ef36e4199bcb719bd61b37c072c9c33ead
+    image: ghcr.io/bitsperitybtc/forester:3.7.0@sha256:d04d718799ef228000bcba73a72c2d246357c7db7a19ae9cc066452e2321254c
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -34,6 +36,13 @@ services:
       STUDIO_OBSERVE_URL: http://127.0.0.1:8787
       STUDIO_CONTROL_URL: http://127.0.0.1:8788
       CANOPY_CONTROL_TOKEN: change-me
+      # Agents -> Add agent pairs an agent through the same-node Moonstone, as in Notus: its approval
+      # links (the page moves them to this page's host on port 8740) and its mailbox relay container.
+      MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
+      MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
+      FORESTER_DATA_DIR: /data
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
     # Writes the forest list from the environment, then serves. The list is not a
     # mounted file: an update only copies this compose file, so the writer has to live here.
     command:
