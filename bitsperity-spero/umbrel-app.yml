@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-spero
 category: finance
 name: Spero
-version: "1.4.2"
+version: "1.4.3"
 tagline: Research forest on Canopy
 description: >-
   Spero is a paper-and-research trading forest on the Canopy runtime. It
@@ -20,8 +20,8 @@ description: >-
   Moonstone app; pair the identities once in Forester (Identities). The vault push
   is off in this package. Forester is its own app.
 releaseNotes: >-
-  Spero 1.4.2 runs on Canopy 3.8.3: agents of one job no longer fail with "file already exists" when they set
-  up the same skill at once, and Forester counts a long job's calls and cost whole.
+  Spero 1.4.3 runs on Canopy 3.8.4: Forester counts all of a day's calls per agent, shows since when each
+  agent is in its state, and puts a call that failed before it started under the model it was set up for.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/bitsperity
 dependencies:
