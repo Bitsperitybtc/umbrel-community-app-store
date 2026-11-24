@@ -19,7 +19,7 @@ services:
 
   web:
     # Multi-arch (linux/amd64 + linux/arm64). Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/forester:3.8.0@sha256:24f3c2c9b5e00e6e00d131317b2c6cd3c81167f4aa52ebd6968c8db6b9fbe8c3
+    image: ghcr.io/bitsperitybtc/forester:3.8.1@sha256:3742e25ca32875b7d2e4a75851c07377e5c4750c4a1ee734e221fe07cbd63a1c
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -30,7 +30,6 @@ services:
       # Behind the app gateway those come from the forwarded host and scheme.
       PROTOCOL_HEADER: x-forwarded-proto
       HOST_HEADER: x-forwarded-host
-      STUDIO_FOREST_NAME: forest
       # 127.0.0.1 is this container, so the default forest stays unreachable until
       # App Settings names the observe and control URLs Forester can dial.
       STUDIO_OBSERVE_URL: http://127.0.0.1:8787
@@ -46,22 +45,20 @@ services:
       FORESTER_DATA_DIR: /data
     volumes:
       - ${APP_DATA_DIR}/data:/data
-    # Writes the forest list from the environment, then serves. The list is not a
-    # mounted file: an update only copies this compose file, so the writer has to live here.
+    # Writes the forest list from the environment, then serves; the forest names itself (name: in its canopy.yaml).
+    # The list is not a mounted file: an update only copies this compose file, so the writer has to live here.
     command:
       - sh
       - -c
       - |
         set -eu
-        name="$$STUDIO_FOREST_NAME"
         observe="$$STUDIO_OBSERVE_URL"
         control="$$STUDIO_CONTROL_URL"
         token="$$CANOPY_CONTROL_TOKEN"
-        printf '%s\n' "$$name" | grep -Eq '^[a-z][a-z0-9-]*$$'
         printf '%s\n' "$$observe" | grep -Eq '^https?://[^[:space:]'\''"]+$$'
         printf '%s\n' "$$control" | grep -Eq '^https?://[^[:space:]'\''"]+$$'
         test -n "$$token"
-        printf 'forests:\n  %s:\n    observeUrl: %s\n    controlUrl: %s\n    controlToken: CANOPY_CONTROL_TOKEN\n' "$$name" "$$observe" "$$control" > /tmp/forests.yaml
+        printf 'forests:\n  - observeUrl: %s\n    controlUrl: %s\n    controlToken: CANOPY_CONTROL_TOKEN\n' "$$observe" "$$control" > /tmp/forests.yaml
         export CANOPY_STUDIO_FORESTS=/tmp/forests.yaml
         exec node build
     healthcheck:
