@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Forester
-version: "3.8.3"
+version: "3.8.4"
 tagline: See what a Canopy forest is doing
 description: >-
   Forester is the window onto a Canopy forest. It shows what each agent is doing,
@@ -31,9 +31,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Forester 3.8.3. The MCP counts a whole long job, shows calls that failed and were retried, says when a cost
-  is a lower bound everywhere, gives every finished call a result and reaches a chat by agent. The access log
-  under Agents keeps tool and task apart, dates older entries and marks wrong requests as invalid.
+  Forester 3.8.4. The MCP overview counts every call of the day instead of the newest thousand and, for one
+  agent, shows only that agent's instances. Now says what an agent between calls is doing and since when each
+  one is in its state. Cost rows match the grouping asked for and add up to the total, and calls without a
+  known price are marked on every row. Detailed event lists read like the short ones, and cancelling a call
+  the forest does not have says so. Every tool says that an agent is one of the forest's, not the caller.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
