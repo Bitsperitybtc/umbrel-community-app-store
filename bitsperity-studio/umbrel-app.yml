@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Forester
-version: "3.8.1"
+version: "3.8.2"
 tagline: See what a Canopy forest is doing
 description: >-
   Forester is the window onto a Canopy forest. It shows what each agent is doing,
@@ -31,9 +31,8 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Forester 3.8.1. A forest names itself: Forester shows the name from its canopy.yaml and makes the address
-  from it (Spero is /f/spero), so the forest-name setting is gone; if the forest had another name, tick its
-  grants under Agents again. The MCP says why a call ended, lists tasks, and with an agent counts only its calls.
+  Forester 3.8.2. Ticking Read or Hand tasks under Agents works again after a forest was renamed: a grant on
+  a forest that is gone is dropped instead of refusing the save.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
