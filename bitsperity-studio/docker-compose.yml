@@ -19,7 +19,7 @@ services:
 
   web:
     # Multi-arch (linux/amd64 + linux/arm64). Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/forester:3.7.0@sha256:d04d718799ef228000bcba73a72c2d246357c7db7a19ae9cc066452e2321254c
+    image: ghcr.io/bitsperitybtc/forester:3.8.0@sha256:24f3c2c9b5e00e6e00d131317b2c6cd3c81167f4aa52ebd6968c8db6b9fbe8c3
     restart: on-failure
     stop_grace_period: 1m
     init: true
@@ -40,6 +40,9 @@ services:
       # links (the page moves them to this page's host on port 8740) and its mailbox relay container.
       MOONSTONE_URL: http://${DEVICE_DOMAIN_NAME}:8740
       MOONSTONE_RELAYS: ws://bitsperity-moonstone_relay_1:8080
+      # Nostr names and pictures of agents and identities (read only): the owner's on the node's
+      # Beacon, the agents' on relay.annotome.com. Set but empty turns profile reads off.
+      FORESTER_PROFILE_RELAYS: ws://bitsperity-beacon_relay_1:7777,wss://relay.annotome.com
       FORESTER_DATA_DIR: /data
     volumes:
       - ${APP_DATA_DIR}/data:/data

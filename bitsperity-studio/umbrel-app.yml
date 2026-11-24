@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-studio
 category: developer
 name: Forester
-version: "3.7.0"
+version: "3.8.0"
 tagline: See what a Canopy forest is doing
 description: >-
   Forester is the window onto a Canopy forest. It shows what each agent is doing,
@@ -31,9 +31,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Forester 3.7.0. Agents you add under Agents (approved in Moonstone) read your forests and hand them
-  tasks through Forester's MCP, each only where you tick Read or Hand tasks; every call is logged. A forest
-  takes only the tasks its canopy.yaml declares, each under a time and cost limit. Chats load in one request.
+  Forester 3.8.0. Agents and identities show their Nostr name and picture instead of the npub, and Agents
+  is in the menu inside a forest too. The MCP answers are smaller and clearer. A call that waits for a rate
+  limit shows as waiting, and one a newer run replaced shows as superseded.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/23f309215c92891a1a6b9102109992e0f4bc1250/bitsperity-studio/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
