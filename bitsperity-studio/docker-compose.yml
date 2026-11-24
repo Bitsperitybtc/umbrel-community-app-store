@@ -19,7 +19,7 @@ services:
 
   web:
     # Multi-arch (linux/amd64 + linux/arm64). Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/forester:3.8.2@sha256:378be17da5d3bad724f4ec1e0586970d32dcd6e54204f2ed72c0f6220a96ce11
+    image: ghcr.io/bitsperitybtc/forester:3.8.3@sha256:5c43ccd824255820aabb308d1cb19f1ce5b5f79f33108b3b86b72c35efa8ba8e
     restart: on-failure
     stop_grace_period: 1m
     init: true
