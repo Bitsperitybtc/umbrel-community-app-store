@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.16.0"
+version: "2.17.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -56,10 +56,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.16.0. Every night at 03:00 (Berlin time) Lunation writes a backup of the plan into the
-  Umbrel folder Home, Backups, Lunation. It lies outside Lunation's app data, so it stays when you reset
-  or uninstall the app. The folder keeps the last 7 daily, 4 weekly and 12 monthly backups and removes
-  older ones. Your plan data stays.
+  Lunation 2.17.0. You can now see that the nightly backup works without the Umbrel password:
+  /v1/health on port 8748 also answers the time of the newest backup and how many backups the folder
+  Home, Backups, Lunation holds (no file names, no content). Backups still land every night at 03:00
+  (Berlin time), outside Lunation's app data, 7 daily, 4 weekly and 12 monthly. Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
