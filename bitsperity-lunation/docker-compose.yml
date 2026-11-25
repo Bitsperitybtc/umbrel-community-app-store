@@ -13,18 +13,21 @@ services:
   web:
     # Multi-arch (linux/amd64 + linux/arm64) build of the lunation/v2.12.1 tag. Tag only here; the community-store copy adds the digest.
     # It never runs ahead of package.json.
-    image: ghcr.io/bitsperitybtc/lunation:2.15.0@sha256:ee33da66a3c0fdb36a79bab34f3d41912f0b8c9b790b0649c4194b6fd2e3c9ae
+    image: ghcr.io/bitsperitybtc/lunation:2.16.0@sha256:46e6e2b9d70fb19f17691f4f5499a4f0ff4d4e65991f2a568936b77a8ff21b38
     restart: on-failure
     stop_grace_period: 1m
     init: true
     volumes:
       - ${APP_DATA_DIR}/data:/data
+      # Umbrel Home > Backups > Lunation: outside the app data, so a reset or uninstall keeps the backups.
+      - ${UMBREL_ROOT}/home/Backups/Lunation:/backups
     environment:
       HOST: 0.0.0.0
       PORT: "8080"
       # New file for the v1.1 model. The v0.2.x database stays where it is, untouched.
       LUNATION_DB: /data/lunation-v1.sqlite
-      LUNATION_BACKUP_DIR: /data/backups
+      # The app backs up here every night at 03:00 (Europe/Berlin) and keeps 7 daily, 4 weekly, 12 monthly.
+      LUNATION_BACKUP_DIR: /backups
       APP_SEED: ${APP_SEED}
       # Same-node Moonstone, as in Horizon: approval links and its mailbox relay
       # container. App Settings -> Environment can point both elsewhere.

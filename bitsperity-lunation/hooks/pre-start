@@ -4,8 +4,15 @@
 # and opens /data/lunation-v1.sqlite. Docker creates a missing bind source as
 # root, which the node user cannot write, so SQLite fails with SQLITE_CANTOPEN.
 # Create the data directory and hand it to uid 1000. Existing files stay.
+# The nightly backups go to Umbrel Home > Backups > Lunation, outside the app data;
+# the same applies to that folder (UMBREL_ROOT is the umbrelOS data root).
 set -euo pipefail
 
 data_dir="${APP_DATA_DIR:?APP_DATA_DIR is not set}/data"
 mkdir -p "${data_dir}"
 chown 1000:1000 "${data_dir}"
+
+umbrel_root="${UMBREL_ROOT:-${APP_DATA_DIR}/../..}"
+backup_dir="${umbrel_root}/home/Backups/Lunation"
+mkdir -p "${backup_dir}"
+chown 1000:1000 "${backup_dir}"
