@@ -9,8 +9,8 @@ services:
       PROXY_AUTH_ADD: "false"
 
   relay:
-    # Multi-arch (linux/amd64 + linux/arm64) build of the v0.4.4 tag. Tag only here; the community-store copy adds the digest.
-    image: ghcr.io/bitsperitybtc/beacon:0.4.5@sha256:aa7b6f50d0f87fea10d670b127cde5d5749a33831375a2cdcd48a975e8f70f09
+    # Multi-arch (linux/amd64 + linux/arm64). Tag only here; the community-store copy adds the digest.
+    image: ghcr.io/bitsperitybtc/beacon:0.4.6@sha256:3284fd8717b4d5694377d5319ea328390cb9ad87e74201b4571da9b226768279
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 1m

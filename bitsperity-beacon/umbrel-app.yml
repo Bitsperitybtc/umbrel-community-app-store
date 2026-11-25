@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-beacon
 category: social
 name: Beacon
-version: "0.4.5"
+version: "0.4.6"
 tagline: Your own Nostr relay, a steady light at home
 description: >-
   bitsperity Beacon is the Nostr relay on your own node, with an app to see
@@ -23,7 +23,7 @@ description: >-
   events (signed in with one of them, you can still store others' events).
   Anyone can read.
 releaseNotes: >-
-  Beacon 0.4.5. Same relay, built through the shared release path. Your relay data stays.
+  Beacon 0.4.6. The top bar shows the Beacon version that runs, so you see an update has arrived. Your relay data stays.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/beacon
 dependencies: []
