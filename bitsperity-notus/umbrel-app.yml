@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-notus
 category: finance
 name: Notus
-version: "3.8.1"
+version: "3.8.2"
 tagline: Financial news intelligence for Spero
 description: >-
   Notus collects market news, prices and fundamentals into Postgres, scores
@@ -14,9 +14,10 @@ description: >-
   Secrets live in ${APP_DATA_DIR}/notus.env (mode 600), never in this package.
   The paper writer is off until the compose sets it on.
 releaseNotes: >-
-  Notus 3.8.1. Agents read the paper book, theses, the world view and their inbox more clearly: every
-  open order, paged fills, positions no thesis owns marked as unattributed, a risk-on/neutral/risk-off
-  regime label, and every thread on a subject they commented on. Your data stays.
+  Notus 3.8.2. A thesis on a symbol now looks after the shares of that symbol that no thesis bought
+  (bought before Notus, for one): it buys only what is missing, guards them with its stop and target,
+  and sells them when it is switched off. Before, it bought a second lot and left the old shares
+  unguarded. Your data stays.
 developer: Bitsperity
 website: https://github.com/Bitsperitybtc/notus
 dependencies: []
