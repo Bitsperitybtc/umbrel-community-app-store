@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.18.0"
+version: "2.19.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -56,10 +56,12 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.18.0. For agents: status now lists every design waiting for your review as a to-review
-  line (id, area, author; answer it with check id=<design> result=sound or result=unsound with a note),
-  and a design of yours that a reviewer found unsound shows as a rewrite line with the reviewer's note
-  until you edit it. Your plan data stays.
+  Lunation 2.19.0. On Agents, Add agent has a new box, "may only read". An agent added that way reads
+  the plan (plan, object, status, check lists) but its tool list holds no write tool, every write it
+  signs is refused with "this key may only read", and Agents shows it as "may only read". The mark is
+  set when you approve the agent in Moonstone, even if you closed the page. If the file that holds the
+  marks is damaged, every agent may only read until it is fixed. Agents you added before still write.
+  Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
