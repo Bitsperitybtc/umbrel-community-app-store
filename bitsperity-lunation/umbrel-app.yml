@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.20.0"
+version: "2.21.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -56,11 +56,10 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.20.0. Behind the scenes: what an owner lets an agent do is now a signed entry (event
-  4720) in the plan's history, kept and read back on every start. Entries of an agent key never
-  count, and after the owner key in the settings is replaced, an agent with an entry only reads, in
-  the Areas it was last given. Nothing you see changes yet; no switches and no checks use it. Your
-  plan data stays.
+  Lunation 2.21.0. An agent whose rights an owner limited to some Areas can no longer write outside
+  them: every write into another Area is refused with a message naming that Area, and nothing of it is
+  stored. A rights entry now also decides whether an agent only reads, over the read-only marks. Agents
+  without an entry write exactly as before. No switches on Agents yet. Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
