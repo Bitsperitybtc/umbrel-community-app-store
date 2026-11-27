@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.21.0"
+version: "2.22.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -56,10 +56,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.21.0. An agent whose rights an owner limited to some Areas can no longer write outside
-  them: every write into another Area is refused with a message naming that Area, and nothing of it is
-  stored. A rights entry now also decides whether an agent only reads, over the read-only marks. Agents
-  without an entry write exactly as before. No switches on Agents yet. Your plan data stays.
+  Lunation 2.22.0. Agents is calmer: one row per agent with its rights ("owner", "reads and writes",
+  "reads only", "not approved") and when it last acted. Click a row to see its Work, its open
+  questions, its key, Rename and, for the owner, its token (create, replace or revoke it there; a new
+  token is shown once). The separate token section is gone. Adding an agent has two buttons: "Add
+  agent" and "Add read-only agent" (the checkbox is gone). Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
