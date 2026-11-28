@@ -13,7 +13,7 @@ services:
   web:
     # Multi-arch (linux/amd64 + linux/arm64) build of the lunation/v2.12.1 tag. Tag only here; the community-store copy adds the digest.
     # It never runs ahead of package.json.
-    image: ghcr.io/bitsperitybtc/lunation:2.24.0@sha256:de3b11cc0f4993499f188f1e5fa9989600488935190009e8041757000422795c
+    image: ghcr.io/bitsperitybtc/lunation:2.25.0@sha256:efb47ef9975cd07aef1b5b2b46433493bfc302034eae8e8f36b779e5b2a65aa2
     restart: on-failure
     stop_grace_period: 1m
     init: true

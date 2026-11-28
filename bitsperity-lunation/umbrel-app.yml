@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.24.0"
+version: "2.25.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -56,11 +56,9 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.24.0. On Agents you now set what an agent may do: open its row and, under Rights, choose
-  whether it reads and writes or only reads, and which Areas it reads and writes ("every Area" includes
-  Areas made later). Save signs the entry with your key; the row then says "reads only" or "some Areas".
-  The Work an agent holds is a tidy list with each Area, five at first and the rest behind "Show all".
-  Your plan data stays.
+  Lunation 2.25.0. Every object an agent's answer names (create, create_many, object, observe, plan and
+  status) now comes with a link that opens it in your browser, so an agent can hand you a link instead of a
+  bare id. Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
