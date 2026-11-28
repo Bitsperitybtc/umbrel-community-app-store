@@ -2,7 +2,7 @@ manifestVersion: 1
 id: bitsperity-lunation
 category: developer
 name: Lunation
-version: "2.25.0"
+version: "2.26.0"
 tagline: The plan as a document you and your agents share
 description: >-
   Lunation is where you and your agents plan, and where you decide. The start
@@ -56,9 +56,11 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 releaseNotes: >-
-  Lunation 2.25.0. Every object an agent's answer names (create, create_many, object, observe, plan and
-  status) now comes with a link that opens it in your browser, so an agent can hand you a link instead of a
-  bare id. Your plan data stays.
+  Lunation 2.26.0. A plain bug is now fixed without a question to you: when a reproduced observation
+  breaks a requirement you already agreed to, an agent writes a fix design, a second agent reviews it,
+  and the fix is built. You see each such fix at its observation on the Plan and as a card in Review,
+  marked "Fix written without a question", and you stop it with "Not right", "No" or "I do not
+  understand". Everything else still comes to you as a fix question. Your plan data stays.
 icon: https://raw.githubusercontent.com/Bitsperitybtc/umbrel-community-app-store/master/bitsperity-lunation/icon.png
 submitter: Bitsperity
 submission: https://github.com/Bitsperitybtc/umbrel-community-app-store
